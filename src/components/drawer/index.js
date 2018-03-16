@@ -10,7 +10,7 @@ import {
 import PropTypes from 'prop-types';
 
 import { Actions, ActionConst } from 'react-native-router-flux';
-//import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 import styles from './styles';
 

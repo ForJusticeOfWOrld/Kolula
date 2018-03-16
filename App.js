@@ -1,58 +1,96 @@
 /**
- * Sample React Native App
+ * Ebike Shariung App
  * https://github.com/facebook/react-native
- * @flow
+ * Gunter Sachse
  */
 
 import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
+import { Router, Scene, ActionConst, Drawer } from 'react-native-router-flux';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+/*
+import { Provider } from 'react-redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import * as reducers from './src/components/reducers'
 
-type Props = {};
-export default class App extends Component<Props> {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-      </View>
-    );
-  }
+const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+const reducer = combineReducers(reducers);
+const store = createStoreWithMiddleware(reducer);
+*/
+
+//import Main from './components/main/index';
+import DrawerContent from './src/components/drawer/index';
+
+import Overview from './src/components/myreservations/overview/index';
+
+import menuIcon from './src/images/others/menu_hamburger.png';
+
+
+export default class App extends Component {
+    render() {
+        return (
+
+                <Router leftButtonIconStyle={styles.leftButtonIconStyle} navigationBarStyle={styles.navStyle} titleStyle={styles.titleStyle}>
+                    <Drawer
+                        hideNavBar
+                        key="drawer"
+                        contentComponent={DrawerContent}
+                        drawerImage={menuIcon}
+                        drawerWidth={250}
+                        drawerPosition='right'
+                    >
+                        <Scene key="root">
+                            <Scene key="overview" component={Overview} title="Overview" />
+
+                            {/*
+                            <Scene key="TestLinkaAPI" component={TestLinkaAPI} />
+                            <Scene key="main" component={Main} type={ActionConst.RESET} />
+                            <Scene key="home" component={Home} title="Home" />
+
+                            <Scene key="login" component={Login} hideNavBar={true} title="Login" />
+                            <Scene key="intro" component={Intro} hideNavBar={true} title="Tutorial" />
+                            <Scene key="help" component={Help} title="Hilfe" />
+                            <Scene key="moremenu" component={MoreMenu} title="Mehr" />
+                            <Scene key="agb" component={AGB} title="Nutzungsbedingungen" />
+                            <Scene key="contact" component={Contact} title="Kontakte" />
+                            <Scene key="user" component={User} title="Nutzer" />
+                            <Scene key="legal" component={Legal} title="Impressum" />
+
+                            <Scene key="stationList" component={StationList} title="Stationen" />
+                            <Scene key="stationMap" component={StationMap} title="Stationen" />
+                            <Scene key="bikeList" component={BikeList} title="Bikes" />
+                            <Scene key="bookBike" component={BookBike} title="Buchen" />
+
+                            <Scene key="bikeStatus" component={BikeStatus} title="Mein Bike" />
+                            <Scene key="bookEnd" component={BookEnd} title="Beenden" />
+                            <Scene key="noBook" component={NoBook} title="Buchung" />
+
+                            <Scene key="async" component={AsyncTest} title="AsyncStorage Test" />
+                            <Scene key="ble" component={BLE} title="BLE Test" />
+                            <Scene key="geo" component={Geo} title="GPS Test" />
+                            <Scene key="map" component={Map} title="Map Test" /> */}
+                        </Scene>
+                    </Drawer>
+                </Router>
+
+        )
+    }
 }
 
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+    leftButtonIconStyle: {
+        tintColor: '#000',
+    },
+    navStyle: {
+        backgroundColor: '#fff',
+        height: (Platform.OS === 'ios') ? 64 : 48,
+    },
+    titleStyle: {
+        color: '#000',
+        alignSelf: 'center',
+        fontSize: 20,
+        fontWeight: 'normal',
+    },
 });
