@@ -8,29 +8,28 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet } from 'react-native';
 import { Router, Scene, ActionConst, Drawer } from 'react-native-router-flux';
 
-/*
+
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import * as reducers from './src/components/reducers'
+import * as reducers from './src/reducers'
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const reducer = combineReducers(reducers);
 const store = createStoreWithMiddleware(reducer);
-*/
 
 //import Main from './components/main/index';
 import DrawerContent from './src/components/drawer/index';
 
-import Overview from './src/components/myreservations/overview/index';
+import MyReservationsOverview from './src/components/myreservations/overview/index';
+import MyReservationsReservation from './src/components/myreservations/reservation/index';
 
 import menuIcon from './src/images/others/menu_hamburger.png';
-
 
 export default class App extends Component {
     render() {
         return (
-
+            <Provider store={store}>
                 <Router leftButtonIconStyle={styles.leftButtonIconStyle} navigationBarStyle={styles.navStyle} titleStyle={styles.titleStyle}>
                     <Drawer
                         hideNavBar
@@ -41,7 +40,9 @@ export default class App extends Component {
                         drawerPosition='right'
                     >
                         <Scene key="root">
-                            <Scene key="overview" component={Overview} title="Overview" />
+
+                            <Scene key="myReservationsOverview" component={MyReservationsOverview} title="Reservierungen" />
+                            <Scene key="myReservationsReservation" component={MyReservationsReservation} title="Details" />
 
                             {/*
                             <Scene key="TestLinkaAPI" component={TestLinkaAPI} />
@@ -73,7 +74,7 @@ export default class App extends Component {
                         </Scene>
                     </Drawer>
                 </Router>
-
+            </Provider>
         )
     }
 }

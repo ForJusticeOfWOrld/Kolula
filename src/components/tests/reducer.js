@@ -10,6 +10,8 @@ const initialState = {
     error: null,
     reservationChecked: false,
     activeReservation: null,
+    user: null,
+    multiLang: null,
 };
 
 export default function (state = initialState, action = {}) {

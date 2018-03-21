@@ -202,11 +202,10 @@ class DrawerContent extends Component {
     }
 }
 
-
 const mapStateToProps = (props) => ({
     user: props.auth.user,
     multiLang: props.multiLang,
 });
-  
+
 export default connect(mapStateToProps, null)(DrawerContent);
   

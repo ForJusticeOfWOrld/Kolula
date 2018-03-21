@@ -16,14 +16,22 @@ export const inactiveBackgroundColor = '#F8F8F8';   // inactive button backgroun
 export const whiteOpacityColor4 = 'rgba(255, 255, 255, 0.4)';
 
 // font sizes
-export const largeFontSize = 24;
-export const standardFontSize = 18;
-export const smallFontSize = 12;
+export const largeFontSize = 22;
+export const standardFontSize = 14;
+export const smallFontSize = 10;
 
 // borders
 export const standardBorderRadius = 3;
 export const standardBorderWidth = 2;
 export const separatorBorderWidth = 2;
+
+// margin
+export const standardMargin = 8;
+export const standardMmarginHorizontal = 32;
+export const standardMarginVertical = 16;
+export const standardSpacerMarginVertical = 32;
+export const containerPaddingHorizontal = 32;
+export const containerPaddingVertical = 16;
 
 
 // styles

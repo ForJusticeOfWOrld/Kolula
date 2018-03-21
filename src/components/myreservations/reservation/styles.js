@@ -58,6 +58,24 @@ export default{
         borderColor: primaryColor,
         marginVertical: standardMargin,
     },
+    viewIcon: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 64,
+    },
+    viewIconSmall: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 18,
+    },
+    viewMap: {
+        height: 128,
+    },
+    largeFontSizeBold: {
+        fontSize: largeFontSize,
+        color: primaryColor,
+        fontWeight: 'bold',
+    },
     textStandardBold: {
         fontSize: standardFontSize,
         color: primaryColor,
