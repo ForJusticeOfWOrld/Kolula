@@ -21,7 +21,7 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 const mapDummy = require('../../../images/dummys/mapdummy.png');
 
-export default class MyReservationsReservation extends Component {
+export default class ReservationsBranch extends Component {
 
     constructor(props) {
         super(props);
@@ -39,14 +39,14 @@ export default class MyReservationsReservation extends Component {
                 <View style={styles.viewSpaceBetween}>
                     <View style={styles.viewBody}>
                         <ScrollView style={styles.viewColumn}>
-                            <Text style={[styles.textLargeBold, styles.marginSpacer]} >{this.props.reservation.new ? 'Bevorstehende Miete' : 'Vergangene Miete'}</Text>
+                            <Text style={[styles.textLargeBold, styles.marginSpacer]} >Vergangene Miete</Text>
                             <View style={[styles.viewRow, styles.marginSpacer]}>
                                 <View style={styles.viewIcon}>
                                     <Icon name="chevron-circle-up" size={32} color={primaryColor} />
                                 </View>
                                 <View style={styles.viewColumn}>
-                                    <Text style={styles.textStandardBold} >{this.props.reservation.items}</Text>
-                                    <Text style={styles.textStandard} >{this.props.reservation.items_desc}</Text>
+                                    <Text style={styles.textStandardBold} >Test</Text>
+                                    <Text style={styles.textStandard} >Test123</Text>
                                 </View>
                             </View>
                             <View style={[styles.viewRow, styles.marginSpacer]}>
@@ -54,18 +54,18 @@ export default class MyReservationsReservation extends Component {
                                     <Icon name="calendar" size={32} color={primaryColor} />
                                 </View>
                                 <View style={styles.viewColumn}>
-                                    <Text style={styles.textStandardBold} >{this.props.reservation.items}</Text>
-                                    <Text style={styles.textStandard} >{this.props.reservation.items_desc}</Text>
+                                    <Text style={styles.textStandardBold} >Testi</Text>
+                                    <Text style={styles.textStandard} >Testi12</Text>
                                 </View>
                             </View>
                             <View style={[styles.viewColumn, styles.marginSpacer]}>
-                                <Text style={styles.textStandardBold} >{this.props.reservation.location_name}</Text>
-                                <Text style={styles.textStandard} >{this.props.reservation.location_street}</Text>
+                                <Text style={styles.textStandardBold} >Lalelu</Text>
+                                <Text style={styles.textStandard} >Lalelu12</Text>
                                 <View style={styles.viewRow}>
                                     <View style={styles.viewIconSmall}>
                                         <Icon name="info-circle" size={16} color={primaryColor} />
                                     </View>
-                                    <Text style={styles.textStandard} >{this.props.reservation.location_transport}</Text>
+                                    <Text style={styles.textStandard} >Mimimi</Text>
                                 </View>
                             </View>
                             <View style={[styles.viewMap, styles.marginSpacer]}>
@@ -75,10 +75,8 @@ export default class MyReservationsReservation extends Component {
                     </View>
                     <View style={[styles.viewFooter, {marginTop: 8}]}>
                         <TouchableOpacity style={styles.viewButton} onPress={() => Actions.myReservationsCancel()}>
-                            <Text style={styles.buttonSecondary} >STORNIEREN</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.viewButton} onPress={() => Actions.myReservationsReschedule()}>
-                            <Text style={styles.buttonSecondary} >MIETE VERSCHIEBEN</Text>
+                            <Text style={styles.buttonSecondary} >Keine Station in der Nähe?</Text>
+                            <Text style={styles.buttonSecondary} >Standort vorschlagen & Updates erhalten</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

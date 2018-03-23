@@ -29,7 +29,7 @@ export const separatorBorderWidth = 2;
 export const standardMargin = 8;
 export const standardMmarginHorizontal = 32;
 export const standardMarginVertical = 16;
-export const standardSpacerMarginVertical = 32;
+export const standardSpacerMarginVertical = 16;
 export const containerPaddingHorizontal = 32;
 export const containerPaddingVertical = 16;
 

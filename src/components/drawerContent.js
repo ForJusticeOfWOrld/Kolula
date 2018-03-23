@@ -172,24 +172,24 @@ class DrawerContent extends Component {
                 {/* <Image source={background} style={styles.containerImage} resizeMode={'cover'}> */}
                     <View style={styles.containerBlur}>
                         <View style={styles.viewHeader}>
-                            <Text style={styles.textTitle}>{this.props.user && this.props.user.firstname} {this.props.user && this.props.user.lastname}</Text>
+                            <Text style={styles.textTitle}>Account</Text>
                         </View>
                         <View style={styles.line} />
-                        <TouchableOpacity  style={styles.menuButtonView} onPress={() => this.onAgb()}>
-                            <Text style={styles.menuButtonText}>Nutzungsbedingungen</Text>
+                        <TouchableOpacity  style={styles.menuButtonView} onPress={() => Actions.myReservationsOverview({type: ActionConst.RESET})}>
+                            <Text style={styles.menuButtonText}>Meine Buchungen</Text>
                         </TouchableOpacity>
                         <TouchableOpacity  style={styles.menuButtonView} onPress={() => this.onContact()}>
-                            <Text style={styles.menuButtonText}>Kontakte</Text>
+                            <Text style={styles.menuButtonText}>Persönliche Daten</Text>
                         </TouchableOpacity>
                         <TouchableOpacity  style={styles.menuButtonView} onPress={() => this.onLegal()}>
-                            <Text style={styles.menuButtonText}>Impressum</Text>
+                            <Text style={styles.menuButtonText}>E-Mail-Adresse & Passwort</Text>
                         </TouchableOpacity>
                         <TouchableOpacity  style={styles.menuButtonView} onPress={() => { this.logoutUser(); }}>
-                            <Text style={styles.menuButtonText}>Ausloggen</Text>
+                            <Text style={styles.menuButtonText}>Debugzeug</Text>
                         </TouchableOpacity>
 
                         {
-                            (this.state.version && this.state.version.Version !== '') && (
+                            (this.state.version && this.state.version.Version !== '') && (ö
                                 <View style={styles.versionContainer}>
                                     <Text style={styles.textVersion}>{this.props.multiLang.version}: {this.state.version.Version}</Text>
                                 </View>

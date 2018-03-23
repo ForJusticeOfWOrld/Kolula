@@ -87,12 +87,13 @@ export default{
     viewButton: {
         alignSelf: 'stretch',
         alignContent: 'center',
-    },
-    buttonPrimary: {
         borderRadius: standardBorderRadius,
         borderWidth: standardBorderWidth,
         borderColor: primaryColor,
         backgroundColor: primaryColor,
+    },
+    buttonPrimary: {
+
         color: primaryInvertedColor,
         fontSize: largeFontSize,
         fontWeight: 'bold',

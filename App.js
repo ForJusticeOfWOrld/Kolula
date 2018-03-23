@@ -23,8 +23,13 @@ import DrawerContent from './src/components/drawer/index';
 
 import MyReservationsOverview from './src/components/myreservations/overview/index';
 import MyReservationsReservation from './src/components/myreservations/reservation/index';
+import MyReservationsCancel from './src/components/myreservations/cancel/index';
+import MyReservationsReschedule from './src/components/myreservations/reschedule/index';
+
+import ReservationsBranch from './src/components/reservation/branch/index';
 
 import menuIcon from './src/images/others/menu_hamburger.png';
+
 
 export default class App extends Component {
     render() {
@@ -43,6 +48,10 @@ export default class App extends Component {
 
                             <Scene key="myReservationsOverview" component={MyReservationsOverview} title="Reservierungen" />
                             <Scene key="myReservationsReservation" component={MyReservationsReservation} title="Details" />
+                            <Scene key="myReservationsCancel" component={MyReservationsCancel} title="Details" />
+                            <Scene key="myReservationsReschedule" component={MyReservationsReschedule} title="Details" />
+
+                            <Scene key="reservationsBranch" component={ReservationsBranch} title="Details" initial={true} />
 
                             {/*
                             <Scene key="TestLinkaAPI" component={TestLinkaAPI} />

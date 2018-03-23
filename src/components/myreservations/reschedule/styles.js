@@ -134,6 +134,10 @@ export default{
         color: primaryColor,
         fontWeight: 'bold',
     },
+    textLarge: {
+        fontSize: largeFontSize,
+        color: primaryColor,
+    },
     textStandard: {
         fontSize: standardFontSize,
         color: primaryColor,
