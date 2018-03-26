@@ -26,10 +26,10 @@ export const standardBorderWidth = 2;
 export const separatorBorderWidth = 2;
 
 // margin
-export const standardMargin = 8;
-export const standardMmarginHorizontal = 32;
-export const standardMarginVertical = 16;
-export const standardSpacerMarginVertical = 16;
+export const standardMargin = 4;
+export const standardMmarginHorizontal = 8;
+export const standardMarginVertical = 8;
+export const standardSpacerMarginVertical = 8;
 export const containerPaddingHorizontal = 32;
 export const containerPaddingVertical = 16;
 

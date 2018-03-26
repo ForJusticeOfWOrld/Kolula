@@ -41,11 +41,20 @@ export default{
         flex: 1,
         flexDirection: 'row',
     },
+    viewHeader: {
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        height: 200,
+    },
     viewBody: {
         flex: 1,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'flex-start',
+        height: undefined,
+        width: undefined,
     },
     viewFooter: {
         //flex: 1,
@@ -66,6 +75,7 @@ export default{
     },
     viewSpaceBetween: {
         flex: 1,
+        flexDirection: 'column',
         justifyContent: "space-between",
     },
     viewIcon: {

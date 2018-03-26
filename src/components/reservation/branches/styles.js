@@ -80,49 +80,49 @@ export default{
     },
     viewMap: {
         flex: 1,
-        alignItems: 'center',
-        height: 200,
-        //minWidth: 200,
+        //height: 100,
+        //Width: 100,
     },
-    viewButton: {
-        alignSelf: 'stretch',
-        alignContent: 'center',
+    viewButtonPrimary: {
         borderRadius: standardBorderRadius,
         borderWidth: standardBorderWidth,
         borderColor: primaryColor,
         backgroundColor: primaryColor,
+        alignSelf: 'stretch',
     },
-    buttonPrimary: {
-
+    textButtonPrimary: {
         color: primaryInvertedColor,
         fontSize: largeFontSize,
         fontWeight: 'bold',
         marginVertical: standardMargin,
-        alignSelf: 'stretch',
         textAlign: 'center',
     },
-    buttonSecondary: {
+    viewButtonSecondary: {
         borderRadius: standardBorderRadius,
         borderWidth: standardBorderWidth,
         borderColor: primaryColor,
         backgroundColor: primaryInvertedColor,
+        alignSelf: 'stretch',
+    },
+    textButtonSecondary: {
         color: primaryColor,
         fontSize: largeFontSize,
         fontWeight: 'bold',
         marginVertical: standardMargin,
-        alignSelf: 'stretch',
         textAlign: 'center',
     },
-    buttonInactive: {
+    viewButtonInactive: {
         borderRadius: standardBorderRadius,
         borderWidth: standardBorderWidth,
         borderColor: inactiveColor,
         backgroundColor: inactiveBackgroundColor,
+        alignSelf: 'stretch',
+    },
+    textButtonInactive: {
         color: inactiveColor,
         fontSize: largeFontSize,
         fontWeight: 'bold',
         marginVertical: standardMargin,
-        alignSelf: 'stretch',
         textAlign: 'center',
     },
     textLargeBold: {
@@ -146,5 +146,20 @@ export default{
     },
     marginSpacer: {
         marginTop: standardSpacerMarginVertical,
+    },
+    viewMargin: {
+        margin: standardMargin,
+    },
+    textNoStationHeading: {
+        color: inactiveColor,
+        fontSize: largeFontSize,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    textNoStation: {
+        color: inactiveColor,
+        fontSize: standardFontSize,
+        marginVertical: 4,
+        textAlign: 'center',
     },
 };

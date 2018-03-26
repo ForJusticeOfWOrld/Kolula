@@ -1,4 +1,5 @@
-import { Platform } from 'react-native';
+const React = require('react-native');
+const { StyleSheet } = React;
 import {
     backgroundColor,
     primaryColor,
@@ -19,50 +20,54 @@ import {
     containerPaddingVertical,
     rowViewPaddingVertical,
     standardSpacerMarginVertical,
-    whiteOpacityColor4,
-} from './../../styles/common'
+} from './../../../styles/common'
 
 export default{
     container: {
-        flex: 1,
-        //backgroundColor: whiteOpacityColor4,
-    },
-    containerBlur: {
-        flex: 1,
-        backgroundColor: whiteOpacityColor4,
-        alignItems: 'center',
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        paddingHorizontal: containerPaddingHorizontal,
+        paddingVertical: containerPaddingVertical,
+        backgroundColor: backgroundColor, //Debug
     },
     viewColumn: {
         flex: 1,
         flexDirection: 'column',
-        margin: standardMargin,
     },
     viewRow: {
         flex: 1,
         flexDirection: 'row',
     },
     viewHeader: {
-        alignItems: 'flex-start',
+        //(flex: 1,
+        height: 100,
+        flexDirection: 'column',
+        alignItems: 'center',
         justifyContent: 'flex-start',
-        paddingTop: (Platform.OS === 'ios') ? 32 : 0,
-        margin: 6,
+        borderWidth: 1,
+        borderColor: primaryColor,
     },
     viewBody: {
         flex: 1,
         flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
+        //borderWidth: 1,
+        //borderColor: "#0F0",
     },
     viewFooter: {
         //flex: 1,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'flex-end',
+        //borderWidth: 1,
+        //borderColor: "#f0F",
     },
     viewSeparator: {
         borderBottomWidth: separatorBorderWidth,
         borderBottomColor: primaryColor,
-        margin: standardMargin,
+        marginVertical: standardMargin,
     },
     viewBorder: {
         borderRadius: standardBorderRadius,
@@ -86,64 +91,55 @@ export default{
     },
     viewMap: {
         flex: 1,
-        alignItems: 'center',
-        height: 200,
-        //minWidth: 200,
+        //height: 100,
+        //Width: 100,
     },
-    viewButton: {
-        alignSelf: 'stretch',
-        alignContent: 'center',
-    },
-    buttonPrimary: {
+    viewButtonPrimary: {
         borderRadius: standardBorderRadius,
         borderWidth: standardBorderWidth,
         borderColor: primaryColor,
         backgroundColor: primaryColor,
+        alignSelf: 'stretch',
+    },
+    textButtonPrimary: {
         color: primaryInvertedColor,
         fontSize: largeFontSize,
         fontWeight: 'bold',
         marginVertical: standardMargin,
-        alignSelf: 'stretch',
         textAlign: 'center',
     },
-    buttonSecondary: {
+    viewButtonSecondary: {
         borderRadius: standardBorderRadius,
         borderWidth: standardBorderWidth,
         borderColor: primaryColor,
         backgroundColor: primaryInvertedColor,
+        alignSelf: 'stretch',
+    },
+    textButtonSecondary: {
         color: primaryColor,
         fontSize: largeFontSize,
         fontWeight: 'bold',
         marginVertical: standardMargin,
-        alignSelf: 'stretch',
         textAlign: 'center',
     },
-    buttonInactive: {
+    viewButtonInactive: {
         borderRadius: standardBorderRadius,
         borderWidth: standardBorderWidth,
         borderColor: inactiveColor,
         backgroundColor: inactiveBackgroundColor,
+        alignSelf: 'stretch',
+    },
+    textButtonInactive: {
         color: inactiveColor,
         fontSize: largeFontSize,
         fontWeight: 'bold',
         marginVertical: standardMargin,
-        alignSelf: 'stretch',
         textAlign: 'center',
-    },
-    line: {
-        height: 1,
-        alignSelf: 'stretch',
-        backgroundColor: primaryColor,
-        marginVertical: 10,
     },
     textLargeBold: {
         fontSize: largeFontSize,
         color: primaryColor,
         fontWeight: 'bold',
-    },
-    textLarge: {
-        fontSize: largeFontSize,
-        color: primaryColor,
     },
     textStandardBold: {
         fontSize: standardFontSize,
@@ -161,5 +157,20 @@ export default{
     },
     marginSpacer: {
         marginTop: standardSpacerMarginVertical,
+    },
+    viewMargin: {
+        margin: standardMargin,
+    },
+    textNoStationHeading: {
+        color: inactiveColor,
+        fontSize: largeFontSize,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    textNoStation: {
+        color: inactiveColor,
+        fontSize: standardFontSize,
+        marginVertical: 4,
+        textAlign: 'center',
     },
 };

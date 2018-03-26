@@ -7,16 +7,9 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet } from 'react-native';
 import { Router, Scene, ActionConst, Drawer } from 'react-native-router-flux';
-
-
 import { Provider } from 'react-redux';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import * as reducers from './src/reducers'
 
-const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
-const reducer = combineReducers(reducers);
-const store = createStoreWithMiddleware(reducer);
+import store from './src/store/store';
 
 //import Main from './components/main/index';
 import DrawerContent from './src/components/drawer/index';
@@ -26,7 +19,8 @@ import MyReservationsReservation from './src/components/myreservations/reservati
 import MyReservationsCancel from './src/components/myreservations/cancel/index';
 import MyReservationsReschedule from './src/components/myreservations/reschedule/index';
 
-import ReservationsBranch from './src/components/reservation/branch/index';
+import ReservationsBranches from './src/components/reservation/branches/index';
+import ReservationsBranchDetail from './src/components/reservation/branchDetail/index';
 
 import menuIcon from './src/images/others/menu_hamburger.png';
 
@@ -41,17 +35,18 @@ export default class App extends Component {
                         key="drawer"
                         contentComponent={DrawerContent}
                         drawerImage={menuIcon}
-                        drawerWidth={250}
+                        drawerWidth={350}
                         drawerPosition='right'
                     >
                         <Scene key="root">
 
                             <Scene key="myReservationsOverview" component={MyReservationsOverview} title="Reservierungen" />
                             <Scene key="myReservationsReservation" component={MyReservationsReservation} title="Details" />
-                            <Scene key="myReservationsCancel" component={MyReservationsCancel} title="Details" />
-                            <Scene key="myReservationsReschedule" component={MyReservationsReschedule} title="Details" />
+                            <Scene key="myReservationsCancel" component={MyReservationsCancel} title="Stornieren" />
+                            <Scene key="myReservationsReschedule" component={MyReservationsReschedule} title="Verschieben" />
 
-                            <Scene key="reservationsBranch" component={ReservationsBranch} title="Details" initial={true} />
+                            <Scene key="reservationsBranch" component={ReservationsBranches} title="Stationen" initial={true} />
+                            <Scene key="reservationsBranchDetail" component={ReservationsBranchDetail} title="Station" initial={false} />
 
                             {/*
                             <Scene key="TestLinkaAPI" component={TestLinkaAPI} />

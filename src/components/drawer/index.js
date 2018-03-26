@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { 
-    Image, 
+    ImageBackground,
     View, 
     ScrollView, 
     Text, 
@@ -170,23 +170,31 @@ class DrawerContent extends Component {
         return (
             <View style={styles.container}>
                 {/* <Image source={background} style={styles.containerImage} resizeMode={'cover'}> */}
-                    <View style={styles.containerBlur}>
+                    <View style={styles.viewColumn}>
                         <View style={styles.viewHeader}>
-                            <Text style={styles.textTitle}>{this.props.user && this.props.user.firstname} {this.props.user && this.props.user.lastname}</Text>
+                            <Text style={styles.textLargeBold}>Account</Text>
                         </View>
                         <View style={styles.line} />
-                        <TouchableOpacity  style={styles.menuButtonView} onPress={() => this.onAgb()}>
-                            <Text style={styles.menuButtonText}>Nutzungsbedingungen</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity  style={styles.menuButtonView} onPress={() => this.onContact()}>
-                            <Text style={styles.menuButtonText}>Kontakte</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity  style={styles.menuButtonView} onPress={() => this.onLegal()}>
-                            <Text style={styles.menuButtonText}>Impressum</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity  style={styles.menuButtonView} onPress={() => { this.logoutUser(); }}>
-                            <Text style={styles.menuButtonText}>Ausloggen</Text>
-                        </TouchableOpacity>
+                        <View style={[styles.viewSeparator, styles.marginSpacer]}>
+                            <TouchableOpacity  style={styles.viewButton} onPress={() => Actions.myReservationsOverview({type: ActionConst.RESET})}>
+                                <Text style={styles.textLarge}>Meine Buchungen</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={[styles.viewSeparator, styles.marginSpacer]}>
+                            <TouchableOpacity  style={styles.viewButton} onPress={() => this.onContact()}>
+                                <Text style={styles.textLarge}>Persönliche Daten</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={[styles.viewSeparator, styles.marginSpacer]}>
+                            <TouchableOpacity  style={styles.viewButton} onPress={() => this.onLegal()}>
+                                <Text style={styles.textLarge}>E-Mail-Adresse & Passwort</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={[styles.viewSeparator, styles.marginSpacer]}>
+                            <TouchableOpacity  style={styles.viewButton} onPress={() => { this.logoutUser(); }}>
+                                <Text style={styles.textLarge}>Debugzeug</Text>
+                            </TouchableOpacity>
+                        </View>
 
                         {
                             (this.state.version && this.state.version.Version !== '') && (
@@ -203,7 +211,7 @@ class DrawerContent extends Component {
 }
 
 const mapStateToProps = (props) => ({
-    user: props.auth.user,
+    user: props.debug.user,
     multiLang: props.multiLang,
 });
 
