@@ -21,6 +21,9 @@ import MyReservationsReschedule from './src/components/myreservations/reschedule
 
 import ReservationsBranches from './src/components/reservation/branches/index';
 import ReservationsBranchDetail from './src/components/reservation/branchDetail/index';
+import ReservationsCalendar from './src/components/reservation/calendar/index';
+import ReservationsResource from './src/components/reservation/resource/index';
+import ReservationsSummary from './src/components/reservation/summary/index';
 
 import menuIcon from './src/images/others/menu_hamburger.png';
 
@@ -47,6 +50,9 @@ export default class App extends Component {
 
                             <Scene key="reservationsBranch" component={ReservationsBranches} title="Stationen" initial={true} />
                             <Scene key="reservationsBranchDetail" component={ReservationsBranchDetail} title="Station" initial={false} />
+                            <Scene key="reservationsCalendar" component={ReservationsCalendar} title="SUP Mieten" initial={false} />
+                            <Scene key="reservationsResource" component={ReservationsResource} title="Board wählen" initial={false} />
+                            <Scene key="reservationsSummary" component={ReservationsSummary} title="Zusammenfassung" initial={false} />
 
                             {/*
                             <Scene key="TestLinkaAPI" component={TestLinkaAPI} />

@@ -39,6 +39,7 @@ const dummyNearBranch = {
     "tempAir": "24",
     "weather": "sunny",
     "highlights": ["Hufeisensee Highlight 1", " Hufeisensee Highlight 2", "Highlight 3", "Highlight 4", "Highlight 5"],
+    "tariffs": [{"time": 60, "desc": "1:00h", "price": 9.99},{"time": 90, "desc": "1:30h", "price": 12.99},{"time": 120, "desc": "2:00h", "price": 14.99},{"time": 180, "desc": "3:00h", "price": 19.99},{"time": 240, "desc": "4:00h", "price": 29.99}],
 };
 
 const dummyBranches = {
@@ -61,6 +62,7 @@ const dummyBranches = {
             "tempAir": "18",
             "weather": "cloudy",
             "highlights": ["Scharmützelsee Highlight 1", " Scharmützelsee Highlight 2", " Scharmützelsee Highlight 3", "Highlight 4"],
+            "tariffs": [{"time": 60, "desc": "1:00h", "price": 9.99},{"time": 90, "desc": "1:30h", "price": 12.99},{"time": 120, "desc": "2:00h", "price": 14.99},{"time": 180, "desc": "3:00h", "price": 19.99},{"time": 240, "desc": "4:00h", "price": 29.99}],
         },
         {
             "id": 1,
@@ -80,6 +82,7 @@ const dummyBranches = {
             "tempAir": "12",
             "weather": "cloudy",
             "highlights": ["Helenesee Highlight 1", " Helenesee Highlight 2", "Helenesee Highlight 3"],
+            "tariffs": [{"time": 60, "desc": "1:00h", "price": 9.99},{"time": 90, "desc": "1:30h", "price": 12.99},{"time": 120, "desc": "2:00h", "price": 14.99},{"time": 180, "desc": "3:00h", "price": 19.99},{"time": 240, "desc": "4:00h", "price": 29.99}],
         },
         {
             "id": 3,
@@ -98,6 +101,7 @@ const dummyBranches = {
             "tempAir": "14",
             "weather": "rainy",
             "highlights": ["Senftenberger See Highlight 1", " Highlight 2", "Highlight 3", "Highlight 4", "Highlight 5", "Highlight 6", "Highlight 7", "Highlight 8"],
+            "tariffs": [{"time": 60, "desc": "1:00h", "price": 9.99},{"time": 90, "desc": "1:30h", "price": 12.99},{"time": 120, "desc": "2:00h", "price": 14.99},{"time": 180, "desc": "3:00h", "price": 19.99},{"time": 240, "desc": "4:00h", "price": 29.99}],
         }
     ]
 };

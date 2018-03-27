@@ -50,7 +50,7 @@ export default class ReservationsBranch extends Component {
             dataSource: new ListView.DataSource({
                 rowHasChanged: (row1, row2) => row1 !== row2,
             }),
-            station: false,
+            branch: false,
         };
     }
 
@@ -58,12 +58,12 @@ export default class ReservationsBranch extends Component {
         if (this.props.branch) {
             this.setState({
                 dataSource: this.state.dataSource.cloneWithRows(this.props.branch.highlights),
-                station: this.props.branch,
+                branch: this.props.branch,
             });
         } else {
             this.setState({
                 dataSource: this.state.dataSource.cloneWithRows(dummyNearBranch.highlights),
-                station: dummyNearBranch,
+                branch: dummyNearBranch,
             });
         }
     }
@@ -87,32 +87,32 @@ export default class ReservationsBranch extends Component {
 
                         <View style={[styles.viewRow, styles.marginSpacer, {justifyContent: "space-between"}]}>
                             <View style={styles.viewColumn}>
-                            <Text style={styles.textStandardBold} >{this.state.station.location_name}</Text>
-                                <Text style={styles.textStandard} >{this.state.station.location_street}</Text>
-                                <Text style={styles.textStandard} >{this.state.station.distance} km entfernt</Text>
+                            <Text style={styles.textStandardBold} >{this.state.branch.location_name}</Text>
+                                <Text style={styles.textStandard} >{this.state.branch.location_street}</Text>
+                                <Text style={styles.textStandard} >{this.state.branch.distance} km entfernt</Text>
                             </View>
                             <View style={{flexDirection: 'row', width: 60}}>
                                 <View style={styles.viewColumn}>
                                     <View style={styles.viewIconSmall}>
                                         <Icon name="tint" size={16} color={primaryColor} />
                                     </View>
-                                    <Text style={styles.textStandard} >{this.state.station.tempWater}°</Text>
+                                    <Text style={styles.textStandard} >{this.state.branch.tempWater}°</Text>
                                 </View>
                                 <View style={styles.viewColumn}>
                                     <View style={styles.viewIconSmall}>
                                         {
-                                            this.state.station.weather === "sunny" ? (
+                                            this.state.branch.weather === "sunny" ? (
                                                 <Icon name="sun-o" size={16} color={primaryColor} />
-                                            ) : (this.state.station.weather === "cloudy") ? (
+                                            ) : (this.state.branch.weather === "cloudy") ? (
                                                 <Icon name="cloud" size={16} color={primaryColor} />
-                                            ) : (this.state.station.weather === "rainy") ? (
+                                            ) : (this.state.branch.weather === "rainy") ? (
                                                 <Icon name="mixcloud" size={16} color={primaryColor} />
                                             ) : (
                                                 <Icon name="sun-o" size={16} color={primaryColor} />
                                             )
                                         }
                                     </View>
-                                    <Text style={styles.textStandard} >{this.state.station.tempAir}°</Text>
+                                    <Text style={styles.textStandard} >{this.state.branch.tempAir}°</Text>
                                 </View>
                             </View>
                         </View>
@@ -130,18 +130,18 @@ export default class ReservationsBranch extends Component {
                         <View style={[styles.viewMap, styles.marginSpacer]}>
                             <Image source={mapDummy} style={{flex: 1, height: undefined, width: undefined, minHeight: 150}} resizeMode={'cover'} />
                         </View>
-                        <Text style={styles.textStandardBold} >{this.state.station.location_name}</Text>
-                        <Text style={styles.textStandard} >{this.state.station.location_street}</Text>
+                        <Text style={styles.textStandardBold} >{this.state.branch.location_name}</Text>
+                        <Text style={styles.textStandard} >{this.state.branch.location_street}</Text>
                         <View style={styles.viewRow}>
                             <View style={styles.viewIconSmall}>
                                 <Icon name="info-circle" size={16} color={primaryColor} />
                             </View>
-                            <Text style={styles.textStandard} >{this.state.station.location_transport}</Text>
+                            <Text style={styles.textStandard} >{this.state.branch.location_transport}</Text>
                         </View>
 
                     </ScrollView>
                     <View style={[styles.viewFooter, {marginTop: 8}]}>
-                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.myReservationsCancel()}>
+                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationsCalendar()}>
                             <Text style={styles.textButtonPrimary} >SUP MIETEN</Text>
                         </TouchableOpacity>
                     </View>
