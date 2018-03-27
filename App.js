@@ -19,11 +19,17 @@ import MyReservationsReservation from './src/components/myreservations/reservati
 import MyReservationsCancel from './src/components/myreservations/cancel/index';
 import MyReservationsReschedule from './src/components/myreservations/reschedule/index';
 
-import ReservationsBranches from './src/components/reservation/branches/index';
-import ReservationsBranchDetail from './src/components/reservation/branchDetail/index';
-import ReservationsCalendar from './src/components/reservation/calendar/index';
-import ReservationsResource from './src/components/reservation/resource/index';
-import ReservationsSummary from './src/components/reservation/summary/index';
+import ReservationBranches from './src/components/reservation/branches/index';
+import ReservationBranchDetail from './src/components/reservation/branchDetail/index';
+import ReservationCalendar from './src/components/reservation/calendar/index';
+import ReservationResource from './src/components/reservation/resource/index';
+import ReservationSummary from './src/components/reservation/summary/index';
+import ReservationPayment from './src/components/reservation/payment/index';
+import ReservationRules from './src/components/reservation/rules/index';
+import ReservationConfirmation from './src/components/reservation/confirmation/index';
+
+import RegisterEmail from './src/components/register/email/index';
+import RegisterAccount from './src/components/register/account/index';
 
 import menuIcon from './src/images/others/menu_hamburger.png';
 
@@ -48,11 +54,17 @@ export default class App extends Component {
                             <Scene key="myReservationsCancel" component={MyReservationsCancel} title="Stornieren" />
                             <Scene key="myReservationsReschedule" component={MyReservationsReschedule} title="Verschieben" />
 
-                            <Scene key="reservationsBranch" component={ReservationsBranches} title="Stationen" initial={true} />
-                            <Scene key="reservationsBranchDetail" component={ReservationsBranchDetail} title="Station" initial={false} />
-                            <Scene key="reservationsCalendar" component={ReservationsCalendar} title="SUP Mieten" initial={false} />
-                            <Scene key="reservationsResource" component={ReservationsResource} title="Board wählen" initial={false} />
-                            <Scene key="reservationsSummary" component={ReservationsSummary} title="Zusammenfassung" initial={false} />
+                            <Scene key="reservationBranch" component={ReservationBranches} title="Stationen" initial={false} />
+                            <Scene key="reservationBranchDetail" component={ReservationBranchDetail} title="Station" initial={false} />
+                            <Scene key="reservationCalendar" component={ReservationCalendar} title="SUP Mieten" initial={false} />
+                            <Scene key="reservationResource" component={ReservationResource} title="Board wählen" initial={false} />
+                            <Scene key="reservationSummary" component={ReservationSummary} title="Zusammenfassung" initial={false} />
+                            <Scene key="reservationPayment" component={ReservationPayment} title="Bezahlen" initial={false} />
+                            <Scene key="reservationRules" component={ReservationRules} title="Regeln und Hinweise" initial={true} />
+                            <Scene key="reservationConfirmation" component={ReservationConfirmation} title="Bestätigung" initial={false} />
+
+                            <Scene key="registerEmail" component={RegisterEmail} title="E-Mail" initial={false} />
+                            <Scene key="registerAccount" component={RegisterAccount} title="Account erstellen" initial={false} />
 
                             {/*
                             <Scene key="TestLinkaAPI" component={TestLinkaAPI} />

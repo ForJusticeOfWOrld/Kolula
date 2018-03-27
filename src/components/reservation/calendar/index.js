@@ -40,7 +40,7 @@ const dummyTariffs = [
     {"time": 240, "desc": "4:00h", "price": 29.99}
 ];
 
-export default class MyReservationsOverview extends Component {
+export default class ReservationCalendar extends Component {
 
     constructor(props) {
         super(props);
@@ -56,6 +56,8 @@ export default class MyReservationsOverview extends Component {
     }
 
     componentWillMount() {
+        console.log("ReservationCalendar props:")
+        console.log(this.props);
         let date = new Date().getDate();
         let month = new Date().getMonth() + 1;
         let year = new Date().getFullYear();
@@ -71,15 +73,15 @@ export default class MyReservationsOverview extends Component {
             });
         } else {
             this.setState({
-                station: dummyBranch,
+                branch: dummyBranch,
                 dataSource: this.state.dataSource.cloneWithRows(dummyTariffs),
             });
         }
     }
 
-    renderReservations(tariffs) {
+    renderTariffs(tariffs) {
         return (
-            <TouchableOpacity onPress={() => Actions.reservationsResource({ tariff: tariffs, branch: this.state.branch, date: this.state.actualDate })}>
+            <TouchableOpacity onPress={() => Actions.reservationResource({ tariff: tariffs, branch: this.state.branch, date: this.state.actualDate })}>
                 <View style={[styles.viewButtonSecondary, styles.viewRow, {justifyContent: "space-between"}]}>
                     <Text style={styles.textButtonSecondary}>{tariffs.desc}</Text>
                     <Text style={styles.textButtonSecondary}>{tariffs.price}</Text>
@@ -128,7 +130,7 @@ export default class MyReservationsOverview extends Component {
                             <View style={styles.viewColumn}>
                                 <ListView
                                     dataSource={this.state.dataSource}
-                                    renderRow={this.renderReservations.bind(this)}
+                                    renderRow={this.renderTariffs.bind(this)}
                                     style={styles.viewColumn}
                                     enableEmptySections={true}
                                 />

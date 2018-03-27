@@ -196,7 +196,7 @@ class DrawerContent extends Component {
                             </TouchableOpacity>
                         </View>
                         <View style={[styles.viewSeparator, styles.marginSpacer]}>
-                            <TouchableOpacity  style={styles.viewButton} onPress={() => Actions.reservationsBranch({type: ActionConst.RESET})}>
+                            <TouchableOpacity  style={styles.viewButton} onPress={() => Actions.reservationBranch({type: ActionConst.RESET})}>
                                 <Text style={styles.textLarge}>Stationen</Text>
                             </TouchableOpacity>
                         </View>

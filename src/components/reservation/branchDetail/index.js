@@ -42,7 +42,7 @@ const dummyNearBranch = {
     "highlights": ["Highlight 1", "Highlight 2", "Highlight 3", "Highlight 4", "Highlight 5",],
 };
 
-export default class ReservationsBranch extends Component {
+export default class ReservationBranchDetail extends Component {
 
     constructor(props) {
         super(props);
@@ -55,6 +55,8 @@ export default class ReservationsBranch extends Component {
     }
 
     componentWillMount() {
+        console.log("ReservationBranchDetail props:")
+        console.log(this.props);
         if (this.props.branch) {
             this.setState({
                 dataSource: this.state.dataSource.cloneWithRows(this.props.branch.highlights),
@@ -141,7 +143,7 @@ export default class ReservationsBranch extends Component {
 
                     </ScrollView>
                     <View style={[styles.viewFooter, {marginTop: 8}]}>
-                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationsCalendar()}>
+                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationCalendar({branch: this.state.branch})}>
                             <Text style={styles.textButtonPrimary} >SUP MIETEN</Text>
                         </TouchableOpacity>
                     </View>

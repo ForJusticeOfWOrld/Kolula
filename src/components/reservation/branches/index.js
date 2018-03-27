@@ -106,7 +106,7 @@ const dummyBranches = {
     ]
 };
 
-export default class ReservationsBranch extends Component {
+export default class ReservationBranches extends Component {
 
     constructor(props) {
         super(props);
@@ -119,6 +119,8 @@ export default class ReservationsBranch extends Component {
     }
 
     componentWillMount() {
+        console.log("ReservationBranches props:")
+        console.log(this.props);
         this.setState({
             dataSource: this.state.dataSource.cloneWithRows(dummyBranches.branches),
             station: dummyNearBranch,
@@ -127,12 +129,12 @@ export default class ReservationsBranch extends Component {
 
     renderBranches(branches) {
         return (
-            <TouchableOpacity onPress={() => Actions.reservationsBranchDetail({ branch: branches })}>
+            <TouchableOpacity onPress={() => Actions.reservationBranchDetail({ branch: branches })}>
                 <View style={styles.viewBorder}>
                     <View style={[styles.viewColumn, styles.viewMargin]}>
                         <Text style={styles.textStandardBold}>{branches.location_name}</Text>
                         <Text style={styles.textStandard}>{branches.location_street}</Text>
-                        <Text style={styles.textStandard}>{branches.distance} km</Text>
+                        <Text style={styles.textStandard}>{branches.distance} km entfernt</Text>
                     </View>
                 </View>
             </TouchableOpacity>
@@ -147,14 +149,14 @@ export default class ReservationsBranch extends Component {
                         <View style={styles.viewRow}>
                             <Text style={[styles.textLargeBold, styles.marginSpacer]} >Nächste Station</Text>
                         </View>
-                        <TouchableOpacity onPress={() => Actions.reservationsBranchDetail({ branch: dummyNearBranch })}>
+                        <TouchableOpacity onPress={() => Actions.reservationBranchDetail({ branch: dummyNearBranch })}>
                         <View style={[styles.viewColumn, styles.viewBorder]}>
                             <View style={[styles.viewMap]}>
                                 <Image source={mapDummy} style={{flex: 1, height: undefined, width: undefined, minHeight: 150}} resizeMode={'cover'} />
                             </View>
                             <View style={[styles.viewColumn, styles.viewMargin]}>
                                 <Text style={styles.textStandardBold} >{this.state.station.location_name}</Text>
-                                <Text style={styles.textStandard} >{this.state.station.distance}</Text>
+                                <Text style={styles.textStandard} >{this.state.station.distance} km entfernt</Text>
                             </View>
                         </View>
                         </TouchableOpacity>
@@ -169,10 +171,10 @@ export default class ReservationsBranch extends Component {
                                 enableEmptySections={true}
                             />
                         </View>
-                        <TouchableOpacity style={styles.viewButtonInactive} onPress={() => Actions.reservationsBranchDetail({ branch: dummyNearBranch })}>
+                        <View style={styles.viewButtonInactive}>
                             <Text style={styles.textNoStationHeading} >Keine Station in der Nähe?</Text>
                             <Text style={styles.textNoStation} >Standort vorschlagen & Updates erhalten</Text>
-                        </TouchableOpacity>
+                        </View>
                     </View>
                 </ScrollView>
             </View>

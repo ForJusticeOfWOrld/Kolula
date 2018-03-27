@@ -39,7 +39,7 @@ const dummyReservationNext = [
     {"timeStart": "15:00", "timeEnd": "16:30"}
 ];
 
-export default class MyReservationsOverview extends Component {
+export default class ReservationResource extends Component {
 
     constructor(props) {
         super(props);
@@ -56,7 +56,8 @@ export default class MyReservationsOverview extends Component {
     }
 
     componentWillMount() {
-
+        console.log("ReservationResource props:")
+        console.log(this.props);
         // debugdata
         if (this.props.tariff && this.props.branch && this.props.date) {
             this.setState({
@@ -100,7 +101,7 @@ export default class MyReservationsOverview extends Component {
                     <View style={{flex: 1, width: 100}}>
                         <Text style={styles.textStandardBold}>{timeWindow.timeStart + " - " + timeWindow.timeEnd}</Text>
                     </View>
-                    <TouchableOpacity style={styles.viewButtonSecondary} onPress={() => Actions.reservationsSummary({ tariff: this.state.branch.tariffs, branch: this.state.branch, date: this.state.date, timeWindow: timeWindow, items: this.state.items })}>
+                    <TouchableOpacity style={styles.viewButtonSecondary} onPress={() => Actions.reservationSummary({ tariff: this.state.tariff, branch: this.state.branch, date: this.state.date, timeWindow: timeWindow, items: this.state.items })}>
                         <Text style={styles.textButtonSecondary}>Auswählen</Text>
                     </TouchableOpacity>
                 </View>
