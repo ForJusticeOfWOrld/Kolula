@@ -1,116 +1,174 @@
-import { StyleSheet } from 'react-native';
-import * as commonStyles from '../../common/commonStyles';
-
+const React = require('react-native');
+const { StyleSheet } = React;
+import {
+    backgroundColor,
+    primaryColor,
+    secondaryColor,
+    primaryInvertedColor,
+    inactiveColor,
+    inactiveBackgroundColor,
+    largeFontSize,
+    standardFontSize,
+    smallFontSize,
+    standardBorderRadius,
+    standardBorderWidth,
+    separatorBorderWidth,
+    standardMargin,
+    standardMmarginHorizontal,
+    standardMarginVertical,
+    containerPaddingHorizontal,
+    containerPaddingVertical,
+    rowViewPaddingVertical,
+    standardSpacerMarginVertical,
+} from './../../styles/common'
 
 export default{
     container: {
-        flex: 1,
-        backgroundColor: '#fff'
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        paddingHorizontal: containerPaddingHorizontal,
+        paddingVertical: containerPaddingVertical,
+        backgroundColor: backgroundColor, //Debug
     },
-    containerImage: {
+    viewColumn: {
         flex: 1,
-        height: null,
-        width: null,
+        flexDirection: 'column',
     },
     viewRow: {
         flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        margin: 10,
+        flexDirection: 'row',
     },
     viewHeader: {
-        flex: 1,
+        //(flex: 1,
+        height: 100,
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        paddingTop: 32,
+        borderWidth: 1,
+        borderColor: primaryColor,
     },
     viewBody: {
-        flexDirection: 'column',
-        marginHorizontal: 10,
-    },
-    viewBottom: {
         flex: 1,
         flexDirection: 'column',
+        //borderWidth: 1,
+        //borderColor: "#0F0",
+    },
+    viewFooter: {
+        //flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
         justifyContent: 'flex-end',
     },
-    viewLogo: {
-        height: 65,
-        marginBottom: 10,
+    viewSeparator: {
+        borderBottomWidth: separatorBorderWidth,
+        borderBottomColor: primaryColor,
+        marginVertical: standardMargin,
     },
-    // imageLogo: {
-    //     flex: 1,
-    // },
-    errorView: {
-        height: 40,
-        alignSelf: 'center',
-        marginBottom: 6,
+    viewBorder: {
+        borderRadius: standardBorderRadius,
+        borderWidth: standardBorderWidth,
+        borderColor: primaryColor,
+        marginVertical: standardMargin,
     },
-    errorText: {
-        color: '#111',
-        fontSize: 22,
-        padding: 10,
-        backgroundColor: commonStyles.lightPinkOpacityColor,
-        borderRadius: 8,
-        borderColor: commonStyles.darkRedColor,
-        borderWidth: 1,
+    viewSpaceBetween: {
+        flex: 1,
+        justifyContent: "space-between",
     },
-    itemsBG: {
-        marginTop: 6,
-        backgroundColor: commonStyles.whiteOpacityColor7,
-        borderRadius: 10,
-        borderColor: commonStyles.moreDarkGreyColor2,
-        borderWidth: 1,
-    },
-    inputText: {
-        fontSize: 22,
-        fontWeight: '100',
-        color: commonStyles.moreDarkGreyColor1,
-        marginVertical: 2,
-        marginLeft: 14,
-        minHeight: 45,
-    },
-    // checkBoxBG: {
-    //     flexDirection: 'row',
-    //     alignItems: 'center',
-    // },
-    // checkBoxText: {
-    //     fontSize: 16,
-    //     fontWeight: '100',
-    //     color: commonStyles.moreDarkGreyColor1,
-    //     paddingRight: 14,
-    // },
-    // checkBox: {
-    //     marginLeft: 16,
-    //     marginVertical: 0,
-    //     paddingTop: 3,
-    //     paddingBottom: 3,
-    // },
-    loginButtonView: {
-        backgroundColor: commonStyles.lightGreenColor,
-        marginTop: 8,
-        borderRadius: 8,
-        justifyContent: 'center',
+    viewIcon: {
         alignItems: 'center',
-    },
-    loginButtonText: {
-        fontSize: 25,
-        fontWeight: 'bold',
-        marginVertical: 4,
-        color: commonStyles.whiteColor,//color: commonStyles.lightRedColor,
-    },
-    loginButtonViewInactive: {
-        flexDirection: 'row',
-        backgroundColor: commonStyles.lightGreyColor,
-        marginTop: 8,
-        borderRadius: 8,
         justifyContent: 'center',
-        alignItems: 'center',
+        width: 64,
     },
-    loginButtonTextInactive: {
-        fontSize: 25,
+    viewIconSmall: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 18,
+    },
+    viewMap: {
+        flex: 1,
+        //height: 100,
+        //Width: 100,
+    },
+    viewButtonPrimary: {
+        borderRadius: standardBorderRadius,
+        borderWidth: standardBorderWidth,
+        borderColor: primaryColor,
+        backgroundColor: primaryColor,
+        alignSelf: 'stretch',
+    },
+    textButtonPrimary: {
+        color: primaryInvertedColor,
+        fontSize: largeFontSize,
         fontWeight: 'bold',
+        marginVertical: standardMargin,
+        textAlign: 'center',
+    },
+    viewButtonSecondary: {
+        borderRadius: standardBorderRadius,
+        borderWidth: standardBorderWidth,
+        borderColor: primaryColor,
+        backgroundColor: primaryInvertedColor,
+        alignSelf: 'stretch',
+    },
+    textButtonSecondary: {
+        color: primaryColor,
+        fontSize: standardFontSize,
+        fontWeight: 'bold',
+        marginVertical: standardMargin,
+        textAlign: 'center',
+    },
+    viewButtonInactive: {
+        borderRadius: standardBorderRadius,
+        borderWidth: standardBorderWidth,
+        borderColor: inactiveColor,
+        backgroundColor: inactiveBackgroundColor,
+        alignSelf: 'stretch',
+    },
+    textButtonInactive: {
+        color: inactiveColor,
+        fontSize: largeFontSize,
+        fontWeight: 'bold',
+        marginVertical: standardMargin,
+        textAlign: 'center',
+    },
+    textLargeBold: {
+        fontSize: largeFontSize,
+        color: primaryColor,
+        fontWeight: 'bold',
+    },
+    textStandardBold: {
+        fontSize: standardFontSize,
+        color: primaryColor,
+        fontWeight: 'bold',
+    },
+    textStandard: {
+        fontSize: standardFontSize,
+        color: primaryColor,
+    },
+    textSeparator: {
+        fontSize: standardFontSize,
+        color: primaryColor,
+        fontWeight: 'bold',
+    },
+    marginSpacer: {
+        marginTop: standardSpacerMarginVertical,
+    },
+    viewMargin: {
+        margin: standardMargin,
+    },
+    textNoStationHeading: {
+        color: inactiveColor,
+        fontSize: largeFontSize,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    textNoStation: {
+        color: inactiveColor,
+        fontSize: standardFontSize,
         marginVertical: 4,
-        marginLeft: 14,
-        color: commonStyles.darkGreyColor,
+        textAlign: 'center',
     },
 };

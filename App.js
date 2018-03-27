@@ -28,8 +28,16 @@ import ReservationPayment from './src/components/reservation/payment/index';
 import ReservationRules from './src/components/reservation/rules/index';
 import ReservationConfirmation from './src/components/reservation/confirmation/index';
 
+import RentStart from './src/components/rent/start/index';
+import RentStatus from './src/components/rent/status/index';
+
 import RegisterEmail from './src/components/register/email/index';
 import RegisterAccount from './src/components/register/account/index';
+
+import AccountPersonalData from './src/components/account/personalData/index';
+import AccountEmailPassword from './src/components/account/emailPassword/index';
+
+import Login from './src/components/login/index';
 
 import menuIcon from './src/images/others/menu_hamburger.png';
 
@@ -48,7 +56,6 @@ export default class App extends Component {
                         drawerPosition='right'
                     >
                         <Scene key="root">
-
                             <Scene key="myReservationsOverview" component={MyReservationsOverview} title="Reservierungen" />
                             <Scene key="myReservationsReservation" component={MyReservationsReservation} title="Details" />
                             <Scene key="myReservationsCancel" component={MyReservationsCancel} title="Stornieren" />
@@ -63,36 +70,17 @@ export default class App extends Component {
                             <Scene key="reservationRules" component={ReservationRules} title="Regeln und Hinweise" initial={true} />
                             <Scene key="reservationConfirmation" component={ReservationConfirmation} title="Bestätigung" initial={false} />
 
+                            <Scene key="rentStart" component={RentStart} title="Miete starten" initial={false} />
+                            <Scene key="rentStatus" component={RentStatus} title="Mietstatus" initial={false} />
+
+
                             <Scene key="registerEmail" component={RegisterEmail} title="E-Mail" initial={false} />
                             <Scene key="registerAccount" component={RegisterAccount} title="Account erstellen" initial={false} />
 
-                            {/*
-                            <Scene key="TestLinkaAPI" component={TestLinkaAPI} />
-                            <Scene key="main" component={Main} type={ActionConst.RESET} />
-                            <Scene key="home" component={Home} title="Home" />
+                            <Scene key="accountPersonalData" component={AccountPersonalData} title="Persönliche Daten" initial={false} />
+                            <Scene key="accountEmailPassword" component={AccountEmailPassword} title="E-Mail und Passwort" initial={false} />
 
-                            <Scene key="login" component={Login} hideNavBar={true} title="Login" />
-                            <Scene key="intro" component={Intro} hideNavBar={true} title="Tutorial" />
-                            <Scene key="help" component={Help} title="Hilfe" />
-                            <Scene key="moremenu" component={MoreMenu} title="Mehr" />
-                            <Scene key="agb" component={AGB} title="Nutzungsbedingungen" />
-                            <Scene key="contact" component={Contact} title="Kontakte" />
-                            <Scene key="user" component={User} title="Nutzer" />
-                            <Scene key="legal" component={Legal} title="Impressum" />
-
-                            <Scene key="stationList" component={StationList} title="Stationen" />
-                            <Scene key="stationMap" component={StationMap} title="Stationen" />
-                            <Scene key="bikeList" component={BikeList} title="Bikes" />
-                            <Scene key="bookBike" component={BookBike} title="Buchen" />
-
-                            <Scene key="bikeStatus" component={BikeStatus} title="Mein Bike" />
-                            <Scene key="bookEnd" component={BookEnd} title="Beenden" />
-                            <Scene key="noBook" component={NoBook} title="Buchung" />
-
-                            <Scene key="async" component={AsyncTest} title="AsyncStorage Test" />
-                            <Scene key="ble" component={BLE} title="BLE Test" />
-                            <Scene key="geo" component={Geo} title="GPS Test" />
-                            <Scene key="map" component={Map} title="Map Test" /> */}
+                            <Scene key="login" component={Login} title="Login" initial={false} />
                         </Scene>
                     </Drawer>
                 </Router>

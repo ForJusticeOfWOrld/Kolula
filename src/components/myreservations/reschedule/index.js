@@ -2,24 +2,33 @@ import React, { Component } from 'react';
 import {
     Text,
     View,
+    Image,
     ScrollView,
     TouchableOpacity,
 } from 'react-native';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './styles';
+import {
+    primaryColor,
+} from './../../../styles/common'
+import { Actions } from "react-native-router-flux";
+import { ActionConst } from "react-native-router-flux";
 
-import { Actions, ActionConst } from 'react-native-router-flux';
+const mapDummy = require('../../../images/dummys/dummyBanner.png');
 
-export default class MyReservationsReschedule extends Component {
+export default class ReservationConfirmation extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            working: false,
+            debug: false,
         };
     }
 
     componentWillMount() {
+        // debugdata
+        console.log("ReservationRules props:")
+        console.log(this.props);
     }
 
     render () {
@@ -27,16 +36,11 @@ export default class MyReservationsReschedule extends Component {
             <View style={styles.container}>
                 <View style={styles.viewSpaceBetween}>
                     <View style={styles.viewBody}>
-                        <ScrollView style={styles.viewColumn}>
-                            <View style={styles.viewColumn}>
-                                <Text style={styles.textLargeBold} >Termin umbuchen</Text>
-                                <Text style={styles.textLarge} >Dummyscreen für das Umbauchen</Text>
-                            </View>
-                        </ScrollView>
+                        <Text style={styles.textLargeBold}>Confirmation Beispieltext</Text>
                     </View>
                     <View style={[styles.viewFooter, {marginTop: 8}]}>
-                        <TouchableOpacity style={styles.viewButton} onPress={() => Actions.myReservationsOverview({type: ActionConst.RESET})}>
-                            <Text style={styles.buttonSecondary} >ALLES KLAR!</Text>
+                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationBranch({type: ActionConst.RESET})}>
+                            <Text style={styles.textButtonPrimary} >FERTIG</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

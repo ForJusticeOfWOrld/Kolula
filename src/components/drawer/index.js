@@ -181,12 +181,12 @@ class DrawerContent extends Component {
                             </TouchableOpacity>
                         </View>
                         <View style={[styles.viewSeparator, styles.marginSpacer]}>
-                            <TouchableOpacity  style={styles.viewButton} onPress={() => this.onContact()}>
+                            <TouchableOpacity  style={styles.viewButton} onPress={() => Actions.accountPersonalData()}>
                                 <Text style={styles.textLarge}>Persönliche Daten</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={[styles.viewSeparator, styles.marginSpacer]}>
-                            <TouchableOpacity  style={styles.viewButton} onPress={() => this.onLegal()}>
+                            <TouchableOpacity  style={styles.viewButton} onPress={() => Actions.accountEmailPassword()}>
                                 <Text style={styles.textLarge}>E-Mail-Adresse & Passwort</Text>
                             </TouchableOpacity>
                         </View>
@@ -198,6 +198,11 @@ class DrawerContent extends Component {
                         <View style={[styles.viewSeparator, styles.marginSpacer]}>
                             <TouchableOpacity  style={styles.viewButton} onPress={() => Actions.reservationBranch({type: ActionConst.RESET})}>
                                 <Text style={styles.textLarge}>Stationen</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={[styles.viewSeparator, styles.marginSpacer]}>
+                            <TouchableOpacity  style={styles.viewButton} onPress={() => Actions.rentStart({type: ActionConst.RESET})}>
+                                <Text style={styles.textLarge}>aktuelle Miete</Text>
                             </TouchableOpacity>
                         </View>
 
