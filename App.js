@@ -56,18 +56,18 @@ export default class App extends Component {
                         drawerPosition='right'
                     >
                         <Scene key="root">
-                            <Scene key="myReservationsOverview" component={MyReservationsOverview} title="Reservierungen" />
+                            <Scene key="myReservationsOverview" component={MyReservationsOverview} title="Reservierungen" initial={false} />
                             <Scene key="myReservationsReservation" component={MyReservationsReservation} title="Details" />
                             <Scene key="myReservationsCancel" component={MyReservationsCancel} title="Stornieren" />
                             <Scene key="myReservationsReschedule" component={MyReservationsReschedule} title="Verschieben" />
 
-                            <Scene key="reservationBranch" component={ReservationBranches} title="Stationen" initial={false} />
+                            <Scene key="reservationBranch" component={ReservationBranches} title="Stationen" initial={true} />
                             <Scene key="reservationBranchDetail" component={ReservationBranchDetail} title="Station" initial={false} />
                             <Scene key="reservationCalendar" component={ReservationCalendar} title="SUP Mieten" initial={false} />
                             <Scene key="reservationResource" component={ReservationResource} title="Board wählen" initial={false} />
                             <Scene key="reservationSummary" component={ReservationSummary} title="Zusammenfassung" initial={false} />
                             <Scene key="reservationPayment" component={ReservationPayment} title="Bezahlen" initial={false} />
-                            <Scene key="reservationRules" component={ReservationRules} title="Regeln und Hinweise" initial={true} />
+                            <Scene key="reservationRules" component={ReservationRules} title="Regeln und Hinweise" initial={false} />
                             <Scene key="reservationConfirmation" component={ReservationConfirmation} title="Bestätigung" initial={false} />
 
                             <Scene key="rentStart" component={RentStart} title="Miete starten" initial={false} />

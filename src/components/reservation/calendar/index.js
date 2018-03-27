@@ -82,9 +82,9 @@ export default class ReservationCalendar extends Component {
     renderTariffs(tariffs) {
         return (
             <TouchableOpacity onPress={() => Actions.reservationResource({ tariff: tariffs, branch: this.state.branch, date: this.state.actualDate })}>
-                <View style={[styles.viewButtonSecondary, styles.viewRow, {justifyContent: "space-between"}]}>
-                    <Text style={styles.textButtonSecondary}>{tariffs.desc}</Text>
-                    <Text style={styles.textButtonSecondary}>{tariffs.price}</Text>
+                <View style={[styles.viewButtonSecondary, styles.viewRow, {justifyContent: "space-between", marginTop: 8,}]}>
+                    <Text style={[styles.textButtonSecondary, {flex: 1}]}>{tariffs.desc}</Text>
+                    <Text style={[styles.textButtonSecondary, {width: 80}]}>{tariffs.price} €</Text>
                 </View>
             </TouchableOpacity>
         );
@@ -124,10 +124,10 @@ export default class ReservationCalendar extends Component {
 
                         </View>
                         <View style={styles.viewFooter}>
-                            <View style={[styles.viewSeparator, styles.marginSpacer]}>
-                                <Text style={[styles.textSeparator]} >Tarif wählen</Text>
+                            <View style={[styles.viewSeparator, styles.marginSpacer, {alignSelf: 'stretch' }]}>
+                                <Text style={[styles.textSeparator, {alignSelf: 'stretch',}]} >Tarif wählen</Text>
                             </View>
-                            <View style={styles.viewColumn}>
+                            <View style={[styles.viewColumn, {alignSelf: 'stretch',}]}>
                                 <ListView
                                     dataSource={this.state.dataSource}
                                     renderRow={this.renderTariffs.bind(this)}

@@ -61,8 +61,8 @@ export default{
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'flex-end',
-        borderWidth: 1,
-        borderColor: "#f0F",
+        //borderWidth: 1,
+        //borderColor: "#f0F",
     },
     viewSeparator: {
         borderBottomWidth: separatorBorderWidth,

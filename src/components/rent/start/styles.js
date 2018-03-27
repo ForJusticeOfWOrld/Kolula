@@ -92,6 +92,14 @@ export default{
         //height: 100,
         //Width: 100,
     },
+    viewImage: {
+        flex: 1,
+        borderWidth: 1,
+        borderColor: primaryColor,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 10,
+    },
     viewButtonPrimary: {
         borderRadius: standardBorderRadius,
         borderWidth: standardBorderWidth,

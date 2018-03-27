@@ -8,7 +8,14 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 import styles from './styles';
+import {
+    primaryColor,
+    backgroundColor,
+    secondaryColor,
+} from './../../../styles/common'
 
 const dummyBranch = {
     "id": 2,
@@ -52,6 +59,7 @@ export default class ReservationResource extends Component {
             date: false,
             time: false,
             items: 0,
+            maxItems: 5,
         };
     }
 
@@ -96,7 +104,7 @@ export default class ReservationResource extends Component {
 
     renderReservations(timeWindow) {
         return (
-            <View style={styles.viewSeparator}>
+            <View style={[styles.viewSeparator, {flex: 1}]}>
                 <View style={styles.viewRow}>
                     <View style={{flex: 1, width: 100}}>
                         <Text style={styles.textStandardBold}>{timeWindow.timeStart + " - " + timeWindow.timeEnd}</Text>
@@ -113,32 +121,75 @@ export default class ReservationResource extends Component {
         return (
             <View style={styles.container}>
                 <ScrollView style={styles.viewColumn}>
-                    <View style={[styles.viewRow, styles.marginSpacer, styles.viewSpaceBetween]}>
-                        <View style={styles.viewColumn}>
-                            <Text style={styles.textStandardBold} >1x Aufblas-SUP</Text>
-                            <Text style={styles.textStandard} >Ein normales SUP.</Text>
-                        </View>
-                        <View style={[styles.viewRow, {width: 130, height: 40, justifyContent: 'flex-end',}]}>
-                            <TouchableOpacity style={[styles.viewBorder, {width: 40, height: 40}]} onPress={() => this.subtractItem()}>
-                                <Text style={styles.textButtonSecondary}>-</Text>
-                            </TouchableOpacity>
-                            <View style={[styles.viewBorder, {width: 40, height: 40}]}>
-                                <Text style={styles.textButtonSecondary} >{this.state.items}</Text>
+                    <View style={[styles.viewColumn, styles.viewSpaceBetween]}>
+                        <View style={[styles.viewRow, styles.marginSpacer, styles.viewSpaceBetween]}>
+                            <View style={styles.viewColumn}>
+                                <Text style={styles.textStandardBold} >1x Aufblas-SUP</Text>
+                                <Text style={styles.textStandard} >Ein normales SUP.</Text>
                             </View>
-                            <TouchableOpacity style={[styles.viewBorder, {width: 40, height: 40}]} onPress={() => this.addItem()}>
-                                <Text style={styles.textButtonSecondary}>+</Text>
-                            </TouchableOpacity>
+                            <View style={[styles.viewRow, {width: 130, height: 40, justifyContent: 'flex-end',}]}>
+                                {
+                                    (this.state.items > 0) ? (
+                                        <TouchableOpacity style={[styles.viewBorder, {width: 40, height: 40, backgroundColor: primaryColor}]} onPress={() => this.subtractItem()}>
+                                            <Text style={[styles.textButtonSecondary, {color: backgroundColor, }]}>-</Text>
+                                        </TouchableOpacity>
+                                    ) : (
+                                        <View style={[styles.viewBorder, {width: 40, height: 40}]}>
+                                            <Text style={styles.textButtonSecondary} >-</Text>
+                                        </View>
+                                    )
+                                }
+                                <View style={[styles.viewBorder, {width: 40, height: 40}]}>
+                                    <Text style={styles.textButtonSecondary} >{this.state.items}</Text>
+                                </View>
+                                {
+                                    (this.state.items <= this.state.maxItems) ? (
+                                        <TouchableOpacity style={[styles.viewBorder, {width: 40, height: 40, backgroundColor: primaryColor}]} onPress={() => this.addItem()}>
+                                            <Text style={[styles.textButtonSecondary, {color: backgroundColor, }]}>-</Text>
+                                        </TouchableOpacity>
+                                    ) : (
+                                        <View style={[styles.viewBorder, {width: 40, height: 40}]}>
+                                            <Text style={styles.textButtonSecondary} >+</Text>
+                                        </View>
+                                    )
+                                }
+                            </View>
+                        </View>
+                        <View style={[styles.viewRow, styles.marginSpacer, styles.viewSpaceBetween]}>
+                            <View style={styles.viewColumn}>
+                                <Text style={[styles.textStandardBold, {color: secondaryColor}]} >1x Aufblas-SUP</Text>
+                                <Text style={[styles.textStandard, {color: secondaryColor}]} >Ein normales SUP.</Text>
+                            </View>
+                            <View style={[styles.viewRow, {width: 130, height: 40, justifyContent: 'flex-end',}]}>
+                                <View style={[styles.viewBorder, {width: 40, height: 40, borderColor: secondaryColor}]}>
+                                    <Text style={[styles.textButtonSecondary, {color: secondaryColor}]} >-</Text>
+                                </View>
+                                <View style={[styles.viewBorder, {width: 40, height: 40, borderColor: secondaryColor}]}>
+                                    <Text style={[styles.textButtonSecondary, {color: secondaryColor}]} >{this.state.items}</Text>
+                                </View>
+                                <View style={[styles.viewBorder, {width: 40, height: 40, borderColor: secondaryColor}]}>
+                                    <Text style={[styles.textButtonSecondary, {color: secondaryColor}]} >+</Text>
+                                </View>
+                            </View>
+                        </View>
+                        <View style={[styles.viewRow, styles.marginSpacer]}>
+                            <View style={styles.viewIcon}>
+                                <Icon name="info-circle" size={16} color={primaryColor} />
+                            </View>
+                            <Text style={[styles.textButtonSecondary, {color: secondaryColor, marginTop: 8}]} >Erst buchbar ab der 2. Buchung.</Text>
+                        </View>
+                        <View style={[styles.viewBody, {marginTop: 100}]}>
+                            <View style={[styles.viewSeparator, styles.marginSpacer]}>
+                                <Text style={styles.textSeparator} >Verfügbare Zeiten</Text>
+                            </View>
+                            <ListView
+                                dataSource={this.state.dataSource}
+                                renderRow={this.renderReservations.bind(this)}
+                                style={styles.listView}
+                                enableEmptySections={true}
+                            />
                         </View>
                     </View>
-                    <View style={[styles.viewSeparator, styles.marginSpacer]}>
-                        <Text style={styles.textSeparator} >Verfügbare Zeiten</Text>
-                    </View>
-                    <ListView
-                        dataSource={this.state.dataSource}
-                        renderRow={this.renderReservations.bind(this)}
-                        style={styles.listView}
-                        enableEmptySections={true}
-                    />
                 </ScrollView>
             </View>
         )
