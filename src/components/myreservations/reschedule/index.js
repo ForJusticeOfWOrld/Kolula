@@ -16,7 +16,7 @@ import { ActionConst } from "react-native-router-flux";
 
 const mapDummy = require('../../../images/dummys/dummyBanner.png');
 
-export default class ReservationConfirmation extends Component {
+export default class MyReservationsReschedule extends Component {
 
     constructor(props) {
         super(props);
@@ -27,7 +27,7 @@ export default class ReservationConfirmation extends Component {
 
     componentWillMount() {
         // debugdata
-        console.log("ReservationRules props:")
+        console.log("MyReservationsReschedule props:")
         console.log(this.props);
     }
 
@@ -36,10 +36,10 @@ export default class ReservationConfirmation extends Component {
             <View style={styles.container}>
                 <View style={styles.viewSpaceBetween}>
                     <View style={styles.viewBody}>
-                        <Text style={styles.textLargeBold}>Confirmation Beispieltext</Text>
+                        <Text style={styles.textLargeBold}>Umbuchung dummy</Text>
                     </View>
                     <View style={[styles.viewFooter, {marginTop: 8}]}>
-                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationBranch({type: ActionConst.RESET})}>
+                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.myReservationsOverview({type: ActionConst.RESET})}>
                             <Text style={styles.textButtonPrimary} >FERTIG</Text>
                         </TouchableOpacity>
                     </View>

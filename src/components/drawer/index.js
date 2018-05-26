@@ -190,19 +190,24 @@ class DrawerContent extends Component {
                                 <Text style={styles.textLarge}>E-Mail-Adresse & Passwort</Text>
                             </TouchableOpacity>
                         </View>
-                        <View style={[styles.viewSeparator, styles.marginSpacer]}>
+                        <View style={[styles.viewSeparator, styles.marginSpacer, {marginTop: 64}]}>
                             <TouchableOpacity  style={styles.viewButton} onPress={() => { this.logoutUser(); }}>
-                                <Text style={styles.textLarge}>Debugzeug</Text>
+                                <Text style={styles.textLarge}>Debug -> log</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={[styles.viewSeparator, styles.marginSpacer]}>
                             <TouchableOpacity  style={styles.viewButton} onPress={() => Actions.reservationBranch({type: ActionConst.RESET})}>
-                                <Text style={styles.textLarge}>Stationen</Text>
+                                <Text style={styles.textLarge}>Stationen (Startseite)</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={[styles.viewSeparator, styles.marginSpacer]}>
                             <TouchableOpacity  style={styles.viewButton} onPress={() => Actions.rentStart({type: ActionConst.RESET})}>
                                 <Text style={styles.textLarge}>aktuelle Miete</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={[styles.viewSeparator, styles.marginSpacer]}>
+                            <TouchableOpacity  style={styles.viewButton} onPress={() => Actions.lockTests({type: ActionConst.RESET})}>
+                                <Text style={styles.textLarge}>Schloss Test</Text>
                             </TouchableOpacity>
                         </View>
 

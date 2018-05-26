@@ -37,6 +37,8 @@ import RegisterAccount from './src/components/register/account/index';
 import AccountPersonalData from './src/components/account/personalData/index';
 import AccountEmailPassword from './src/components/account/emailPassword/index';
 
+import LockTests from './src/components/tests/locktests/index';
+
 import Login from './src/components/login/index';
 
 import menuIcon from './src/images/others/menu_hamburger.png';
@@ -79,6 +81,8 @@ export default class App extends Component {
 
                             <Scene key="accountPersonalData" component={AccountPersonalData} title="Persönliche Daten" initial={false} />
                             <Scene key="accountEmailPassword" component={AccountEmailPassword} title="E-Mail und Passwort" initial={false} />
+
+                            <Scene key="lockTests" component={LockTests} title="Schloss Test" initial={false} />
 
                             <Scene key="login" component={Login} title="Login" initial={false} />
                         </Scene>

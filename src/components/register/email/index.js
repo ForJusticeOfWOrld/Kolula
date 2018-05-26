@@ -45,11 +45,7 @@ export default class RegisterEmail extends Component {
             newReservation: false,
             apiCallWorking: false,
             //debugdata
-            tariff: false,
-            branch: false,
-            date: false,
-            timeWindow: false,
-            items: false,
+            reservation: false,
         };
     }
 
@@ -57,21 +53,13 @@ export default class RegisterEmail extends Component {
         // debugdata
         console.log("RegisterEmail props:")
         console.log(this.props);
-        if (this.props.tariff && this.props.branch && this.props.date && this.props.items) {
+        if (this.props.reservation) {
             this.setState({
-                tariff: this.props.tariff,
-                branch: this.props.branch,
-                date: this.props.date,
-                timeWindow: this.props.timeWindow,
-                items: this.props.items,
+                reservation: this.props.reservation,
             });
         } else {
             this.setState({
-                tariff: {"time": 120, "desc": "2:00h", "price": 14.99},
-                branch: dummyBranch,
-                date: {"date": 22, "month": 11, "year": 2018},
-                timeWindow: {"timeStart": "10:00", "timeEnd": "11:30"},
-                items: 5,
+                reservation: { tariff: {"time": 120, "desc": "2:00h", "price": 14.99}, branch: dummyBranch, date: {"date": 22, "month": 11, "year": 2018}, timeWindow: {"timeStart": "10:00", "timeEnd": "11:30"}, items: 5 }
             });
         }
     }
@@ -100,7 +88,7 @@ export default class RegisterEmail extends Component {
                         </TouchableOpacity>
                     </View>
                     <View style={[styles.viewFooter, {marginTop: 8}]}>
-                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.registerAccount({tariff: this.state.tariff, branch: this.state.branch, date: this.state.date, timeWindow: this.state.timeWindow, items: this.state.items, email: this.state.email})}>
+                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.registerAccount({ reservation: this.state.reservation, user: {email: this.state.email}})}>
                             <Text style={styles.textButtonPrimary} >WEITER</Text>
                         </TouchableOpacity>
                     </View>

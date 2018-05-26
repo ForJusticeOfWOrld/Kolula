@@ -50,22 +50,22 @@ export default class ReservationBranchDetail extends Component {
             dataSource: new ListView.DataSource({
                 rowHasChanged: (row1, row2) => row1 !== row2,
             }),
-            branch: false,
+            reservation: false,
         };
     }
 
     componentWillMount() {
         console.log("ReservationBranchDetail props:")
         console.log(this.props);
-        if (this.props.branch) {
+        if (this.props.reservation.branch) {
             this.setState({
-                dataSource: this.state.dataSource.cloneWithRows(this.props.branch.highlights),
-                branch: this.props.branch,
+                dataSource: this.state.dataSource.cloneWithRows(this.props.reservation.branch.highlights),
+                reservation: this.props.reservation,
             });
         } else {
             this.setState({
                 dataSource: this.state.dataSource.cloneWithRows(dummyNearBranch.highlights),
-                branch: dummyNearBranch,
+                reservation: {branch: dummyNearBranch,}
             });
         }
     }
@@ -89,32 +89,32 @@ export default class ReservationBranchDetail extends Component {
 
                         <View style={[styles.viewRow, styles.marginSpacer, {justifyContent: "space-between"}]}>
                             <View style={styles.viewColumn}>
-                            <Text style={styles.textStandardBold} >{this.state.branch.location_name}</Text>
-                                <Text style={styles.textStandard} >{this.state.branch.location_street}</Text>
-                                <Text style={styles.textStandard} >{this.state.branch.distance} km entfernt</Text>
+                            <Text style={styles.textStandardBold} >{this.state.reservation.branch.location_name}</Text>
+                                <Text style={styles.textStandard} >{this.state.reservation.branch.location_street}</Text>
+                                <Text style={styles.textStandard} >{this.state.reservation.branch.distance} km entfernt</Text>
                             </View>
                             <View style={{flexDirection: 'row', width: 60}}>
                                 <View style={styles.viewColumn}>
                                     <View style={styles.viewIconSmall}>
                                         <Icon name="tint" size={16} color={primaryColor} />
                                     </View>
-                                    <Text style={styles.textStandard} >{this.state.branch.tempWater}°</Text>
+                                    <Text style={styles.textStandard} >{this.state.reservation.branch.tempWater}°</Text>
                                 </View>
                                 <View style={styles.viewColumn}>
                                     <View style={styles.viewIconSmall}>
                                         {
-                                            this.state.branch.weather === "sunny" ? (
+                                            this.state.reservation.branch.weather === "sunny" ? (
                                                 <Icon name="sun-o" size={16} color={primaryColor} />
-                                            ) : (this.state.branch.weather === "cloudy") ? (
+                                            ) : (this.state.reservation.branch.weather === "cloudy") ? (
                                                 <Icon name="cloud" size={16} color={primaryColor} />
-                                            ) : (this.state.branch.weather === "rainy") ? (
+                                            ) : (this.state.reservation.branch.weather === "rainy") ? (
                                                 <Icon name="mixcloud" size={16} color={primaryColor} />
                                             ) : (
                                                 <Icon name="sun-o" size={16} color={primaryColor} />
                                             )
                                         }
                                     </View>
-                                    <Text style={styles.textStandard} >{this.state.branch.tempAir}°</Text>
+                                    <Text style={styles.textStandard} >{this.state.reservation.branch.tempAir}°</Text>
                                 </View>
                             </View>
                         </View>
@@ -132,18 +132,18 @@ export default class ReservationBranchDetail extends Component {
                         <View style={[styles.viewMap, styles.marginSpacer]}>
                             <Image source={mapDummy} style={{flex: 1, height: undefined, width: undefined, minHeight: 150}} resizeMode={'cover'} />
                         </View>
-                        <Text style={styles.textStandardBold} >{this.state.branch.location_name}</Text>
-                        <Text style={styles.textStandard} >{this.state.branch.location_street}</Text>
+                        <Text style={styles.textStandardBold} >{this.state.reservation.branch.location_name}</Text>
+                        <Text style={styles.textStandard} >{this.state.reservation.branch.location_street}</Text>
                         <View style={styles.viewRow}>
                             <View style={styles.viewIconSmall}>
                                 <Icon name="info-circle" size={16} color={primaryColor} />
                             </View>
-                            <Text style={styles.textStandard} >{this.state.branch.location_transport}</Text>
+                            <Text style={styles.textStandard} >{this.state.reservation.branch.location_transport}</Text>
                         </View>
 
                     </ScrollView>
                     <View style={[styles.viewFooter, {marginTop: 8}]}>
-                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationCalendar({branch: this.state.branch})}>
+                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationCalendar({reservation: this.state.reservation})}>
                             <Text style={styles.textButtonPrimary} >SUP MIETEN</Text>
                         </TouchableOpacity>
                     </View>

@@ -54,10 +54,7 @@ export default class ReservationResource extends Component {
             dataSource: new ListView.DataSource({
                 rowHasChanged: (row1, row2) => row1 !== row2,
             }),
-            tariff: false,
-            branch: false,
-            date: false,
-            time: false,
+            reservation: false,
             items: 0,
             maxItems: 5,
         };
@@ -67,19 +64,15 @@ export default class ReservationResource extends Component {
         console.log("ReservationResource props:")
         console.log(this.props);
         // debugdata
-        if (this.props.tariff && this.props.branch && this.props.date) {
+        if (this.props.reservation.branch && this.props.reservation.date && this.props.reservation.tariff) {
             this.setState({
-                dataSource: this.state.dataSource.cloneWithRows(this.props.branch.tariffs),
-                tariff: this.props.tariff,
-                branch: this.props.branch,
-                date: this.props.date,
+                dataSource: this.state.dataSource.cloneWithRows(dummyReservationNext),
+                reservation: this.props.reservation,
             });
         } else {
             this.setState({
                 dataSource: this.state.dataSource.cloneWithRows(dummyReservationNext),
-                tariff: {"time": 120, "desc": "2:00h", "price": 14.99},
-                branch: dummyBranch,
-                date: {"date": 22, "month": 11, "year": 2018},
+                reservation: {branch: dummyBranch, tariff: {"time": 120, "desc": "2:00h", "price": 14.99}, date: {"date": 22, "month": 11, "year": 2018} },
             });
         }
     }
@@ -109,7 +102,7 @@ export default class ReservationResource extends Component {
                     <View style={{flex: 1, width: 100}}>
                         <Text style={styles.textStandardBold}>{timeWindow.timeStart + " - " + timeWindow.timeEnd}</Text>
                     </View>
-                    <TouchableOpacity style={styles.viewButtonSecondary} onPress={() => Actions.reservationSummary({ tariff: this.state.tariff, branch: this.state.branch, date: this.state.date, timeWindow: timeWindow, items: this.state.items })}>
+                    <TouchableOpacity style={styles.viewButtonSecondary} onPress={() => Actions.reservationSummary({ reservation: {...this.state.reservation, timeWindow: timeWindow, items: this.state.items }})}>
                         <Text style={styles.textButtonSecondary}>Auswählen</Text>
                     </TouchableOpacity>
                 </View>
@@ -165,7 +158,7 @@ export default class ReservationResource extends Component {
                                     <Text style={[styles.textButtonSecondary, {color: secondaryColor}]} >-</Text>
                                 </View>
                                 <View style={[styles.viewBorder, {width: 40, height: 40, borderColor: secondaryColor}]}>
-                                    <Text style={[styles.textButtonSecondary, {color: secondaryColor}]} >{this.state.items}</Text>
+                                    <Text style={[styles.textButtonSecondary, {color: secondaryColor}]} >0</Text>
                                 </View>
                                 <View style={[styles.viewBorder, {width: 40, height: 40, borderColor: secondaryColor}]}>
                                     <Text style={[styles.textButtonSecondary, {color: secondaryColor}]} >+</Text>

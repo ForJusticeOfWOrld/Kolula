@@ -44,6 +44,8 @@ export default class ReservationRules extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            reservation: false,
+            user: false,
             debug: false,
         };
     }
@@ -52,6 +54,17 @@ export default class ReservationRules extends Component {
         // debugdata
         console.log("ReservationRules props:")
         console.log(this.props);
+        if (this.props.reservation && this.props.user) {
+            this.setState({
+                reservation: this.props.reservation,
+                user: this.props.user
+            });
+        } else {
+            this.setState({
+                reservation: { tariff: {"time": 120, "desc": "2:00h", "price": 14.99}, branch: dummyBranch, date: {"date": 22, "month": 11, "year": 2018}, timeWindow: {"timeStart": "10:00", "timeEnd": "11:30"}, items: 5 },
+                user: {email: "debugdaten@email.com", password: "password", surname: "Max", name: "Mustermann", street: "Musterweg 12", postCode: "12345", place: "Musterhausen" }
+            });
+        }
     }
 
     render () {
@@ -87,7 +100,7 @@ export default class ReservationRules extends Component {
                         </Swiper>
                     </View>
                     <View style={[styles.viewFooter, {marginTop: 8}]}>
-                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationConfirmation()}>
+                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationConfirmation({ reservation: this.state.reservation, user: this.state.user })}>
                             <Text style={styles.textButtonPrimary} >ALLES KLAR!</Text>
                         </TouchableOpacity>
                     </View>

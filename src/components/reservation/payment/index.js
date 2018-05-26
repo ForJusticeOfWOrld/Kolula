@@ -70,23 +70,15 @@ export default class ReservationPayment extends Component {
         // debugdata
         console.log("ReservationPayment props:")
         console.log(this.props);
-        if (this.props.tariff && this.props.branch && this.props.date && this.props.items) {
+        if (this.props.reservation && this.props.user) {
             this.setState({
-                tariff: this.props.tariff,
-                branch: this.props.branch,
-                date: this.props.date,
-                timeWindow: this.props.timeWindow,
-                items: this.props.items,
-                email: this.props.email,
+                reservation: this.props.reservation,
+                user: this.props.user
             });
         } else {
             this.setState({
-                tariff: {"time": 120, "desc": "2:00h", "price": 14.99},
-                branch: dummyBranch,
-                date: {"date": 22, "month": 11, "year": 2018},
-                timeWindow: {"timeStart": "10:00", "timeEnd": "11:30"},
-                items: 5,
-                email: "debugdaten@email.com"
+                reservation: { tariff: {"time": 120, "desc": "2:00h", "price": 14.99}, branch: dummyBranch, date: {"date": 22, "month": 11, "year": 2018}, timeWindow: {"timeStart": "10:00", "timeEnd": "11:30"}, items: 5 },
+                user: {email: "debugdaten@email.com", password: "password", surname: "Max", name: "Mustermann", street: "Musterweg 12", postCode: "12345", place: "Musterhausen" }
             });
         }
     }
@@ -121,41 +113,24 @@ export default class ReservationPayment extends Component {
                                 )
                             }
                         </View>
-                        <View style={[styles.viewColumn, styles.viewBorder, {flex: 0, height: 300, alignSelf: 'stretch', marginTop: 24,}]}>
-                            <Text style={[styles.textLargeBold, styles.marginSpacer, {alignSelf: 'stretch',}]} >Zusammenfassung</Text>
-                            <View style={[styles.viewRow, styles.marginSpacer]}>
-                                <View style={styles.viewIcon}>
-                                    <Icon name="chevron-circle-up" size={32} color={primaryColor} />
-                                </View>
-                                <View style={styles.viewColumn}>
-                                    <Text style={styles.textStandardBold} >{this.state.items} Aufblas-SUP</Text>
-                                    <Text style={styles.textStandard} >Ein normales SUP.</Text>
-                                </View>
+                        <View style={[styles.viewColumn, styles.viewBorder, {flex: 0, height: 220, alignSelf: 'stretch', marginTop: 24, padding: 8}]}>
+                            <View style={styles.viewColumn}>
+                                <Text style={styles.textStandardBold} >{this.state.reservation.items} Aufblas-SUP</Text>
+                                <Text style={styles.textStandard} >Ein normales SUP.</Text>
                             </View>
-                            <View style={[styles.viewRow, styles.marginSpacer]}>
-                                <View style={styles.viewIcon}>
-                                    <Icon name="calendar" size={32} color={primaryColor} />
-                                </View>
-                                <View style={styles.viewColumn}>
-                                    <Text style={styles.textStandardBold} >{this.state.date.date + "-" + this.state.date.month + "-" + this.state.date.year}</Text>
-                                    <Text style={styles.textStandard} >{this.state.timeWindow.timeStart + " - " + this.state.timeWindow.timeEnd + " Uhr"}</Text>
-                                </View>
+                            <View style={styles.viewColumn}>
+                                <Text style={styles.textStandardBold} >{this.state.reservation.date.date + "-" + this.state.reservation.date.month + "-" + this.state.reservation.date.year}</Text>
+                                <Text style={styles.textStandardBold} >{this.state.reservation.timeWindow.timeStart + " - " + this.state.reservation.timeWindow.timeEnd + " Uhr"}</Text>
                             </View>
-                            <Text style={[styles.textLargeBold, styles.marginSpacer]} >{this.state.tariff.price} €</Text>
                             <View style={[styles.viewColumn, styles.marginSpacer]}>
-                                <Text style={styles.textStandardBold} >{this.state.branch.location_name}</Text>
-                                <Text style={styles.textStandard} >{this.state.branch.location_street}</Text>
-                                <View style={styles.viewRow}>
-                                    <View style={styles.viewIconSmall}>
-                                        <Icon name="info-circle" size={16} color={primaryColor} />
-                                    </View>
-                                    <Text style={styles.textStandard} >{this.state.branch.location_transport}</Text>
-                                </View>
+                                <Text style={styles.textStandardBold} >{this.state.reservation.branch.location_name}</Text>
+                                <Text style={styles.textStandard} >{this.state.reservation.branch.location_street}</Text>
                             </View>
+                            <Text style={[styles.textLargeBold, styles.marginSpacer]} >{this.state.reservation.tariff.price*this.state.reservation.items} €</Text>
                         </View>
                     </View>
                     <View style={[styles.viewFooter, {marginTop: 8, height: 40}]}>
-                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.registerAccount({newReservation: this.state.newReservation})}>
+                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationRules({ reservation: this.state.reservation, user: this.state.user })}>
                             <Text style={styles.textButtonPrimary} >WEITER</Text>
                         </TouchableOpacity>
                     </View>

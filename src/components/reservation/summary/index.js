@@ -47,6 +47,7 @@ export default class ReservationSummary extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            reservation: false,
             tariff: false,
             branch: false,
             date: false,
@@ -59,21 +60,13 @@ export default class ReservationSummary extends Component {
         // debugdata
         console.log("ReservationSummary props:")
         console.log(this.props);
-        if (this.props.tariff && this.props.branch && this.props.date && this.props.items) {
+        if (this.props.reservation.tariff && this.props.reservation.branch && this.props.reservation.date && this.props.reservation.items && this.props.reservation.timeWindow) {
             this.setState({
-                tariff: this.props.tariff,
-                branch: this.props.branch,
-                date: this.props.date,
-                timeWindow: this.props.timeWindow,
-                items: this.props.items,
+                reservation: this.props.reservation,
             });
         } else {
             this.setState({
-                tariff: {"time": 120, "desc": "2:00h", "price": 14.99},
-                branch: dummyBranch,
-                date: {"date": 22, "month": 11, "year": 2018},
-                timeWindow: {"timeStart": "10:00", "timeEnd": "11:30"},
-                items: 5,
+                reservation: {branch: dummyBranch, tariff: {"time": 120, "desc": "2:00h", "price": 14.99}, date: {"date": 22, "month": 11, "year": 2018}, timeWindow: {"timeStart": "10:00", "timeEnd": "11:30"}, items: 5 }
             });
         }
     }
@@ -90,7 +83,7 @@ export default class ReservationSummary extends Component {
                                     <Icon name="chevron-circle-up" size={32} color={primaryColor} />
                                 </View>
                                 <View style={styles.viewColumn}>
-                                    <Text style={styles.textStandardBold} >{this.state.items} Aufblas-SUP</Text>
+                                    <Text style={styles.textStandardBold} >{this.state.reservation.items} Aufblas-SUP</Text>
                                     <Text style={styles.textStandard} >Ein normales SUP.</Text>
                                 </View>
                             </View>
@@ -99,19 +92,19 @@ export default class ReservationSummary extends Component {
                                     <Icon name="calendar" size={32} color={primaryColor} />
                                 </View>
                                 <View style={styles.viewColumn}>
-                                    <Text style={styles.textStandardBold} >{this.state.date.date + "-" + this.state.date.month + "-" + this.state.date.year}</Text>
-                                    <Text style={styles.textStandard} >{this.state.timeWindow.timeStart + " - " + this.state.timeWindow.timeEnd + " Uhr"}</Text>
+                                    <Text style={styles.textStandardBold} >{this.state.reservation.date.date + "-" + this.state.reservation.date.month + "-" + this.state.reservation.date.year}</Text>
+                                    <Text style={styles.textStandard} >{this.state.reservation.timeWindow.timeStart + " - " + this.state.reservation.timeWindow.timeEnd + " Uhr"}</Text>
                                 </View>
                             </View>
-                            <Text style={[styles.textLargeBold, styles.marginSpacer]} >{this.state.tariff.price} €</Text>
+                            <Text style={[styles.textLargeBold, styles.marginSpacer]} >{this.state.reservation.tariff.price*this.state.reservation.items} €</Text>
                             <View style={[styles.viewColumn, styles.marginSpacer]}>
-                                <Text style={styles.textStandardBold} >{this.state.branch.location_name}</Text>
-                                <Text style={styles.textStandard} >{this.state.branch.location_street}</Text>
+                                <Text style={styles.textStandardBold} >{this.state.reservation.branch.location_name}</Text>
+                                <Text style={styles.textStandard} >{this.state.reservation.branch.location_street}</Text>
                                 <View style={styles.viewRow}>
                                     <View style={styles.viewIconSmall}>
                                         <Icon name="info-circle" size={16} color={primaryColor} />
                                     </View>
-                                    <Text style={styles.textStandard} >{this.state.branch.location_transport}</Text>
+                                    <Text style={styles.textStandard} >{this.state.reservation.branch.location_transport}</Text>
                                 </View>
                             </View>
                             <View style={[styles.viewMap, styles.marginSpacer, {height: 200}]}>
@@ -120,7 +113,7 @@ export default class ReservationSummary extends Component {
                         </ScrollView>
                     </View>
                     <View style={[styles.viewFooter, {marginTop: 8}]}>
-                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.registerEmail({ tariff: this.state.tariff, branch: this.state.branch, date: this.state.date, timeWindow: this.state.timeWindow, items: this.state.items })}>
+                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.registerEmail({ reservation: this.state.reservation })}>
                             <Text style={styles.textButtonPrimary} >REGISTRIEREN UND BUCHEN</Text>
                         </TouchableOpacity>
                     </View>

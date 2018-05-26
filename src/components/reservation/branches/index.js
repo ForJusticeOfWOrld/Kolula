@@ -114,7 +114,7 @@ export default class ReservationBranches extends Component {
             dataSource: new ListView.DataSource({
                 rowHasChanged: (row1, row2) => row1 !== row2,
             }),
-            station: false,
+            reservation: false,
         };
     }
 
@@ -123,13 +123,13 @@ export default class ReservationBranches extends Component {
         console.log(this.props);
         this.setState({
             dataSource: this.state.dataSource.cloneWithRows(dummyBranches.branches),
-            station: dummyNearBranch,
+            reservation: {branch: dummyNearBranch},
         });
     }
 
     renderBranches(branches) {
         return (
-            <TouchableOpacity onPress={() => Actions.reservationBranchDetail({ branch: branches })}>
+            <TouchableOpacity onPress={() => Actions.reservationBranchDetail({ reservation: {branch: branches} })}>
                 <View style={styles.viewBorder}>
                     <View style={[styles.viewColumn, styles.viewMargin]}>
                         <Text style={styles.textStandardBold}>{branches.location_name}</Text>
@@ -149,14 +149,14 @@ export default class ReservationBranches extends Component {
                         <View style={styles.viewRow}>
                             <Text style={[styles.textLargeBold, styles.marginSpacer]} >Nächste Station</Text>
                         </View>
-                        <TouchableOpacity onPress={() => Actions.reservationBranchDetail({ branch: dummyNearBranch })}>
+                        <TouchableOpacity onPress={() => Actions.reservationBranchDetail({ reservation: {branch: dummyNearBranch} })}>
                         <View style={[styles.viewColumn, styles.viewBorder]}>
                             <View style={[styles.viewMap]}>
                                 <Image source={mapDummy} style={{flex: 1, height: undefined, width: undefined, minHeight: 150}} resizeMode={'cover'} />
                             </View>
                             <View style={[styles.viewColumn, styles.viewMargin]}>
-                                <Text style={styles.textStandardBold} >{this.state.station.location_name}</Text>
-                                <Text style={styles.textStandard} >{this.state.station.distance} km entfernt</Text>
+                                <Text style={styles.textStandardBold} >{dummyNearBranch.location_name}</Text>
+                                <Text style={styles.textStandard} >{dummyNearBranch.distance} km entfernt</Text>
                             </View>
                         </View>
                         </TouchableOpacity>

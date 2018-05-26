@@ -48,10 +48,9 @@ export default class ReservationCalendar extends Component {
             dataSource: new ListView.DataSource({
                 rowHasChanged: (row1, row2) => row1 !== row2,
             }),
-            branch: false,
+            reservation: false,
             actualDate: false,
             actualDateString: "",
-            reservation: false,
         };
     }
 
@@ -66,22 +65,22 @@ export default class ReservationCalendar extends Component {
             actualDate: {"date": date, "month": month, "year": year},
             actualDateString: (date + '-' + month + '-' + year),
         });
-        if (this.props.branch) {
+        if (this.props.reservation.branch) {
             this.setState({
-                branch: this.props.branch,
-                dataSource: this.state.dataSource.cloneWithRows(this.props.branch.tariffs),
+                reservation: this.props.reservation,
+                dataSource: this.state.dataSource.cloneWithRows(this.props.reservation.branch.tariffs),
             });
         } else {
             this.setState({
-                branch: dummyBranch,
-                dataSource: this.state.dataSource.cloneWithRows(dummyTariffs),
+                reservation: {branch: dummyBranch},
+                dataSource: this.state.dataSource.cloneWithRows(dummyBranch.tariffs),
             });
         }
     }
 
     renderTariffs(tariffs) {
         return (
-            <TouchableOpacity onPress={() => Actions.reservationResource({ tariff: tariffs, branch: this.state.branch, date: this.state.actualDate })}>
+            <TouchableOpacity onPress={() => Actions.reservationResource({ reservation: {...this.state.reservation, tariff: tariffs, date: this.state.actualDate} })}>
                 <View style={[styles.viewButtonSecondary, styles.viewRow, {justifyContent: "space-between", marginTop: 8,}]}>
                     <Text style={[styles.textButtonSecondary, {flex: 1}]}>{tariffs.desc}</Text>
                     <Text style={[styles.textButtonSecondary, {width: 80}]}>{tariffs.price} €</Text>

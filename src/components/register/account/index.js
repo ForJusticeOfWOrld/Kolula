@@ -43,23 +43,11 @@ export default class RegisterAccount extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: false,
-            password: false,
-            surname: false,
-            name: false,
-            postCode: false,
-            place: false,
-            street: false,
-            isSmall: true,
+            user: { email: "", password: "", surname: "", name: "", postCode: "", place: "", street: "", isSmall: true },
             isTermsChecked: false,
-            newReservation: false,
+            reservation: false,
             apiCallWorking: false,
-            //debugdata
-            tariff: false,
-            branch: false,
-            date: false,
-            timeWindow: false,
-            items: false,
+            debug: false
         };
     }
 
@@ -67,40 +55,33 @@ export default class RegisterAccount extends Component {
         this.setState({
             isTermsChecked: checked,
         });
-    }
+    };
 
-    handleSelectRadionButtonSmall = (checked) => {
+    handleSelectRadioButtonSmall = (checked) => {
         this.setState({
-            isSmall: true,
+            user: {...this.state.user, isSmall: true}
         });
-    }
+    };
 
-    handleSelectRadionButtonLarge = (checked) => {
+    handleSelectRadioButtonLarge = (checked) => {
         this.setState({
-            isSmall: false,
+            user: {...this.state.user, isSmall: false}
         });
-    }
+    };
+
     componentWillMount() {
         // debugdata
         console.log("RegisterAccount props:")
         console.log(this.props);
-        if (this.props.tariff && this.props.branch && this.props.date && this.props.items) {
+        if (this.props.reservation && this.props.user) {
             this.setState({
-                tariff: this.props.tariff,
-                branch: this.props.branch,
-                date: this.props.date,
-                timeWindow: this.props.timeWindow,
-                items: this.props.items,
-                email: this.props.email,
+                reservation: this.props.reservation,
+                user: this.props.user,
             });
         } else {
             this.setState({
-                tariff: {"time": 120, "desc": "2:00h", "price": 14.99},
-                branch: dummyBranch,
-                date: {"date": 22, "month": 11, "year": 2018},
-                timeWindow: {"timeStart": "10:00", "timeEnd": "11:30"},
-                items: 5,
-                email: "debugdaten@email.com"
+                reservation: { tariff: {"time": 120, "desc": "2:00h", "price": 14.99}, branch: dummyBranch, date: {"date": 22, "month": 11, "year": 2018}, timeWindow: {"timeStart": "10:00", "timeEnd": "11:30"}, items: 5},
+                user: {email: "debugdaten@email.com"}
             });
         }
     }
@@ -115,13 +96,14 @@ export default class RegisterAccount extends Component {
                                 style={styles.inputText}
                                 placeholderTextColor={primaryColor}
                                 placeholder={"E-Mail Adresse"}
+                                defaultValue={this.state.user.email}
                                 underlineColorAndroid="transparent"
                                 keyboardType="email-address"
                                 autoCapitalize="none"
                                 autoCorrect={false}
                                 returnKeyType="next"
                                 editable={!this.state.apiCallWorking}
-                                onChangeText={email => this.setState({email})}
+                                onChangeText={email => this.setState({user: {...this.state.user, email: email}})}
                             />
                         </View>
                         <View style={styles.viewInput}>
@@ -136,7 +118,7 @@ export default class RegisterAccount extends Component {
                                 returnKeyType="next"
                                 secureTextEntry
                                 editable={!this.state.apiCallWorking}
-                                onChangeText={password => this.setState({password})}
+                                onChangeText={password => this.setState({user: {...this.state.user, password: password}})}
                             />
                         </View>
                         <Text style={styles.textLargeBold} >Persönliche Daten</Text>
@@ -151,7 +133,7 @@ export default class RegisterAccount extends Component {
                                 autoCorrect={false}
                                 returnKeyType="next"
                                 editable={!this.state.apiCallWorking}
-                                onChangeText={surname => this.setState({surname})}
+                                onChangeText={surname => this.setState({user: {...this.state.user, surname: surname}})}
                             />
                         </View>
                         <View style={styles.viewInput}>
@@ -164,7 +146,7 @@ export default class RegisterAccount extends Component {
                                 autoCapitalize="none"
                                 returnKeyType="next"
                                 editable={!this.state.apiCallWorking}
-                                onChangeText={name => this.setState({name})}
+                                onChangeText={name => this.setState({user: {...this.state.user, name: name}})}
                             />
                         </View>
                         <View style={styles.viewInput}>
@@ -178,7 +160,7 @@ export default class RegisterAccount extends Component {
                                 autoCorrect={false}
                                 returnKeyType="next"
                                 editable={!this.state.apiCallWorking}
-                                onChangeText={street => this.setState({street})}
+                                onChangeText={street => this.setState({user: {...this.state.user, street: street}})}
                             />
                         </View>
                         <View style={[styles.viewRow, {flex: 0}]}>
@@ -192,7 +174,7 @@ export default class RegisterAccount extends Component {
                                     autoCapitalize="none"
                                     returnKeyType="next"
                                     editable={!this.state.apiCallWorking}
-                                    onChangeText={postCode => this.setState({postCode})}
+                                    onChangeText={postCode => this.setState({user: {...this.state.user, postCode: postCode}})}
                                 />
                             </View>
                             <View style={[styles.viewInput, {marginLeft: 4, flex: 1}]}>
@@ -206,7 +188,7 @@ export default class RegisterAccount extends Component {
                                     autoCorrect={false}
                                     returnKeyType="next"
                                     editable={!this.state.apiCallWorking}
-                                    onChangeText={place => this.setState({place})}
+                                    onChangeText={place => this.setState({user: {...this.state.user, place: place}})}
                                 />
                             </View>
                         </View>
@@ -214,8 +196,8 @@ export default class RegisterAccount extends Component {
                             <CheckBox
                                 label=""
                                 size={20}
-                                checked={this.state.isSmall}
-                                onPress={this.handleSelectRadionButtonSmall}
+                                checked={this.state.user.isSmall}
+                                onPress={this.handleSelectRadioButtonSmall}
                                 uncheckedIconName="radio-button-unchecked"
                                 checkedIconName="radio-button-checked"
                             />
@@ -225,8 +207,8 @@ export default class RegisterAccount extends Component {
                             <CheckBox
                                 label=""
                                 size={20}
-                                checked={!this.state.isSmall}
-                                onPress={this.handleSelectRadionButtonLarge}
+                                checked={!this.state.user.isSmall}
+                                onPress={this.handleSelectRadioButtonLarge}
                                 uncheckedIconName="radio-button-unchecked"
                                 checkedIconName="radio-button-checked"
                             />
@@ -246,9 +228,13 @@ export default class RegisterAccount extends Component {
                     <View style={[styles.viewFooter, {marginTop: 8}]}>
                         {
                             (this.state.isTermsChecked === true) ? (
-                            <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationRules()}>
+                            <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationPayment({ reservation: this.state.reservation, user: this.state.user }) }>
                                 <Text style={styles.textButtonPrimary} >WEITER</Text>
                             </TouchableOpacity>
+                            ) : (this.state.debug === true) ? (
+                                <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => console.log(this.state) }>
+                                    <Text style={styles.textButtonPrimary} >WEITER</Text>
+                                </TouchableOpacity>
                             ) : (
                             <View style={styles.viewButtonInactive}>
                                 <Text style={styles.textButtonInactive} >WEITER</Text>
