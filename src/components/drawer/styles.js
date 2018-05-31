@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
 import {
-    backgroundColor,
+    secondaryBackgroundColor,
     primaryColor,
     secondaryColor,
     primaryInvertedColor,

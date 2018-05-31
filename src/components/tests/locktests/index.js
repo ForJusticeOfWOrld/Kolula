@@ -12,8 +12,8 @@ import {
 import { Actions } from 'react-native-router-flux';
 import styles from './styles';
 
-const lockClosed = require('../../../images/icons/lock_closed.png');
-const lockOpen = require('../../../images/icons/lock_open.png');
+const lockClosed = require('../../../images/icons/icon_lock_closed.png');
+const lockOpen = require('../../../images/icons/icon_lock_open.png');
 
 const api_host_live = "kolula.ddns.net:62157";
 const api_host_debug = "kolula.ddns.net:62157";
@@ -327,7 +327,6 @@ export default class MyReservationsOverview extends Component {
                     });
                     setTimeout(() => {
                         this.getState();
-
                     }, 2000);
 
                     return true;
@@ -365,34 +364,34 @@ export default class MyReservationsOverview extends Component {
                     {
                         ( lockStates.lockState === 1 ) ? (
                             <View style={[styles.viewBorder, {flexDirection: "column", height: 45, width: 70, justifyContent: "center", alignItems: "center", padding: 3}]}>
-                                <Text style={[styles.textStandard, {textAlign: "center", color: "#00a0a7"}]}>Schloss:</Text>
+                                <Text style={[styles.textStandard, {textAlign: "center", color: "#00a0a7", fontSize: 14}]}>Schloss:</Text>
                                 <Image source={lockClosed} style={{flex: 1}} resizeMode='contain' />
                             </View>
                         ) : ( lockStates.lockState === 0 ) ? (
                             <View style={[styles.viewBorder, {flexDirection: "column", height: 45, width: 70, justifyContent: "center", alignItems: "center", padding: 3}]}>
-                                <Text style={[styles.textStandard, {textAlign: "center", color: "#b2e3e5"}]}>Schloss:</Text>
+                                <Text style={[styles.textStandard, {textAlign: "center", color: "#b2e3e5", fontSize: 14}]}>Schloss:</Text>
                                 <Image source={lockOpen} style={{flex: 1}} resizeMode='contain' />
                             </View>
                         ) : (
                             <View style={[styles.viewBorder, {flexDirection: "column", height: 45, width: 70, justifyContent: "center", alignItems: "center", padding: 3}]}>
-                                <Text style={[styles.textStandardBold, {textAlign: "center", color: "#00a0a7"}]}>not clear</Text>
+                                <Text style={[styles.textStandardBold, {textAlign: "center", color: "#00a0a7", fontSize: 14}]}>not clear</Text>
                             </View>
                         )
                     }
                     {
                         ( lockStates.switchState === 1 ) ? (
                             <View style={[styles.viewBorder, {flexDirection: "column", height: 45, width: 70, justifyContent: "center", alignItems: "center", padding: 3}]}>
-                                <Text style={[styles.textStandard, {textAlign: "center", color: "#00a0a7"}]}>Fach:</Text>
+                                <Text style={[styles.textStandard, {textAlign: "center", color: "#00a0a7", fontSize: 14}]}>Fach:</Text>
                                 <Image source={lockClosed} style={{flex: 1}} resizeMode='contain' />
                             </View>
                         ) : ( lockStates.switchState === 0 ) ? (
                             <View style={[styles.viewBorder, {flexDirection: "column", height: 45, width: 70, justifyContent: "center", alignItems: "center", padding: 3}]}>
-                                <Text style={[styles.textStandard, {textAlign: "center", color: "#b2e3e5"}]}>Fach:</Text>
+                                <Text style={[styles.textStandard, {textAlign: "center", color: "#b2e3e5", fontSize: 14}]}>Fach:</Text>
                                 <Image source={lockOpen} style={{flex: 1}} resizeMode='contain' />
                             </View>
                         ) : (
                             <View style={[styles.viewBorder, {flexDirection: "column", height: 45, width: 70, justifyContent: "center", alignItems: "center", padding: 3}]}>
-                                <Text style={[styles.textStandardBold, {textAlign: "center", color: "#00a0a7"}]}>not clear</Text>
+                                <Text style={[styles.textStandardBold, {textAlign: "center", color: "#00a0a7", fontSize: 14}]}>not clear</Text>
                             </View>
                         )
                     }

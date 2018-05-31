@@ -1,7 +1,7 @@
 const React = require('react-native');
 const { StyleSheet } = React;
 import {
-    backgroundColor,
+    secondaryBackgroundColor,
     primaryColor,
     secondaryColor,
     primaryInvertedColor,
@@ -31,7 +31,7 @@ export default{
         right: 0,
         paddingHorizontal: containerPaddingHorizontal,
         paddingVertical: containerPaddingVertical,
-        backgroundColor: backgroundColor, //Debug
+        backgroundColor: secondaryBackgroundColor, //Debug
     },
     viewColumn: {
         flex: 1,
@@ -102,7 +102,7 @@ export default{
         borderRadius: standardBorderRadius,
         borderWidth: standardBorderWidth,
         borderColor: primaryColor,
-        backgroundColor: primaryColor,
+        backgroundColor: secondaryBackgroundColor,
         color: primaryInvertedColor,
         fontSize: largeFontSize,
         fontWeight: 'bold',

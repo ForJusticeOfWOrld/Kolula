@@ -1,6 +1,7 @@
 const React = require('react-native');
 const { StyleSheet } = React;
 import {
+    primaryBackgroundColor,
     secondaryBackgroundColor,
     primaryColor,
     secondaryColor,
@@ -20,7 +21,7 @@ import {
     containerPaddingVertical,
     rowViewPaddingVertical,
     standardSpacerMarginVertical,
-} from './../../../styles/common'
+} from './../../styles/common'
 
 export default{
     container: {
@@ -31,7 +32,9 @@ export default{
         right: 0,
         paddingHorizontal: containerPaddingHorizontal,
         paddingVertical: containerPaddingVertical,
-        backgroundColor: secondaryBackgroundColor, //Debug
+        backgroundColor: primaryBackgroundColor, //Debug
+        justifyContent: "center",
+        alignItems: "center",
     },
     viewColumn: {
         flex: 1,
@@ -41,11 +44,20 @@ export default{
         flex: 1,
         flexDirection: 'row',
     },
-    viewBody: {
-        flex: 1,
+    viewHeader: {
+        //(flex: 1,
+        height: 100,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'flex-start',
+        borderWidth: 1,
+        borderColor: primaryColor,
+    },
+    viewBody: {
+        flex: 1,
+        flexDirection: 'column',
+        //borderWidth: 1,
+        //borderColor: "#0F0",
     },
     viewFooter: {
         //flex: 1,
@@ -80,48 +92,49 @@ export default{
     },
     viewMap: {
         flex: 1,
-        alignItems: 'center',
-        height: 200,
-        //minWidth: 200,
+        //height: 100,
+        //Width: 100,
     },
-    viewButton: {
-        alignSelf: 'stretch',
-        alignContent: 'center',
-    },
-    buttonPrimary: {
+    viewButtonPrimary: {
         borderRadius: standardBorderRadius,
         borderWidth: standardBorderWidth,
         borderColor: primaryColor,
         backgroundColor: primaryColor,
+        alignSelf: 'stretch',
+    },
+    textButtonPrimary: {
         color: primaryInvertedColor,
         fontSize: largeFontSize,
         fontWeight: 'bold',
         marginVertical: standardMargin,
-        alignSelf: 'stretch',
         textAlign: 'center',
     },
-    buttonSecondary: {
+    viewButtonSecondary: {
         borderRadius: standardBorderRadius,
         borderWidth: standardBorderWidth,
         borderColor: primaryColor,
         backgroundColor: primaryInvertedColor,
+        alignSelf: 'stretch',
+    },
+    textButtonSecondary: {
         color: primaryColor,
-        fontSize: largeFontSize,
+        fontSize: standardFontSize,
         fontWeight: 'bold',
         marginVertical: standardMargin,
-        alignSelf: 'stretch',
         textAlign: 'center',
     },
-    buttonInactive: {
+    viewButtonInactive: {
         borderRadius: standardBorderRadius,
         borderWidth: standardBorderWidth,
         borderColor: inactiveColor,
         backgroundColor: inactiveBackgroundColor,
+        alignSelf: 'stretch',
+    },
+    textButtonInactive: {
         color: inactiveColor,
         fontSize: largeFontSize,
         fontWeight: 'bold',
         marginVertical: standardMargin,
-        alignSelf: 'stretch',
         textAlign: 'center',
     },
     textLargeBold: {
@@ -134,10 +147,6 @@ export default{
         color: primaryColor,
         fontWeight: 'bold',
     },
-    textLarge: {
-        fontSize: largeFontSize,
-        color: primaryColor,
-    },
     textStandard: {
         fontSize: standardFontSize,
         color: primaryColor,
@@ -149,5 +158,20 @@ export default{
     },
     marginSpacer: {
         marginTop: standardSpacerMarginVertical,
+    },
+    viewMargin: {
+        margin: standardMargin,
+    },
+    textNoStationHeading: {
+        color: inactiveColor,
+        fontSize: largeFontSize,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    textNoStation: {
+        color: inactiveColor,
+        fontSize: standardFontSize,
+        marginVertical: 4,
+        textAlign: 'center',
     },
 };

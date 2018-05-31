@@ -1,7 +1,7 @@
 const React = require('react-native');
 const { StyleSheet } = React;
 import {
-    backgroundColor,
+    primaryBackgroundColor,
     primaryColor,
     secondaryColor,
     primaryInvertedColor,
@@ -29,9 +29,9 @@ export default{
         bottom: 0,
         left: 0,
         right: 0,
-        paddingHorizontal: containerPaddingHorizontal,
-        paddingVertical: containerPaddingVertical,
-        backgroundColor: backgroundColor, //Debug
+        //paddingHorizontal: containerPaddingHorizontal,
+        //paddingVertical: containerPaddingVertical,
+        backgroundColor: primaryBackgroundColor, //Debug
     },
     viewColumn: {
         flex: 1,
@@ -54,15 +54,23 @@ export default{
         justifyContent: 'flex-end',
     },
     viewSeparator: {
-        borderBottomWidth: separatorBorderWidth,
-        borderBottomColor: primaryColor,
+        //borderBottomWidth: separatorBorderWidth,
+        //borderBottomColor: primaryColor,
         marginVertical: standardMargin,
     },
-    viewBorder: {
-        borderRadius: standardBorderRadius,
-        borderWidth: standardBorderWidth,
-        borderColor: primaryColor,
+    viewBorderMap: {
+        borderRadius: 16,
+        borderWidth: 0.5,
+        borderColor: "#333",
         marginVertical: standardMargin,
+        overflow: 'hidden',
+    },
+    viewBorder: {
+        borderRadius: 4,
+        borderWidth: 0.5,
+        borderColor: "#333",
+        marginVertical: standardMargin,
+        overflow: 'hidden',
     },
     viewSpaceBetween: {
         flex: 1,
@@ -112,11 +120,11 @@ export default{
         textAlign: 'center',
     },
     viewButtonInactive: {
-        borderRadius: standardBorderRadius,
-        borderWidth: standardBorderWidth,
-        borderColor: inactiveColor,
-        backgroundColor: inactiveBackgroundColor,
+        backgroundColor: primaryBackgroundColor,
         alignSelf: 'stretch',
+        borderRadius: 4,
+        borderWidth: 0.5,
+        borderColor: "#333",
     },
     textButtonInactive: {
         color: inactiveColor,
@@ -127,21 +135,26 @@ export default{
     },
     textLargeBold: {
         fontSize: largeFontSize,
-        color: primaryColor,
+        color: '#000',
+        fontWeight: 'bold',
+    },
+    textLarge: {
+        fontSize: 20,
+        color: '#000',
         fontWeight: 'bold',
     },
     textStandardBold: {
         fontSize: standardFontSize,
-        color: primaryColor,
+        color: '#000',
         fontWeight: 'bold',
     },
     textStandard: {
         fontSize: standardFontSize,
-        color: primaryColor,
+        color: '#666',
     },
     textSeparator: {
         fontSize: standardFontSize,
-        color: primaryColor,
+        color: '#000',
         fontWeight: 'bold',
     },
     marginSpacer: {
@@ -151,14 +164,14 @@ export default{
         margin: standardMargin,
     },
     textNoStationHeading: {
-        color: inactiveColor,
-        fontSize: largeFontSize,
+        color: "#FFF",
+        fontSize: 18,
         fontWeight: 'bold',
         textAlign: 'center',
     },
     textNoStation: {
-        color: inactiveColor,
-        fontSize: standardFontSize,
+        color: secondaryColor,
+        fontSize: 14,
         marginVertical: 4,
         textAlign: 'center',
     },

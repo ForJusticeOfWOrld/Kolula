@@ -1,7 +1,7 @@
 const React = require('react-native');
 const { StyleSheet } = React;
 import {
-    backgroundColor,
+    secondaryBackgroundColor,
     primaryColor,
     secondaryColor,
     primaryInvertedColor,
@@ -22,7 +22,7 @@ export default{
         bottom: 0,
         left: 0,
         right: 0,
-        backgroundColor: backgroundColor, //Debug
+        backgroundColor: secondaryBackgroundColor, //Debug
     },
     viewRow: {
         flex: 1,

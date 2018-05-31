@@ -14,6 +14,8 @@ import store from './src/store/store';
 //import Main from './components/main/index';
 import DrawerContent from './src/components/drawer/index';
 
+import Home from './src/components/home/index';
+
 import MyReservationsOverview from './src/components/myreservations/overview/index';
 import MyReservationsReservation from './src/components/myreservations/reservation/index';
 import MyReservationsCancel from './src/components/myreservations/cancel/index';
@@ -58,12 +60,13 @@ export default class App extends Component {
                         drawerPosition='right'
                     >
                         <Scene key="root">
+                            <Scene key="home" component={Home} title="home" hideNavBar={true} initial={true} />
                             <Scene key="myReservationsOverview" component={MyReservationsOverview} title="Reservierungen" initial={false} />
                             <Scene key="myReservationsReservation" component={MyReservationsReservation} title="Details" />
                             <Scene key="myReservationsCancel" component={MyReservationsCancel} title="Stornieren" />
                             <Scene key="myReservationsReschedule" component={MyReservationsReschedule} title="Verschieben" />
 
-                            <Scene key="reservationBranch" component={ReservationBranches} title="Stationen" initial={true} />
+                            <Scene key="reservationBranch" component={ReservationBranches} title="Stationen" initial={false} />
                             <Scene key="reservationBranchDetail" component={ReservationBranchDetail} title="Station" initial={false} />
                             <Scene key="reservationCalendar" component={ReservationCalendar} title="SUP Mieten" initial={false} />
                             <Scene key="reservationResource" component={ReservationResource} title="Board wählen" initial={false} />
@@ -99,7 +102,7 @@ const styles = StyleSheet.create({
         tintColor: '#000',
     },
     navStyle: {
-        backgroundColor: '#fff',
+        backgroundColor: '#00b5ba',
         height: (Platform.OS === 'ios') ? 64 : 48,
     },
     titleStyle: {
