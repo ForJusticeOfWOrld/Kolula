@@ -16,6 +16,7 @@ import {
     backgroundColor,
     secondaryColor,
 } from './../../../styles/common'
+import { Metrics, Styles, Images, Icons, Colors, Fonts, Global } from '@theme/';
 
 const dummyBranch = {
     "id": 2,

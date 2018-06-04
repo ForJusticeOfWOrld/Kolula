@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import styles from './styles';
+import { Metrics, Styles, Images, Icons, Colors, Fonts, Global } from '@theme/';
 
 const lockClosed = require('../../../images/icons/icon_lock_closed.png');
 const lockOpen = require('../../../images/icons/icon_lock_open.png');

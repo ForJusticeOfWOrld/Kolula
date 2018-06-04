@@ -13,6 +13,7 @@ import { Actions } from "react-native-router-flux";
 import {
     primaryColor,
 } from './../../../styles/common'
+import { Metrics, Styles, Images, Icons, Colors, Fonts, Global } from '@theme/';
 
 dummyReservation = "Temp";
 

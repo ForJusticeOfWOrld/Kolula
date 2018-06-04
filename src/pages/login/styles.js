@@ -20,6 +20,7 @@ import {
     containerPaddingVertical,
     rowViewPaddingVertical,
     standardSpacerMarginVertical,
+    whiteOpacityColor4,
 } from './../../styles/common'
 
 export default{
@@ -55,6 +56,14 @@ export default{
         flexDirection: 'column',
         //borderWidth: 1,
         //borderColor: "#0F0",
+    },
+    viewInput: {
+        marginTop: 6,
+        backgroundColor: whiteOpacityColor4,
+        borderRadius: standardBorderRadius,
+        borderWidth: standardBorderWidth,
+        borderColor: primaryColor,
+        alignSelf: 'stretch',
     },
     viewFooter: {
         //flex: 1,

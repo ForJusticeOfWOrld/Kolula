@@ -8,6 +8,7 @@ import {
     TouchableOpacity,
 } from 'react-native'
 import styles from './styles';
+import { Metrics, Styles, Images, Icons, Colors, Fonts, Global } from '@theme/';
 
 export default class MyReservationsOverview extends Component {
 

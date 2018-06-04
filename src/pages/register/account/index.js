@@ -14,6 +14,7 @@ import {
     primaryColor,
 } from './../../../styles/common'
 import ReservationRules from "../../reservation/rules";
+import { Metrics, Styles, Images, Icons, Colors, Fonts, Global } from '@theme/';
 
 dummyReservation = "Temp";
 

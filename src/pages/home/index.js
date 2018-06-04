@@ -17,6 +17,7 @@ import {
     Actions,
     ActionConst,
 } from "react-native-router-flux";
+import { Metrics, Styles, Images, Icons, Colors, Fonts, Global } from '@theme/';
 
 const logoKolula = require('../../images/logos/logo_kolula_white.png');
 

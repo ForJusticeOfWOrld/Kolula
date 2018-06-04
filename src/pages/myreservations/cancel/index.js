@@ -9,6 +9,7 @@ import {
 import styles from './styles';
 
 import { Actions, ActionConst } from 'react-native-router-flux';
+import { Metrics, Styles, Images, Icons, Colors, Fonts, Global } from '@theme/';
 
 export default class MyReservationsCancel extends Component {
 

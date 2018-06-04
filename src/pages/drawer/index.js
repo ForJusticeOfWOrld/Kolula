@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 
 import { Actions, ActionConst } from 'react-native-router-flux';
 import { connect } from 'react-redux';
+import { Metrics, Styles, Images, Icons, Colors, Fonts, Global } from '@theme/';
 
 import styles from './styles';
 

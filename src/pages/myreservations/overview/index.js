@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import styles from './styles';
+import { Metrics, Styles, Images, Icons, Colors, Fonts, Global } from '@theme/';
 
 const dummyReservationNext = {
     "reservations": [

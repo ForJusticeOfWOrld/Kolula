@@ -14,6 +14,7 @@ import {
     primaryColor,
 } from './../../../styles/common'
 import { Actions } from "react-native-router-flux";
+import { Metrics, Styles, Images, Icons, Colors, Fonts, Global } from '@theme/';
 
 const ASPECT_RATIO = 4 / 2;
 const LATITUDE_DELTA = 0.1;

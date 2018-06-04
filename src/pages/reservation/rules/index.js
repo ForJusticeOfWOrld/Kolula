@@ -13,6 +13,7 @@ import {
 } from './../../../styles/common'
 import { Actions } from "react-native-router-flux";
 import Swiper from 'react-native-swiper'
+import { Metrics, Styles, Images, Icons, Colors, Fonts, Global } from '@theme/';
 
 const mapDummy = require('../../../images/dummys/dummyBanner.png');
 
