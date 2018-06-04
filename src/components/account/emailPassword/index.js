@@ -13,6 +13,7 @@ import {
 } from './../../../styles/common'
 import { Actions } from "react-native-router-flux";
 import { ActionConst } from "react-native-router-flux";
+import CardView from 'react-native-cardview'
 
 const mapDummy = require('../../../images/dummys/dummyBanner.png');
 
@@ -31,15 +32,24 @@ export default class AccountEmailPassword extends Component {
         console.log(this.props);
     }
 
-    render () {
+    render() {
         return (
             <View style={styles.container}>
                 <View style={styles.viewSpaceBetween}>
                     <View style={styles.viewBody}>
                         <Text style={styles.textLargeBold}>E-Mail und Passwort Dummy</Text>
                     </View>
-                    <View style={[styles.viewFooter, {marginTop: 8}]}>
-                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationBranch({type: ActionConst.RESET})}>
+                    <CardView
+                        cardElevation={2}
+                        cardMaxElevation={2}
+                        cornerRadius={5}>
+                        <Text>
+                            Elevation 0
+                        </Text>
+                    </CardView>
+
+                    <View style={[styles.viewFooter, { marginTop: 8 }]}>
+                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationBranch({ type: ActionConst.RESET })}>
                             <Text style={styles.textButtonPrimary} >FERTIG</Text>
                         </TouchableOpacity>
                     </View>
