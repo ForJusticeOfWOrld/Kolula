@@ -11,37 +11,37 @@ import { Provider } from 'react-redux';
 
 import store from './src/store/store';
 
-//import Main from './components/main/index';
-import DrawerContent from './src/components/drawer/index';
+//import Main from './pages/main/index';
+import DrawerContent from './src/pages/drawer/index';
 
-import Home from './src/components/home/index';
+import Home from './src/pages/home/index';
 
-import MyReservationsOverview from './src/components/myreservations/overview/index';
-import MyReservationsReservation from './src/components/myreservations/reservation/index';
-import MyReservationsCancel from './src/components/myreservations/cancel/index';
-import MyReservationsReschedule from './src/components/myreservations/reschedule/index';
+import MyReservationsOverview from './src/pages/myreservations/overview/index';
+import MyReservationsReservation from './src/pages/myreservations/reservation/index';
+import MyReservationsCancel from './src/pages/myreservations/cancel/index';
+import MyReservationsReschedule from './src/pages/myreservations/reschedule/index';
 
-import ReservationBranches from './src/components/reservation/branches/index';
-import ReservationBranchDetail from './src/components/reservation/branchDetail/index';
-import ReservationCalendar from './src/components/reservation/calendar/index';
-import ReservationResource from './src/components/reservation/resource/index';
-import ReservationSummary from './src/components/reservation/summary/index';
-import ReservationPayment from './src/components/reservation/payment/index';
-import ReservationRules from './src/components/reservation/rules/index';
-import ReservationConfirmation from './src/components/reservation/confirmation/index';
+import ReservationBranches from './src/pages/reservation/branches/index';
+import ReservationBranchDetail from './src/pages/reservation/branchDetail/index';
+import ReservationCalendar from './src/pages/reservation/calendar/index';
+import ReservationResource from './src/pages/reservation/resource/index';
+import ReservationSummary from './src/pages/reservation/summary/index';
+import ReservationPayment from './src/pages/reservation/payment/index';
+import ReservationRules from './src/pages/reservation/rules/index';
+import ReservationConfirmation from './src/pages/reservation/confirmation/index';
 
-import RentStart from './src/components/rent/start/index';
-import RentStatus from './src/components/rent/status/index';
+import RentStart from './src/pages/rent/start/index';
+import RentStatus from './src/pages/rent/status/index';
 
-import RegisterEmail from './src/components/register/email/index';
-import RegisterAccount from './src/components/register/account/index';
+import RegisterEmail from './src/pages/register/email/index';
+import RegisterAccount from './src/pages/register/account/index';
 
-import AccountPersonalData from './src/components/account/personalData/index';
-import AccountEmailPassword from './src/components/account/emailPassword/index';
+import AccountPersonalData from './src/pages/account/personalData/index';
+import AccountEmailPassword from './src/pages/account/emailPassword/index';
 
-import LockTests from './src/components/tests/locktests/index';
+import LockTests from './src/pages/tests/locktests/index';
 
-import Login from './src/components/login/index';
+import Login from './src/pages/login/index';
 
 import menuIcon from './src/images/others/menu_hamburger.png';
 
