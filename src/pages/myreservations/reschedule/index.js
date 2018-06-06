@@ -32,15 +32,15 @@ export default class MyReservationsReschedule extends Component {
         console.log(this.props);
     }
 
-    render () {
+    render() {
         return (
             <View style={styles.container}>
                 <View style={styles.viewSpaceBetween}>
                     <View style={styles.viewBody}>
                         <Text style={styles.textLargeBold}>Umbuchung dummy</Text>
                     </View>
-                    <View style={[styles.viewFooter, {marginTop: 8}]}>
-                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.myReservationsOverview({type: ActionConst.RESET})}>
+                    <View style={[styles.viewFooter, { marginTop: 8 }]}>
+                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.myReservationsOverview({ type: ActionConst.RESET })}>
                             <Text style={styles.textButtonPrimary} >FERTIG</Text>
                         </TouchableOpacity>
                     </View>

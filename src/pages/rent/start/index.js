@@ -32,22 +32,22 @@ export default class RentStart extends Component {
         console.log(this.props);
     }
 
-    render () {
+    render() {
         return (
             <View style={styles.container}>
                 <View style={styles.viewSpaceBetween}>
                     <View style={styles.viewBody}>
-                        <View style={[styles.viewColumn, {height: 100, flex: 0}]}>
+                        <View style={[styles.viewColumn, { height: 100, flex: 0 }]}>
                             <Text style={styles.textLargeBold}>Aktuelle Buchung</Text>
                             <Text style={styles.textStandardBold}>11:30 - 13:30 Uhr</Text>
                         </View>
-                        <View style={[styles.viewImage, {height: 700}]}>
-                            <Image source={mapDummy} style={{flex: 1}} resizeMode={'contain'} />
+                        <View style={[styles.viewImage, { height: 700 }]}>
+                            <Image source={mapDummy} style={{ flex: 1 }} resizeMode={'contain'} />
                         </View>
                     </View>
-                    <View style={[styles.viewFooter, {marginTop: 8}]}>
-                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.rentStatus({type: ActionConst.RESET})}>
-                            <Text style={[styles.textButtonPrimary, {fontSize: 19}]} >TÜR ÖFFNEN & BUCHUNG STARTEN</Text>
+                    <View style={[styles.viewFooter, { marginTop: 8 }]}>
+                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.rentStatus({ type: ActionConst.RESET })}>
+                            <Text style={[styles.textButtonPrimary, { fontSize: 19 }]} >TÜR ÖFFNEN & BUCHUNG STARTEN</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

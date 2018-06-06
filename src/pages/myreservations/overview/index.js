@@ -173,7 +173,7 @@ export default class MyReservationsOverview extends Component {
         );
     }
 
-    render () {
+    render() {
         return (
             <View style={styles.container}>
                 <ScrollView style={styles.viewColumn}>

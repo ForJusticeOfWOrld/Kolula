@@ -35,7 +35,7 @@ const dummyBranch = {
     "tempAir": "24",
     "weather": "sunny",
     "highlights": ["Hufeisensee Highlight 1", " Hufeisensee Highlight 2", "Highlight 3", "Highlight 4", "Highlight 5"],
-    "tariffs": [{"time": 60, "desc": "1:00h", "price": 9.99},{"time": 90, "desc": "1:30h", "price": 12.99},{"time": 120, "desc": "2:00h", "price": 14.99},{"time": 180, "desc": "3:00h", "price": 19.99},{"time": 240, "desc": "4:00h", "price": 29.99}],
+    "tariffs": [{ "time": 60, "desc": "1:00h", "price": 9.99 }, { "time": 90, "desc": "1:30h", "price": 12.99 }, { "time": 120, "desc": "2:00h", "price": 14.99 }, { "time": 180, "desc": "3:00h", "price": 19.99 }, { "time": 240, "desc": "4:00h", "price": 29.99 }],
 };
 
 export default class ReservationPayment extends Component {
@@ -78,29 +78,29 @@ export default class ReservationPayment extends Component {
             });
         } else {
             this.setState({
-                reservation: { tariff: {"time": 120, "desc": "2:00h", "price": 14.99}, branch: dummyBranch, date: {"date": 22, "month": 11, "year": 2018}, timeWindow: {"timeStart": "10:00", "timeEnd": "11:30"}, items: 5 },
-                user: {email: "debugdaten@email.com", password: "password", surname: "Max", name: "Mustermann", street: "Musterweg 12", postCode: "12345", place: "Musterhausen" }
+                reservation: { tariff: { "time": 120, "desc": "2:00h", "price": 14.99 }, branch: dummyBranch, date: { "date": 22, "month": 11, "year": 2018 }, timeWindow: { "timeStart": "10:00", "timeEnd": "11:30" }, items: 5 },
+                user: { email: "debugdaten@email.com", password: "password", surname: "Max", name: "Mustermann", street: "Musterweg 12", postCode: "12345", place: "Musterhausen" }
             });
         }
     }
 
-    render () {
+    render() {
         return (
             <View style={styles.container}>
                 <View style={styles.viewSpaceBetween}>
                     <View style={[styles.viewBody, styles.viewEmail]}>
 
-                        <View style={[styles.viewRow, {flex: 0}]}>
+                        <View style={[styles.viewRow, { flex: 0 }]}>
                             {
                                 (this.state.isPayment === true) ? (
                                     <View style={styles.viewButtonPrimary}>
                                         <Text style={styles.textButtonPrimary} >Paypal</Text>
                                     </View>
                                 ) : (
-                                    <TouchableOpacity style={styles.viewButtonInactive} onPress={() => this.handleSelectPayment}>
-                                        <Text style={styles.textButtonInactive} >Paypal</Text>
-                                    </TouchableOpacity>
-                                )
+                                        <TouchableOpacity style={styles.viewButtonInactive} onPress={() => this.handleSelectPayment}>
+                                            <Text style={styles.textButtonInactive} >Paypal</Text>
+                                        </TouchableOpacity>
+                                    )
                             }
                             {
                                 (this.state.isPayment === false) ? (
@@ -108,13 +108,13 @@ export default class ReservationPayment extends Component {
                                         <Text style={styles.textButtonPrimary} >Gutschein</Text>
                                     </View>
                                 ) : (
-                                    <TouchableOpacity style={styles.viewButtonInactive} onPress={() => this.handleSelectCoupon}>
-                                        <Text style={styles.textButtonInactive} >Gutschein</Text>
-                                    </TouchableOpacity>
-                                )
+                                        <TouchableOpacity style={styles.viewButtonInactive} onPress={() => this.handleSelectCoupon}>
+                                            <Text style={styles.textButtonInactive} >Gutschein</Text>
+                                        </TouchableOpacity>
+                                    )
                             }
                         </View>
-                        <View style={[styles.viewColumn, styles.viewBorder, {flex: 0, height: 220, alignSelf: 'stretch', marginTop: 24, padding: 8}]}>
+                        <View style={[styles.viewColumn, styles.viewBorder, { flex: 0, height: 220, alignSelf: 'stretch', marginTop: 24, padding: 8 }]}>
                             <View style={styles.viewColumn}>
                                 <Text style={styles.textStandardBold} >{this.state.reservation.items} Aufblas-SUP</Text>
                                 <Text style={styles.textStandard} >Ein normales SUP.</Text>
@@ -127,10 +127,10 @@ export default class ReservationPayment extends Component {
                                 <Text style={styles.textStandardBold} >{this.state.reservation.branch.location_name}</Text>
                                 <Text style={styles.textStandard} >{this.state.reservation.branch.location_street}</Text>
                             </View>
-                            <Text style={[styles.textLargeBold, styles.marginSpacer]} >{this.state.reservation.tariff.price*this.state.reservation.items} €</Text>
+                            <Text style={[styles.textLargeBold, styles.marginSpacer]} >{this.state.reservation.tariff.price * this.state.reservation.items} €</Text>
                         </View>
                     </View>
-                    <View style={[styles.viewFooter, {marginTop: 8, height: 40}]}>
+                    <View style={[styles.viewFooter, { marginTop: 8, height: 40 }]}>
                         <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationRules({ reservation: this.state.reservation, user: this.state.user })}>
                             <Text style={styles.textButtonPrimary} >WEITER</Text>
                         </TouchableOpacity>

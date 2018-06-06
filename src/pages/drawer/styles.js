@@ -22,7 +22,7 @@ import {
     whiteOpacityColor4,
 } from './../../styles/common'
 
-export default{
+export default {
     container: {
         flex: 1,
         //backgroundColor: whiteOpacityColor4,

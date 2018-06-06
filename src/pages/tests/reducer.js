@@ -35,7 +35,7 @@ export default function (state = initialState, action = {}) {
                 reservationChecked: true,
                 error: action.payload,
             };
-        
+
         case GET_TEST_DATA_ERROR:
             return {
                 ...state,
@@ -43,7 +43,7 @@ export default function (state = initialState, action = {}) {
                 reservationChecked: false,
                 error: action.payload,
             };
-            
+
         default:
             return state;
     }

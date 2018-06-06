@@ -22,7 +22,7 @@ import {
     standardSpacerMarginVertical,
 } from './../../../styles/common'
 
-export default{
+export default {
     container: {
         position: 'absolute',
         top: 0,

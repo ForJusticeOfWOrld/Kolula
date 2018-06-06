@@ -38,19 +38,19 @@ export default class Login extends Component {
 
     componentDidMount() {
         setTimeout(() => {
-            Actions.reservationBranch({type: ActionConst.RESET});
+            Actions.reservationBranch({ type: ActionConst.RESET });
         }, 3000);
     }
 
-render () {
+    render() {
         return (
             <View style={styles.container}>
                 <StatusBar
                     backgroundColor={primaryBackgroundColor}
                     barStyle="light-content"
                 />
-                <View style={[styles.viewColumn, {justifyContent: "center"}]}>
-                    <Image source={logoKolula} style={{ marginTop: 100, marginBottom: 64}} resizeMode='contain' />
+                <View style={[styles.viewColumn, { justifyContent: "center" }]}>
+                    <Image source={logoKolula} style={{ marginTop: 100, marginBottom: 64 }} resizeMode='contain' />
                     <ActivityIndicator size={50} color="#b2e3e5" />
                 </View>
             </View>

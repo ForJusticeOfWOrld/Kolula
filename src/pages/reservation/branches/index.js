@@ -45,7 +45,7 @@ const dummyNearBranch = {
     "tempAir": "24",
     "weather": "sunny",
     "highlights": ["Hufeisensee Highlight 1", " Hufeisensee Highlight 2", "Highlight 3", "Highlight 4", "Highlight 5"],
-    "tariffs": [{"time": 60, "desc": "1:00h", "price": 9.99},{"time": 90, "desc": "1:30h", "price": 12.99},{"time": 120, "desc": "2:00h", "price": 14.99},{"time": 180, "desc": "3:00h", "price": 19.99},{"time": 240, "desc": "4:00h", "price": 29.99}],
+    "tariffs": [{ "time": 60, "desc": "1:00h", "price": 9.99 }, { "time": 90, "desc": "1:30h", "price": 12.99 }, { "time": 120, "desc": "2:00h", "price": 14.99 }, { "time": 180, "desc": "3:00h", "price": 19.99 }, { "time": 240, "desc": "4:00h", "price": 29.99 }],
 };
 
 const dummyBranches = {
@@ -68,7 +68,7 @@ const dummyBranches = {
             "tempAir": "18",
             "weather": "cloudy",
             "highlights": ["Scharmützelsee Highlight 1", " Scharmützelsee Highlight 2", " Scharmützelsee Highlight 3", "Highlight 4"],
-            "tariffs": [{"time": 60, "desc": "1:00h", "price": 9.99},{"time": 90, "desc": "1:30h", "price": 12.99},{"time": 120, "desc": "2:00h", "price": 14.99},{"time": 180, "desc": "3:00h", "price": 19.99},{"time": 240, "desc": "4:00h", "price": 29.99}],
+            "tariffs": [{ "time": 60, "desc": "1:00h", "price": 9.99 }, { "time": 90, "desc": "1:30h", "price": 12.99 }, { "time": 120, "desc": "2:00h", "price": 14.99 }, { "time": 180, "desc": "3:00h", "price": 19.99 }, { "time": 240, "desc": "4:00h", "price": 29.99 }],
         },
         {
             "id": 1,
@@ -88,7 +88,7 @@ const dummyBranches = {
             "tempAir": "12",
             "weather": "cloudy",
             "highlights": ["Helenesee Highlight 1", " Helenesee Highlight 2", "Helenesee Highlight 3"],
-            "tariffs": [{"time": 60, "desc": "1:00h", "price": 9.99},{"time": 90, "desc": "1:30h", "price": 12.99},{"time": 120, "desc": "2:00h", "price": 14.99},{"time": 180, "desc": "3:00h", "price": 19.99},{"time": 240, "desc": "4:00h", "price": 29.99}],
+            "tariffs": [{ "time": 60, "desc": "1:00h", "price": 9.99 }, { "time": 90, "desc": "1:30h", "price": 12.99 }, { "time": 120, "desc": "2:00h", "price": 14.99 }, { "time": 180, "desc": "3:00h", "price": 19.99 }, { "time": 240, "desc": "4:00h", "price": 29.99 }],
         },
         {
             "id": 3,
@@ -107,7 +107,7 @@ const dummyBranches = {
             "tempAir": "14",
             "weather": "rainy",
             "highlights": ["Senftenberger See Highlight 1", " Highlight 2", "Highlight 3", "Highlight 4", "Highlight 5", "Highlight 6", "Highlight 7", "Highlight 8"],
-            "tariffs": [{"time": 60, "desc": "1:00h", "price": 9.99},{"time": 90, "desc": "1:30h", "price": 12.99},{"time": 120, "desc": "2:00h", "price": 14.99},{"time": 180, "desc": "3:00h", "price": 19.99},{"time": 240, "desc": "4:00h", "price": 29.99}],
+            "tariffs": [{ "time": 60, "desc": "1:00h", "price": 9.99 }, { "time": 90, "desc": "1:30h", "price": 12.99 }, { "time": 120, "desc": "2:00h", "price": 14.99 }, { "time": 180, "desc": "3:00h", "price": 19.99 }, { "time": 240, "desc": "4:00h", "price": 29.99 }],
         }
     ]
 };
@@ -129,21 +129,21 @@ export default class ReservationBranches extends Component {
         console.log(this.props);
         this.setState({
             dataSource: this.state.dataSource.cloneWithRows(dummyBranches.branches),
-            reservation: {branch: dummyNearBranch},
+            reservation: { branch: dummyNearBranch },
         });
     }
 
     renderBranches(branches) {
         return (
-            <TouchableOpacity onPress={() => Actions.reservationBranchDetail({ reservation: {branch: branches} })}>
-                <View style={[styles.viewBorder ,{marginTop: 16, backgroundColor: "#FFF"}]}>
-                    <View style={[styles.viewRow, {margin: 8}]}>
+            <TouchableOpacity onPress={() => Actions.reservationBranchDetail({ reservation: { branch: branches } })}>
+                <View style={[styles.viewBorder, { marginTop: 16, backgroundColor: "#FFF" }]}>
+                    <View style={[styles.viewRow, { margin: 8 }]}>
                         <View style={[styles.viewColumn, styles.viewMargin]}>
                             <Text style={styles.textStandardBold}>{branches.location_name}</Text>
                             <Text style={styles.textStandard}>{branches.location_street}</Text>
                         </View>
-                        <View style={{justifyContent: "center"}}>
-                            <Text style={[styles.textStandard, {fontSize: 18, color: "#000"}]}>{branches.distance} km</Text>
+                        <View style={{ justifyContent: "center" }}>
+                            <Text style={[styles.textStandard, { fontSize: 18, color: "#000" }]}>{branches.distance} km</Text>
                         </View>
                     </View>
                 </View>
@@ -151,35 +151,35 @@ export default class ReservationBranches extends Component {
         );
     }
 
-    render () {
+    render() {
         return (
             <View style={styles.container}>
                 <StatusBar
                     backgroundColor={primaryBackgroundColor}
                     barStyle="light-content"
                 />
-                <ScrollView style={{flex: 1, height: undefined, width: undefined,}}>
+                <ScrollView style={{ flex: 1, height: undefined, width: undefined, }}>
                     <View style={[styles.viewColumn]}>
                         <View style={styles.viewRow}>
-                            <Text style={[styles.textLargeBold, {textAlign: "center", flex: 1, color: "#FFF", marginTop: 12, fontSize: 26}]} >Nächste Station</Text>
+                            <Text style={[styles.textLargeBold, { textAlign: "center", flex: 1, color: "#FFF", marginTop: 12, fontSize: 26 }]} >Nächste Station</Text>
                         </View>
-                        <TouchableOpacity onPress={() => Actions.reservationBranchDetail({ reservation: {branch: dummyNearBranch} })}>
-                        <View style={[styles.viewColumn, styles.viewBorderMap, {backgroundColor: "#FFF", marginHorizontal: containerPaddingHorizontal, marginBottom: containerPaddingVertical}]}>
-                            <View style={styles.viewMap}>
-                                <Image source={mapDummy} style={{flex: 1, height: undefined, width: undefined, minHeight: 150}} resizeMode={'cover'} />
-                            </View>
-                            <View style={[styles.viewRow, {justifyContent: "center", alignContent: "center", margin: 12}]}>
-                                <View style={{height: 36, width: 30}}>
-                                    <Image source={mapMarkerGeneric} style={{flex: 1}} resizeMode='contain' />
+                        <TouchableOpacity onPress={() => Actions.reservationBranchDetail({ reservation: { branch: dummyNearBranch } })}>
+                            <View style={[styles.viewColumn, styles.viewBorderMap, { backgroundColor: "#FFF", marginHorizontal: containerPaddingHorizontal, marginBottom: containerPaddingVertical }]}>
+                                <View style={styles.viewMap}>
+                                    <Image source={mapDummy} style={{ flex: 1, height: undefined, width: undefined, minHeight: 150 }} resizeMode={'cover'} />
                                 </View>
-                                <View style={[styles.viewColumn, {marginLeft: 40}]}>
-                                    <Text style={styles.textStandardBold} >{dummyNearBranch.location_name}</Text>
-                                    <Text style={styles.textStandard} >{dummyNearBranch.distance} km entfernt</Text>
+                                <View style={[styles.viewRow, { justifyContent: "center", alignContent: "center", margin: 12 }]}>
+                                    <View style={{ height: 36, width: 30 }}>
+                                        <Image source={mapMarkerGeneric} style={{ flex: 1 }} resizeMode='contain' />
+                                    </View>
+                                    <View style={[styles.viewColumn, { marginLeft: 40 }]}>
+                                        <Text style={styles.textStandardBold} >{dummyNearBranch.location_name}</Text>
+                                        <Text style={styles.textStandard} >{dummyNearBranch.distance} km entfernt</Text>
+                                    </View>
                                 </View>
                             </View>
-                        </View>
                         </TouchableOpacity>
-                        <View style={[styles.viewColumn, {backgroundColor: "#f7f7f7", paddingHorizontal: containerPaddingHorizontal, paddingVertical: 8}]}>
+                        <View style={[styles.viewColumn, { backgroundColor: "#f7f7f7", paddingHorizontal: containerPaddingHorizontal, paddingVertical: 8 }]}>
                             <View style={[styles.viewSeparator]}>
                                 <Text style={styles.textLarge} >Weitere Stationen</Text>
                             </View>
@@ -191,7 +191,7 @@ export default class ReservationBranches extends Component {
                                     enableEmptySections={true}
                                 />
                             </View>
-                            <View style={[styles.viewButtonInactive, {marginTop: 16, padding: 8}]}>
+                            <View style={[styles.viewButtonInactive, { marginTop: 16, padding: 8 }]}>
                                 <Text style={styles.textNoStationHeading} >Keine Station in der Nähe?</Text>
                                 <Text style={styles.textNoStation} >Standort vorschlagen & Updates erhalten</Text>
                             </View>

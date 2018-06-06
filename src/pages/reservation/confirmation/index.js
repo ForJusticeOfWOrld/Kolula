@@ -39,13 +39,13 @@ export default class ReservationConfirmation extends Component {
             });
         } else {
             this.setState({
-                reservation: { tariff: {"time": 120, "desc": "2:00h", "price": 14.99}, branch: dummyBranch, date: {"date": 22, "month": 11, "year": 2018}, timeWindow: {"timeStart": "10:00", "timeEnd": "11:30"}, items: 5 },
-                user: {email: "debugdaten@email.com", password: "password", surname: "Max", name: "Mustermann", street: "Musterweg 12", postCode: "12345", place: "Musterhausen" }
+                reservation: { tariff: { "time": 120, "desc": "2:00h", "price": 14.99 }, branch: dummyBranch, date: { "date": 22, "month": 11, "year": 2018 }, timeWindow: { "timeStart": "10:00", "timeEnd": "11:30" }, items: 5 },
+                user: { email: "debugdaten@email.com", password: "password", surname: "Max", name: "Mustermann", street: "Musterweg 12", postCode: "12345", place: "Musterhausen" }
             });
         }
     }
 
-    render () {
+    render() {
         return (
             <View style={styles.container}>
                 <View style={styles.viewSpaceBetween}>
@@ -82,8 +82,8 @@ export default class ReservationConfirmation extends Component {
                             <Text style={styles.textStandard}>user place: {this.state.user.place}</Text>
                         </ScrollView>
                     </View>
-                    <View style={[styles.viewFooter, {marginTop: 8}]}>
-                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationBranch({type: ActionConst.RESET})}>
+                    <View style={[styles.viewFooter, { marginTop: 8 }]}>
+                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationBranch({ type: ActionConst.RESET })}>
                             <Text style={styles.textButtonPrimary} >FERTIG</Text>
                         </TouchableOpacity>
                     </View>

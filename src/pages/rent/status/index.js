@@ -36,39 +36,39 @@ export default class RentStatus extends Component {
         console.log(this.props);
     }
 
-    timeIsOver () {
+    timeIsOver() {
         Alert.alert(
             'Zeit abgelaufen',
             'Ihre Miete ist abgelaufen',
             [
-                {text: 'Miete verlängern', onPress: () =>  Actions.reservationBranch({type: ActionConst.RESET})},
-                {text: 'Miete beenden', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                { text: 'Miete verlängern', onPress: () => Actions.reservationBranch({ type: ActionConst.RESET }) },
+                { text: 'Miete beenden', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
             ],
             { cancelable: false }
         )
     };
 
-    render () {
+    render() {
         return (
             <View style={styles.container}>
                 <View style={styles.viewSpaceBetween}>
                     <View style={styles.viewBody}>
-                        <View style={[styles.viewColumn, {height: 100, flex: 0}]}>
+                        <View style={[styles.viewColumn, { height: 100, flex: 0 }]}>
                             <Text style={styles.textLargeBold}>Aktuelle Buchung</Text>
                             <Text style={styles.textStandardBold}>11:30 - 13:30 Uhr</Text>
                         </View>
-                        <View style={[styles.viewColumn, {height: 100, flex: 1}]}>
-                            <TouchableOpacity style={[styles.viewButtonSecondary, {marginTop: 16}]} onPress={() => Actions.rentStatus({type: ActionConst.RESET})}>
+                        <View style={[styles.viewColumn, { height: 100, flex: 1 }]}>
+                            <TouchableOpacity style={[styles.viewButtonSecondary, { marginTop: 16 }]} onPress={() => Actions.rentStatus({ type: ActionConst.RESET })}>
                                 <Text style={styles.textButtonSecondary} >TÜR ÖFFNEN</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={[styles.viewButtonSecondary, {marginTop: 16}]} onPress={() => Actions.rentStatus({type: ActionConst.RESET})}>
+                            <TouchableOpacity style={[styles.viewButtonSecondary, { marginTop: 16 }]} onPress={() => Actions.rentStatus({ type: ActionConst.RESET })}>
                                 <Text style={styles.textButtonSecondary} >SCHADEN MELDEN</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={[styles.viewButtonSecondary, {marginTop: 16}]} onPress={() => Actions.rentStatus({type: ActionConst.RESET})}>
+                            <TouchableOpacity style={[styles.viewButtonSecondary, { marginTop: 16 }]} onPress={() => Actions.rentStatus({ type: ActionConst.RESET })}>
                                 <Text style={styles.textButtonSecondary} >VERLÄNGERUNG PRÜFEN</Text>
                             </TouchableOpacity>
                         </View>
-                        <View style={{flex: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
                             <CountdownCircle
                                 seconds={11}
                                 radius={64}
@@ -76,13 +76,13 @@ export default class RentStatus extends Component {
                                 color={primaryColor}
                                 bgColor={backgroundColor}
                                 textStyle={{ fontSize: 44, fontWeight: 'bold', }}
-                                onTimeElapsed={() => this.timeIsOver() }
+                                onTimeElapsed={() => this.timeIsOver()}
                             />
                         </View>
                     </View>
-                    <View style={[styles.viewFooter, {marginTop: 8}]}>
-                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.rentStatus({type: ActionConst.RESET})}>
-                            <Text style={[styles.textButtonPrimary, {fontSize: 19}]} >BUCHUNG BEENDEN</Text>
+                    <View style={[styles.viewFooter, { marginTop: 8 }]}>
+                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.rentStatus({ type: ActionConst.RESET })}>
+                            <Text style={[styles.textButtonPrimary, { fontSize: 19 }]} >BUCHUNG BEENDEN</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

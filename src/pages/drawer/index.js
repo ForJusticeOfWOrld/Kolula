@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { 
+import {
     ImageBackground,
-    View, 
-    ScrollView, 
-    Text, 
-    TouchableOpacity, 
+    View,
+    ScrollView,
+    Text,
+    TouchableOpacity,
     AsyncStorage,
 } from 'react-native';
 import PropTypes from 'prop-types';
@@ -17,11 +17,10 @@ import styles from './styles';
 
 const app_debug = 0;
 
-
 class DrawerContent extends Component {
 
     static contextTypes = {
-      drawer: PropTypes.object,
+        drawer: PropTypes.object,
     }
 
     constructor(props) {
@@ -36,13 +35,11 @@ class DrawerContent extends Component {
         this.currentRouteName = '';
     }
 
-
     componentWillReceiveProps(nextProps) {
         const routes = nextProps.navigation.state.routes[0];
         this.currentRouteName = routes.routes[routes.index].routeName;
         console.log('Drawer Routes : ', this.currentRouteName);
     }
-
 
     componentWillMount() {
         /*  debug section:
@@ -50,15 +47,15 @@ class DrawerContent extends Component {
          */
         // load debugvalues from const
         if (app_debug > 0) {
-            this.setState({debug: app_debug});
+            this.setState({ debug: app_debug });
             console.log('(more (componentWillMount)) no debuglevel by props. set debug to app_debug level: ' + app_debug);
         }
-        
+
         // look if we got debug value from props
         if (this.props.hasOwnProperty('debug')) {
             // only load debug from props if its higher than this components debug const value!
             if (this.props.debug > app_debug) {
-                this.setState({debug: this.props.debug});
+                this.setState({ debug: this.props.debug });
                 if (this.props.debug > 8) {
                     console.log('(more (componentWillMount)) got debug by props. set: ' + this.props.debug + ' instead of own debuglevel: ' + app_debug);
                 }
@@ -68,7 +65,7 @@ class DrawerContent extends Component {
         // look if we force api to use the testserver
         if (this.props.hasOwnProperty('force_testserver')) {
             if (this.props.force_testserver) {
-                this.setState({force_testserver: true});
+                this.setState({ force_testserver: true });
                 if (this.state.debug > 8) {
                     console.log('(more (componentWillMount)) got force_testserver by props. Set force_testserver to true');
                 }
@@ -79,21 +76,19 @@ class DrawerContent extends Component {
         this.loadVersion();
     }
 
-
     /*  clearReservation()
      *  remove all reservationdata -> reservation and lock data
      */
     clearReservation = async () => {
-	    try {
+        try {
             await AsyncStorage.removeItem('ebike_reservation');
             await AsyncStorage.removeItem('iOS_id');
             console.log('(more (clearReservation)) reservation erased from disk. Send to home');
             Actions.home({ type: ActionConst.RESET });
-	    } catch (error) {
+        } catch (error) {
             console.log('(more (clearReservation)) AsyncStorage error: ' + error.message);
-	    }
+        }
     }
-
 
     /*  logoutUser()
      *  remove all userdata -> user, reservation and lock data
@@ -108,12 +103,11 @@ class DrawerContent extends Component {
             await AsyncStorage.removeItem('ebike_app_data');
             console.log('(more (logoutUser)) User logged out and all data erased from disk. Send to home');
             // Actions.home({ type: ActionConst.RESET });
-            Actions.login({type: ActionConst.RESET, force_testserver: this.state.force_testserver, debug: this.state.debug});            
+            Actions.login({ type: ActionConst.RESET, force_testserver: this.state.force_testserver, debug: this.state.debug });
         } catch (error) {
             console.log('(more (logoutUser)) AsyncStorage error: ' + error.message);
         }
     }
-
 
     loadVersion = async () => {
         let versionTemp = null
@@ -126,110 +120,106 @@ class DrawerContent extends Component {
             }
         }
         if (versionTemp !== null) {
-            this.setState({version: JSON.parse(versionTemp)});
+            this.setState({ version: JSON.parse(versionTemp) });
         }
     }
-
 
     onAgb() {
         if (this.currentRouteName === 'agb') {
             Actions.pop();
         } else if ((this.currentRouteName === 'contact') || (this.currentRouteName === 'legal')) {
-            Actions.agb({type: ActionConst.REPLACE});
+            Actions.agb({ type: ActionConst.REPLACE });
             return;
         }
 
         Actions.agb();
     }
 
-
     onContact() {
         if (this.currentRouteName === 'contact') {
             Actions.pop();
         } else if ((this.currentRouteName === 'agb') || (this.currentRouteName === 'legal')) {
-            Actions.contact({type: ActionConst.REPLACE});
+            Actions.contact({ type: ActionConst.REPLACE });
             return;
         }
 
         Actions.contact();
     }
 
-
     onLegal() {
         if (this.currentRouteName === 'legal') {
             Actions.pop();
         } else if ((this.currentRouteName === 'contact') || (this.currentRouteName === 'agb')) {
-            Actions.legal({type: ActionConst.REPLACE});
+            Actions.legal({ type: ActionConst.REPLACE });
             return;
         }
 
         Actions.legal();
     }
 
-
     render() {
         return (
             <View style={styles.container}>
                 {/* <Image source={background} style={styles.containerImage} resizeMode={'cover'}> */}
-                    <View style={styles.viewColumn}>
-                        <View style={styles.viewHeader}>
-                            <Text style={styles.textLargeBold}>Account</Text>
-                        </View>
-                        <View style={styles.line} />
-                        <View style={[styles.viewSeparator, styles.marginSpacer]}>
-                            <TouchableOpacity  style={styles.viewButton} onPress={() => Actions.myReservationsOverview({type: ActionConst.RESET})}>
-                                <Text style={styles.textLarge}>Meine Buchungen</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={[styles.viewSeparator, styles.marginSpacer]}>
-                            <TouchableOpacity  style={styles.viewButton} onPress={() => Actions.accountPersonalData()}>
-                                <Text style={styles.textLarge}>Persönliche Daten</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={[styles.viewSeparator, styles.marginSpacer]}>
-                            <TouchableOpacity  style={styles.viewButton} onPress={() => Actions.accountEmailPassword()}>
-                                <Text style={styles.textLarge}>E-Mail-Adresse & Passwort</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={[styles.viewSeparator, styles.marginSpacer]}>
-                            <TouchableOpacity  style={styles.viewButton} >
-                                <Text style={styles.textLarge}>Support</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={[styles.viewSeparator, styles.marginSpacer]}>
-                            <TouchableOpacity  style={styles.viewButton} >
-                                <Text style={styles.textLarge}>Abmelden</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={[styles.viewSeparator, styles.marginSpacer, {marginTop: 64}]}>
-                            <TouchableOpacity  style={styles.viewButton} onPress={() => { this.logoutUser(); }}>
-                                <Text style={styles.textLarge}>Debug -> log</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={[styles.viewSeparator, styles.marginSpacer]}>
-                            <TouchableOpacity  style={styles.viewButton} onPress={() => Actions.reservationBranch({type: ActionConst.RESET})}>
-                                <Text style={styles.textLarge}>Stationen (Startseite)</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={[styles.viewSeparator, styles.marginSpacer]}>
-                            <TouchableOpacity  style={styles.viewButton} onPress={() => Actions.rentStart({type: ActionConst.RESET})}>
-                                <Text style={styles.textLarge}>aktuelle Miete</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={[styles.viewSeparator, styles.marginSpacer]}>
-                            <TouchableOpacity  style={styles.viewButton} onPress={() => Actions.lockTests({type: ActionConst.RESET})}>
-                                <Text style={styles.textLarge}>Schloss Test</Text>
-                            </TouchableOpacity>
-                        </View>
-
-                        {
-                            (this.state.version && this.state.version.Version !== '') && (
-                                <View style={styles.versionContainer}>
-                                    <Text style={styles.textVersion}>{this.props.multiLang.version}: {this.state.version.Version}</Text>
-                                </View>
-                            )
-                        }
+                <View style={styles.viewColumn}>
+                    <View style={styles.viewHeader}>
+                        <Text style={styles.textLargeBold}>Account</Text>
                     </View>
+                    <View style={styles.line} />
+                    <View style={[styles.viewSeparator, styles.marginSpacer]}>
+                        <TouchableOpacity style={styles.viewButton} onPress={() => Actions.myReservationsOverview({ type: ActionConst.RESET })}>
+                            <Text style={styles.textLarge}>Meine Buchungen</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={[styles.viewSeparator, styles.marginSpacer]}>
+                        <TouchableOpacity style={styles.viewButton} onPress={() => Actions.accountPersonalData()}>
+                            <Text style={styles.textLarge}>Persönliche Daten</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={[styles.viewSeparator, styles.marginSpacer]}>
+                        <TouchableOpacity style={styles.viewButton} onPress={() => Actions.accountEmailPassword()}>
+                            <Text style={styles.textLarge}>E-Mail-Adresse & Passwort</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={[styles.viewSeparator, styles.marginSpacer]}>
+                        <TouchableOpacity style={styles.viewButton} >
+                            <Text style={styles.textLarge}>Support</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={[styles.viewSeparator, styles.marginSpacer]}>
+                        <TouchableOpacity style={styles.viewButton} >
+                            <Text style={styles.textLarge}>Abmelden</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={[styles.viewSeparator, styles.marginSpacer, { marginTop: 64 }]}>
+                        <TouchableOpacity style={styles.viewButton} onPress={() => { this.logoutUser(); }}>
+                            <Text style={styles.textLarge}>Debug -> log</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={[styles.viewSeparator, styles.marginSpacer]}>
+                        <TouchableOpacity style={styles.viewButton} onPress={() => Actions.reservationBranch({ type: ActionConst.RESET })}>
+                            <Text style={styles.textLarge}>Stationen (Startseite)</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={[styles.viewSeparator, styles.marginSpacer]}>
+                        <TouchableOpacity style={styles.viewButton} onPress={() => Actions.rentStart({ type: ActionConst.RESET })}>
+                            <Text style={styles.textLarge}>aktuelle Miete</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={[styles.viewSeparator, styles.marginSpacer]}>
+                        <TouchableOpacity style={styles.viewButton} onPress={() => Actions.lockTests({ type: ActionConst.RESET })}>
+                            <Text style={styles.textLarge}>Schloss Test</Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    {
+                        (this.state.version && this.state.version.Version !== '') && (
+                            <View style={styles.versionContainer}>
+                                <Text style={styles.textVersion}>{this.props.multiLang.version}: {this.state.version.Version}</Text>
+                            </View>
+                        )
+                    }
+                </View>
                 {/* </Image> */}
             </View>
         );
@@ -242,4 +232,3 @@ const mapStateToProps = (props) => ({
 });
 
 export default connect(mapStateToProps, null)(DrawerContent);
-  

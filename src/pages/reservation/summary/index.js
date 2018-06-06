@@ -40,7 +40,7 @@ const dummyBranch = {
     "tempAir": "24",
     "weather": "sunny",
     "highlights": ["Hufeisensee Highlight 1", " Hufeisensee Highlight 2", "Highlight 3", "Highlight 4", "Highlight 5"],
-    "tariffs": [{"time": 60, "desc": "1:00h", "price": 9.99},{"time": 90, "desc": "1:30h", "price": 12.99},{"time": 120, "desc": "2:00h", "price": 14.99},{"time": 180, "desc": "3:00h", "price": 19.99},{"time": 240, "desc": "4:00h", "price": 29.99}],
+    "tariffs": [{ "time": 60, "desc": "1:00h", "price": 9.99 }, { "time": 90, "desc": "1:30h", "price": 12.99 }, { "time": 120, "desc": "2:00h", "price": 14.99 }, { "time": 180, "desc": "3:00h", "price": 19.99 }, { "time": 240, "desc": "4:00h", "price": 29.99 }],
 };
 
 export default class ReservationSummary extends Component {
@@ -67,12 +67,12 @@ export default class ReservationSummary extends Component {
             });
         } else {
             this.setState({
-                reservation: {branch: dummyBranch, tariff: {"time": 120, "desc": "2:00h", "price": 14.99}, date: {"date": 22, "month": 11, "year": 2018}, timeWindow: {"timeStart": "10:00", "timeEnd": "11:30"}, items: 5 }
+                reservation: { branch: dummyBranch, tariff: { "time": 120, "desc": "2:00h", "price": 14.99 }, date: { "date": 22, "month": 11, "year": 2018 }, timeWindow: { "timeStart": "10:00", "timeEnd": "11:30" }, items: 5 }
             });
         }
     }
 
-    render () {
+    render() {
         return (
             <View style={styles.container}>
                 <View style={styles.viewSpaceBetween}>
@@ -97,7 +97,7 @@ export default class ReservationSummary extends Component {
                                     <Text style={styles.textStandard} >{this.state.reservation.timeWindow.timeStart + " - " + this.state.reservation.timeWindow.timeEnd + " Uhr"}</Text>
                                 </View>
                             </View>
-                            <Text style={[styles.textLargeBold, styles.marginSpacer]} >{this.state.reservation.tariff.price*this.state.reservation.items} €</Text>
+                            <Text style={[styles.textLargeBold, styles.marginSpacer]} >{this.state.reservation.tariff.price * this.state.reservation.items} €</Text>
                             <View style={[styles.viewColumn, styles.marginSpacer]}>
                                 <Text style={styles.textStandardBold} >{this.state.reservation.branch.location_name}</Text>
                                 <Text style={styles.textStandard} >{this.state.reservation.branch.location_street}</Text>
@@ -108,12 +108,12 @@ export default class ReservationSummary extends Component {
                                     <Text style={styles.textStandard} >{this.state.reservation.branch.location_transport}</Text>
                                 </View>
                             </View>
-                            <View style={[styles.viewMap, styles.marginSpacer, {height: 200}]}>
-                                <Image source={mapDummy} style={{flex: 1}} resizeMode={'cover'} />
+                            <View style={[styles.viewMap, styles.marginSpacer, { height: 200 }]}>
+                                <Image source={mapDummy} style={{ flex: 1 }} resizeMode={'cover'} />
                             </View>
                         </ScrollView>
                     </View>
-                    <View style={[styles.viewFooter, {marginTop: 8}]}>
+                    <View style={[styles.viewFooter, { marginTop: 8 }]}>
                         <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.registerEmail({ reservation: this.state.reservation })}>
                             <Text style={styles.textButtonPrimary} >REGISTRIEREN UND BUCHEN</Text>
                         </TouchableOpacity>

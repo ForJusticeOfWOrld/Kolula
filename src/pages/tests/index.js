@@ -24,18 +24,18 @@ export default class MyReservationsOverview extends Component {
     componentDidMount() {
         // check if props else get data again?
         if (this.props.hasOwnProperty('station')) {
-            this.setState({station: this.props.station});
+            this.setState({ station: this.props.station });
         } else {
-            this.setState({station: mockStation});
+            this.setState({ station: mockStation });
         }
         if (this.props.hasOwnProperty('bike')) {
-            this.setState({bike: this.props.bike});
+            this.setState({ bike: this.props.bike });
         } else {
-            this.setState({bike: mockBike});
+            this.setState({ bike: mockBike });
         }
     }
 
-        render () {
+    render() {
         return (
             <View style={styles.container}>
                 <View style={styles.viewRow}>

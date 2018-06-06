@@ -66,35 +66,35 @@ export default class ReservationBranchDetail extends Component {
         } else {
             this.setState({
                 dataSource: this.state.dataSource.cloneWithRows(dummyNearBranch.highlights),
-                reservation: {branch: dummyNearBranch,}
+                reservation: { branch: dummyNearBranch, }
             });
         }
     }
 
     renderBranches(highlights) {
         return (
-                <View style={styles.viewRow}>
-                        <Text style={styles.textStandard}>* {highlights}</Text>
-                </View>
+            <View style={styles.viewRow}>
+                <Text style={styles.textStandard}>* {highlights}</Text>
+            </View>
         );
     }
 
-    render () {
+    render() {
         return (
             <View style={styles.container}>
                 <View style={styles.viewSpaceBetween}>
                     <View style={[styles.viewHeader]}>
-                        <Image source={bannerDummy} style={{flex: 1, height: 100, minWidth: 200}} resizeMode={'cover'} />
+                        <Image source={bannerDummy} style={{ flex: 1, height: 100, minWidth: 200 }} resizeMode={'cover'} />
                     </View>
                     <ScrollView style={styles.viewBody}>
 
-                        <View style={[styles.viewRow, styles.marginSpacer, {justifyContent: "space-between"}]}>
+                        <View style={[styles.viewRow, styles.marginSpacer, { justifyContent: "space-between" }]}>
                             <View style={styles.viewColumn}>
-                            <Text style={styles.textStandardBold} >{this.state.reservation.branch.location_name}</Text>
+                                <Text style={styles.textStandardBold} >{this.state.reservation.branch.location_name}</Text>
                                 <Text style={styles.textStandard} >{this.state.reservation.branch.location_street}</Text>
                                 <Text style={styles.textStandard} >{this.state.reservation.branch.distance} km entfernt</Text>
                             </View>
-                            <View style={{flexDirection: 'row', width: 60}}>
+                            <View style={{ flexDirection: 'row', width: 60 }}>
                                 <View style={styles.viewColumn}>
                                     <View style={styles.viewIconSmall}>
                                         <Icon name="tint" size={16} color={primaryColor} />
@@ -111,8 +111,8 @@ export default class ReservationBranchDetail extends Component {
                                             ) : (this.state.reservation.branch.weather === "rainy") ? (
                                                 <Icon name="mixcloud" size={16} color={primaryColor} />
                                             ) : (
-                                                <Icon name="sun-o" size={16} color={primaryColor} />
-                                            )
+                                                            <Icon name="sun-o" size={16} color={primaryColor} />
+                                                        )
                                         }
                                     </View>
                                     <Text style={styles.textStandard} >{this.state.reservation.branch.tempAir}°</Text>
@@ -131,7 +131,7 @@ export default class ReservationBranchDetail extends Component {
                             />
                         </View>
                         <View style={[styles.viewMap, styles.marginSpacer]}>
-                            <Image source={mapDummy} style={{flex: 1, height: undefined, width: undefined, minHeight: 150}} resizeMode={'cover'} />
+                            <Image source={mapDummy} style={{ flex: 1, height: undefined, width: undefined, minHeight: 150 }} resizeMode={'cover'} />
                         </View>
                         <Text style={styles.textStandardBold} >{this.state.reservation.branch.location_name}</Text>
                         <Text style={styles.textStandard} >{this.state.reservation.branch.location_street}</Text>
@@ -143,8 +143,8 @@ export default class ReservationBranchDetail extends Component {
                         </View>
 
                     </ScrollView>
-                    <View style={[styles.viewFooter, {marginTop: 8}]}>
-                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationCalendar({reservation: this.state.reservation})}>
+                    <View style={[styles.viewFooter, { marginTop: 8 }]}>
+                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationCalendar({ reservation: this.state.reservation })}>
                             <Text style={styles.textButtonPrimary} >SUP MIETEN</Text>
                         </TouchableOpacity>
                     </View>

@@ -36,7 +36,7 @@ export function getActiveReservation(clientId, clientApiKey, userId, testServer,
                 }
             } else {
                 console.log("Active Reservation Failed: ", reservation.result);
-                dispatch({ type: GET_ACTIVE_RESERVATION_FAILED, payload: reservation.result.error});
+                dispatch({ type: GET_ACTIVE_RESERVATION_FAILED, payload: reservation.result.error });
             }
         } catch (error) {
             dispatch({ type: GET_ACTIVE_RESERVATION_ERROR, payload: error });

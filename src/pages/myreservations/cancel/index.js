@@ -23,7 +23,7 @@ export default class MyReservationsCancel extends Component {
     componentWillMount() {
     }
 
-    render () {
+    render() {
         return (
             <View style={styles.container}>
                 <View style={styles.viewSpaceBetween}>
@@ -35,8 +35,8 @@ export default class MyReservationsCancel extends Component {
                             </View>
                         </ScrollView>
                     </View>
-                    <View style={[styles.viewFooter, {marginTop: 8}]}>
-                        <TouchableOpacity style={styles.viewButton} onPress={() => Actions.myReservationsOverview({type: ActionConst.RESET})}>
+                    <View style={[styles.viewFooter, { marginTop: 8 }]}>
+                        <TouchableOpacity style={styles.viewButton} onPress={() => Actions.myReservationsOverview({ type: ActionConst.RESET })}>
                             <Text style={styles.buttonSecondary} >ALLES KLAR!</Text>
                         </TouchableOpacity>
                     </View>

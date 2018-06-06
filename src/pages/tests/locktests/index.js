@@ -56,19 +56,19 @@ const dummyState = {
 };
 
 const lockObjectConst = {
-    "action":"open_lock",
-    "lock1":"open",
-    "lock2":"open",
-    "lock3":"open",
-    "lock4":"open",
-    "lock5":"open",
-    "lock6":"open",
-    "lock7":"open",
-    "lock8":"open",
-    "lock9":"open",
-    "lock10":"open",
-    "lock11":"open",
-    "lock12":"open"
+    "action": "open_lock",
+    "lock1": "open",
+    "lock2": "open",
+    "lock3": "open",
+    "lock4": "open",
+    "lock5": "open",
+    "lock6": "open",
+    "lock7": "open",
+    "lock8": "open",
+    "lock9": "open",
+    "lock10": "open",
+    "lock11": "open",
+    "lock12": "open"
 };
 
 export default class MyReservationsOverview extends Component {
@@ -92,7 +92,7 @@ export default class MyReservationsOverview extends Component {
     async fetchApi(fetchData) {
         // use a specific host for the apicall
         let fetch_api_host = api_host_live;
-        switch(dummy_host_value) {
+        switch (dummy_host_value) {
             case "debug":
                 fetch_api_host = api_host_debug;
                 break;
@@ -102,7 +102,7 @@ export default class MyReservationsOverview extends Component {
         }
         let api_url = 'http://' + fetch_api_host + '/' + api_path + '/' + fetchData.path;
 
-        if (fetchData.hasOwnProperty("suffix") && fetchData.suffix !== ""){
+        if (fetchData.hasOwnProperty("suffix") && fetchData.suffix !== "") {
             api_url += fetchData.suffix;
         }
 
@@ -112,7 +112,7 @@ export default class MyReservationsOverview extends Component {
         };
 
         // if specific call need the JWT-token, add the authorization header
-        if( fetchData.hasOwnProperty("authorization") && fetchData.authorization == true ) {
+        if (fetchData.hasOwnProperty("authorization") && fetchData.authorization == true) {
             if (use_api_dummy_user_token) {
                 console.log('(api (fetchApi)) WARNING using debugheader from config.js');
                 if (debug_log_api && debug_log_api_level > 1) {
@@ -133,7 +133,7 @@ export default class MyReservationsOverview extends Component {
         }
 
         // add content-length to header if body is set
-        if(fetchData.hasOwnProperty("body")) {
+        if (fetchData.hasOwnProperty("body")) {
             let lengthTemp = fetchData.body + "";
             fetchHeader["Content-length"] = lengthTemp.length;
             if (debug_log_api && debug_log_api_level > 1) {
@@ -188,17 +188,17 @@ export default class MyReservationsOverview extends Component {
         return body;
     }
 
-    async makeArray( arrayToProcess ) {
+    async makeArray(arrayToProcess) {
         let stateDataArray = [];
         let finalArray = [];
         let lockStateArray = [];
 
-        if ( Object.keys(arrayToProcess).length > 1) {
-            Object.entries(arrayToProcess).map(function(key) {
+        if (Object.keys(arrayToProcess).length > 1) {
+            Object.entries(arrayToProcess).map(function (key) {
                 if (key[0].substring(0, 4) === "lock") {
-                    stateDataArray.push({id: parseInt(key[0].substring(4)), lockName: key[0], lockState: parseInt(key[1]), type: key[0].substring(0, 4)});
+                    stateDataArray.push({ id: parseInt(key[0].substring(4)), lockName: key[0], lockState: parseInt(key[1]), type: key[0].substring(0, 4) });
                 } else if (key[0].substring(0, 6) === "switch") {
-                    stateDataArray.push({id: parseInt(key[0].substring(6)), switchName: key[0], switchState: parseInt(key[1]), type: key[0].substring(0, 6)});
+                    stateDataArray.push({ id: parseInt(key[0].substring(6)), switchName: key[0], switchState: parseInt(key[1]), type: key[0].substring(0, 6) });
                 }
             });
 
@@ -207,7 +207,7 @@ export default class MyReservationsOverview extends Component {
             for (let i1 = 0; i1 < lockStateArray.length; i1++) {
                 for (let i2 = 0; i2 < stateDataArray.length; i2++) {
                     if (lockStateArray[i1].id == stateDataArray[i2].id) {
-                        finalArray.push({"id":lockStateArray[i1].id, "lockName": lockStateArray[i1].lockName, "lockState": lockStateArray[i1].lockState, "switchName": stateDataArray[i2].switchName, "switchState": stateDataArray[i2].switchState});
+                        finalArray.push({ "id": lockStateArray[i1].id, "lockName": lockStateArray[i1].lockName, "lockState": lockStateArray[i1].lockState, "switchName": stateDataArray[i2].switchName, "switchState": stateDataArray[i2].switchState });
                     }
                 }
             }
@@ -225,7 +225,7 @@ export default class MyReservationsOverview extends Component {
             console.log("makeArray(): finalArray sorted:");
             console.log(finalArray);
 
-            if (finalArray.length > 0 ){
+            if (finalArray.length > 0) {
                 this.setState({
                     dataSource: this.state.dataSource.cloneWithRows(finalArray),
                     listViewDataReady: true,
@@ -265,7 +265,7 @@ export default class MyReservationsOverview extends Component {
             if (this.state.fetchTries < 11) {
                 setTimeout(() => {
                     this.setState({
-                        fetchTries: ( this.state.fetchTries + 1 ),
+                        fetchTries: (this.state.fetchTries + 1),
                     });
                     this.getState();
 
@@ -274,7 +274,7 @@ export default class MyReservationsOverview extends Component {
             return false;
         }
 
-        if ( stateFetchData !== null) {
+        if (stateFetchData !== null) {
             console.log('await this.fetchApi(getStateData) was successful:');
             console.log(stateFetchData);
             try {
@@ -288,24 +288,24 @@ export default class MyReservationsOverview extends Component {
         }
     }
 
-    async setLock( lockData ) {
+    async setLock(lockData) {
         let lockObject = lockObjectConst;
         let lockDataResponse = null;
 
 
         for (let i = 0; i < this.state.stateArray.length; i++) {
 
-            if ( lockData.lockName === this.state.stateArray[i].lockName ) {
+            if (lockData.lockName === this.state.stateArray[i].lockName) {
                 lockObject[lockData.lockName] = lockData.switchState;
             } else if (lockObject.hasOwnProperty(this.state.stateArray[i].lockName)) {
-                if ( this.state.stateArray[i].lockState === 1 ) {
+                if (this.state.stateArray[i].lockState === 1) {
                     lockObject[this.state.stateArray[i].lockName] = "close";
                 } else {
                     lockObject[this.state.stateArray[i].lockName] = "open";
                 }
 
             }
-            if (this.state.stateArray.length === (i+1)) {
+            if (this.state.stateArray.length === (i + 1)) {
                 let getLockData = {
                     method: "POST",
                     path: "open_lock",
@@ -320,7 +320,7 @@ export default class MyReservationsOverview extends Component {
                     console.log('api/actions/login(): login user error: ' + error.message);
                     return false;
                 }
-                if ( lockDataResponse !== null && Object.keys(lockDataResponse).length > 1) {
+                if (lockDataResponse !== null && Object.keys(lockDataResponse).length > 1) {
                     console.log('await this.fetchApi(getStateData) was successful:');
                     console.log(lockDataResponse);
                     this.setState({
@@ -343,77 +343,77 @@ export default class MyReservationsOverview extends Component {
 
     renderReservations(lockStates) {
         return (
-            <View style={[styles.viewBorder, {padding: 5}]}>
-                <View style={[styles.viewColumn, {justifyContent: "space-between"}]}>
+            <View style={[styles.viewBorder, { padding: 5 }]}>
+                <View style={[styles.viewColumn, { justifyContent: "space-between" }]}>
                     <Text style={styles.textStandardBold}>Schloss {lockStates.id}</Text>
-                    <View style={{flexDirection: "row", justifyContent: "space-between"}}>
-                    {
-                        ( lockStates.lockState === 1 ) ? (
-                            <TouchableOpacity style={[styles.viewBorder, {flexDirection: "column", height: 45, width: 140, justifyContent: "center"}]} onPress={()=> this.setLock( {lockName: lockStates.lockName, switchState: "open"} ) }>
-                                <Text style={[styles.textStandardBold, {textAlign: "center", color: "#00a0a7"}]}>Schloss öffnen</Text>
-                            </TouchableOpacity>
-                        ) : ( lockStates.lockState === 0 ) ? (
-                            <TouchableOpacity style={[styles.viewBorder, {flexDirection: "column", height: 45, width: 140, justifyContent: "center"}]} onPress={()=> this.setLock( {lockName: lockStates.lockName, switchState: "close"} ) }>
-                                <Text style={[styles.textStandardBold, {textAlign: "center", color: "#00a0a7"}]}>Schloss schließen</Text>
-                            </TouchableOpacity>
-                        ) : (
-                            <View style={[styles.viewBorder, {flexDirection: "column", height: 45, width: 140, justifyContent: "center"}]}>
-                                <Text style={[styles.textStandardBold, {textAlign: "center", color: "#00a0a7"}]}>not clear</Text>
-                            </View>
-                        )
-                    }
-                    {
-                        ( lockStates.lockState === 1 ) ? (
-                            <View style={[styles.viewBorder, {flexDirection: "column", height: 45, width: 70, justifyContent: "center", alignItems: "center", padding: 3}]}>
-                                <Text style={[styles.textStandard, {textAlign: "center", color: "#00a0a7", fontSize: 14}]}>Schloss:</Text>
-                                <Image source={lockClosed} style={{flex: 1}} resizeMode='contain' />
-                            </View>
-                        ) : ( lockStates.lockState === 0 ) ? (
-                            <View style={[styles.viewBorder, {flexDirection: "column", height: 45, width: 70, justifyContent: "center", alignItems: "center", padding: 3}]}>
-                                <Text style={[styles.textStandard, {textAlign: "center", color: "#b2e3e5", fontSize: 14}]}>Schloss:</Text>
-                                <Image source={lockOpen} style={{flex: 1}} resizeMode='contain' />
-                            </View>
-                        ) : (
-                            <View style={[styles.viewBorder, {flexDirection: "column", height: 45, width: 70, justifyContent: "center", alignItems: "center", padding: 3}]}>
-                                <Text style={[styles.textStandardBold, {textAlign: "center", color: "#00a0a7", fontSize: 14}]}>not clear</Text>
-                            </View>
-                        )
-                    }
-                    {
-                        ( lockStates.switchState === 1 ) ? (
-                            <View style={[styles.viewBorder, {flexDirection: "column", height: 45, width: 70, justifyContent: "center", alignItems: "center", padding: 3}]}>
-                                <Text style={[styles.textStandard, {textAlign: "center", color: "#00a0a7", fontSize: 14}]}>Fach:</Text>
-                                <Image source={lockClosed} style={{flex: 1}} resizeMode='contain' />
-                            </View>
-                        ) : ( lockStates.switchState === 0 ) ? (
-                            <View style={[styles.viewBorder, {flexDirection: "column", height: 45, width: 70, justifyContent: "center", alignItems: "center", padding: 3}]}>
-                                <Text style={[styles.textStandard, {textAlign: "center", color: "#b2e3e5", fontSize: 14}]}>Fach:</Text>
-                                <Image source={lockOpen} style={{flex: 1}} resizeMode='contain' />
-                            </View>
-                        ) : (
-                            <View style={[styles.viewBorder, {flexDirection: "column", height: 45, width: 70, justifyContent: "center", alignItems: "center", padding: 3}]}>
-                                <Text style={[styles.textStandardBold, {textAlign: "center", color: "#00a0a7", fontSize: 14}]}>not clear</Text>
-                            </View>
-                        )
-                    }
+                    <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                        {
+                            (lockStates.lockState === 1) ? (
+                                <TouchableOpacity style={[styles.viewBorder, { flexDirection: "column", height: 45, width: 140, justifyContent: "center" }]} onPress={() => this.setLock({ lockName: lockStates.lockName, switchState: "open" })}>
+                                    <Text style={[styles.textStandardBold, { textAlign: "center", color: "#00a0a7" }]}>Schloss öffnen</Text>
+                                </TouchableOpacity>
+                            ) : (lockStates.lockState === 0) ? (
+                                <TouchableOpacity style={[styles.viewBorder, { flexDirection: "column", height: 45, width: 140, justifyContent: "center" }]} onPress={() => this.setLock({ lockName: lockStates.lockName, switchState: "close" })}>
+                                    <Text style={[styles.textStandardBold, { textAlign: "center", color: "#00a0a7" }]}>Schloss schließen</Text>
+                                </TouchableOpacity>
+                            ) : (
+                                        <View style={[styles.viewBorder, { flexDirection: "column", height: 45, width: 140, justifyContent: "center" }]}>
+                                            <Text style={[styles.textStandardBold, { textAlign: "center", color: "#00a0a7" }]}>not clear</Text>
+                                        </View>
+                                    )
+                        }
+                        {
+                            (lockStates.lockState === 1) ? (
+                                <View style={[styles.viewBorder, { flexDirection: "column", height: 45, width: 70, justifyContent: "center", alignItems: "center", padding: 3 }]}>
+                                    <Text style={[styles.textStandard, { textAlign: "center", color: "#00a0a7", fontSize: 14 }]}>Schloss:</Text>
+                                    <Image source={lockClosed} style={{ flex: 1 }} resizeMode='contain' />
+                                </View>
+                            ) : (lockStates.lockState === 0) ? (
+                                <View style={[styles.viewBorder, { flexDirection: "column", height: 45, width: 70, justifyContent: "center", alignItems: "center", padding: 3 }]}>
+                                    <Text style={[styles.textStandard, { textAlign: "center", color: "#b2e3e5", fontSize: 14 }]}>Schloss:</Text>
+                                    <Image source={lockOpen} style={{ flex: 1 }} resizeMode='contain' />
+                                </View>
+                            ) : (
+                                        <View style={[styles.viewBorder, { flexDirection: "column", height: 45, width: 70, justifyContent: "center", alignItems: "center", padding: 3 }]}>
+                                            <Text style={[styles.textStandardBold, { textAlign: "center", color: "#00a0a7", fontSize: 14 }]}>not clear</Text>
+                                        </View>
+                                    )
+                        }
+                        {
+                            (lockStates.switchState === 1) ? (
+                                <View style={[styles.viewBorder, { flexDirection: "column", height: 45, width: 70, justifyContent: "center", alignItems: "center", padding: 3 }]}>
+                                    <Text style={[styles.textStandard, { textAlign: "center", color: "#00a0a7", fontSize: 14 }]}>Fach:</Text>
+                                    <Image source={lockClosed} style={{ flex: 1 }} resizeMode='contain' />
+                                </View>
+                            ) : (lockStates.switchState === 0) ? (
+                                <View style={[styles.viewBorder, { flexDirection: "column", height: 45, width: 70, justifyContent: "center", alignItems: "center", padding: 3 }]}>
+                                    <Text style={[styles.textStandard, { textAlign: "center", color: "#b2e3e5", fontSize: 14 }]}>Fach:</Text>
+                                    <Image source={lockOpen} style={{ flex: 1 }} resizeMode='contain' />
+                                </View>
+                            ) : (
+                                        <View style={[styles.viewBorder, { flexDirection: "column", height: 45, width: 70, justifyContent: "center", alignItems: "center", padding: 3 }]}>
+                                            <Text style={[styles.textStandardBold, { textAlign: "center", color: "#00a0a7", fontSize: 14 }]}>not clear</Text>
+                                        </View>
+                                    )
+                        }
                     </View>
                 </View>
             </View>
         );
     }
 
-    render () {
-        if (this.state.listViewDataReady===false) {
+    render() {
+        if (this.state.listViewDataReady === false) {
             return (
                 <View style={styles.container}>
                     <ScrollView style={styles.viewColumn}
-                                refreshControl={
-                                    <RefreshControl
-                                        refreshing={this.state.listViewDataReady}
-                                        onRefresh={this.getState.bind(this)}
-                                        tintColor={"#00b2b7"}
-                                    />
-                                }
+                        refreshControl={
+                            <RefreshControl
+                                refreshing={this.state.listViewDataReady}
+                                onRefresh={this.getState.bind(this)}
+                                tintColor={"#00b2b7"}
+                            />
+                        }
                     >
                         <View style={[styles.viewSeparator, styles.marginSpacer]}>
                             <Text style={styles.textSeparator} >Daten werden geladen</Text><ActivityIndicator size="small" color="#00b2b7" />
@@ -425,13 +425,13 @@ export default class MyReservationsOverview extends Component {
             return (
                 <View style={styles.container}>
                     <ScrollView style={styles.viewColumn}
-                                refreshControl={
-                                    <RefreshControl
-                                        refreshing={!this.state.listViewDataReady}
-                                        onRefresh={this.getState.bind(this)}
-                                        tintColor={"#00b2b7"}
-                                    />
-                                }
+                        refreshControl={
+                            <RefreshControl
+                                refreshing={!this.state.listViewDataReady}
+                                onRefresh={this.getState.bind(this)}
+                                tintColor={"#00b2b7"}
+                            />
+                        }
                     >
                         <View style={[styles.viewSeparator, styles.marginSpacer]}>
                             <Text style={styles.textSeparator} >Liste der Schlösser</Text>

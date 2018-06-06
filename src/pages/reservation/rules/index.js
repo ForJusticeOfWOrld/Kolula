@@ -62,19 +62,19 @@ export default class ReservationRules extends Component {
             });
         } else {
             this.setState({
-                reservation: { tariff: {"time": 120, "desc": "2:00h", "price": 14.99}, branch: dummyBranch, date: {"date": 22, "month": 11, "year": 2018}, timeWindow: {"timeStart": "10:00", "timeEnd": "11:30"}, items: 5 },
-                user: {email: "debugdaten@email.com", password: "password", surname: "Max", name: "Mustermann", street: "Musterweg 12", postCode: "12345", place: "Musterhausen" }
+                reservation: { tariff: { "time": 120, "desc": "2:00h", "price": 14.99 }, branch: dummyBranch, date: { "date": 22, "month": 11, "year": 2018 }, timeWindow: { "timeStart": "10:00", "timeEnd": "11:30" }, items: 5 },
+                user: { email: "debugdaten@email.com", password: "password", surname: "Max", name: "Mustermann", street: "Musterweg 12", postCode: "12345", place: "Musterhausen" }
             });
         }
     }
 
-    render () {
+    render() {
         return (
             <View style={styles.container}>
                 <View style={styles.viewSpaceBetween}>
                     <View style={styles.viewBody}>
                         <Swiper
-                            paginationStyle={{ bottom: +44}}
+                            paginationStyle={{ bottom: +44 }}
                             loop
                         >
                             {
@@ -82,7 +82,7 @@ export default class ReservationRules extends Component {
                                     return (
                                         <View key={key} style={styles.viewSlide}>
                                             <View style={styles.viewSlideImage}>
-                                                <Image source={item.image} style={{flex: 1}} resizeMode={'contain'} />
+                                                <Image source={item.image} style={{ flex: 1 }} resizeMode={'contain'} />
                                             </View>
                                             {
                                                 (item.text != '') && (
@@ -100,7 +100,7 @@ export default class ReservationRules extends Component {
                             }
                         </Swiper>
                     </View>
-                    <View style={[styles.viewFooter, {marginTop: 8}]}>
+                    <View style={[styles.viewFooter, { marginTop: 8 }]}>
                         <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationConfirmation({ reservation: this.state.reservation, user: this.state.user })}>
                             <Text style={styles.textButtonPrimary} >ALLES KLAR!</Text>
                         </TouchableOpacity>
