@@ -34,6 +34,15 @@ export default {
         paddingVertical: containerPaddingVertical,
         backgroundColor: backgroundColor, //Debug
     },
+    paymentType: {
+        width: 150,
+        height: 150,
+        margin: 5,
+    },
+    paymentIcon: {
+        width: 100,
+        height: 100,
+    },
     viewColumn: {
         flex: 1,
         flexDirection: 'column',
@@ -82,7 +91,6 @@ export default {
     },
     viewSpaceBetween: {
         flex: 1,
-        justifyContent: "space-between",
     },
     viewIcon: {
         alignItems: 'center',

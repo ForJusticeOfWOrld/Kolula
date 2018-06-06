@@ -86,10 +86,10 @@ export default class RegisterEmail extends Component {
                                 onChangeText={email => this.setState({ email })}
                             />
                         </View>
-                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.registerAccount({ reservation: this.state.reservation, user: { email: this.state.email } })}>
-                            <Text style={styles.textButtonPrimary} >WEITER</Text>
+                        <TouchableOpacity style={styles.viewButtonPrimary} >
+                            <Text style={styles.textButtonPrimary} onPress={() => Actions.login()}>WEITER</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles.viewButtonSecondary, { marginTop: 18 }]} onPress={() => Actions.myReservationsCancel()}>
+                        <TouchableOpacity style={[styles.viewButtonSecondary, { marginTop: 18 }]} onPress={() => Actions.registerAccount({ reservation: this.state.reservation, user: { email: this.state.email } })}>
                             <Text style={styles.textButtonSecondary} >MIT HANDY VERIFIZIEREN</Text>
                         </TouchableOpacity>
                         <Text style={styles.textDescription} >*über Mobile Connect - ein Service der Telefonica</Text>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
     Text,
     View,
+    Image,
     ScrollView,
     TouchableOpacity,
 } from 'react-native';
@@ -12,7 +13,10 @@ import styles from './styles';
 import { Actions } from "react-native-router-flux";
 import {
     primaryColor,
-} from './../../../styles/common'
+} from './../../../styles/common';
+
+import CardView from 'react-native-cardview'
+import { PagerTabIndicator, IndicatorViewPager, PagerTitleIndicator, PagerDotIndicator } from 'rn-viewpager';
 import { Metrics, Styles, Images, Icons, Colors, Fonts, Global } from '@theme/';
 
 dummyReservation = "Temp";
@@ -84,13 +88,52 @@ export default class ReservationPayment extends Component {
         }
     }
 
+    _renderDotIndicator() {
+        return <PagerDotIndicator pageCount={3} />;
+    }
+
     render() {
         return (
             <View style={styles.container}>
+                <Text style={styles.textStandardBold}>Zahlmethode Wählen</Text>
+                <ScrollView style={{ height: 150, width: 150 }} horizontal={true}
+                >
+                    <TouchableOpacity style={styles.paymentType} >
+                        <CardView
+                            style={styles.paymentType}
+                            cardElevation={2}
+                            cardMaxElevation={2}
+                            cornerRadius={5}>
+                            <Image style={styles.paymentIcon} source={Icons.iconCard} />
+                            <Text style={styles.textStandardBold}>KreditKarte</Text>
+                        </CardView>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.paymentType} >
+                        <CardView
+                            style={styles.paymentType}
+                            cardElevation={2}
+                            cardMaxElevation={2}
+                            cornerRadius={5}>
+                            <Image style={styles.paymentIcon} source={Icons.iconPaypal} />
+                            <Text style={styles.textStandardBold}>PayPal</Text>
+                        </CardView>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.paymentType} >
+                        <CardView
+                            style={styles.paymentType}
+                            cardElevation={2}
+                            cardMaxElevation={2}
+                            cornerRadius={5}>
+                            <Image style={styles.paymentIcon} source={Icons.iconCard} />
+                            <Text style={styles.textStandardBold}>XXXXXX</Text>
+                        </CardView>
+                    </TouchableOpacity>
+                </ScrollView>
+
                 <View style={styles.viewSpaceBetween}>
                     <View style={[styles.viewBody, styles.viewEmail]}>
 
-                        <View style={[styles.viewRow, { flex: 0 }]}>
+                        {/* <View style={[styles.viewRow, { flex: 0 }]}>
                             {
                                 (this.state.isPayment === true) ? (
                                     <View style={styles.viewButtonPrimary}>
@@ -113,8 +156,8 @@ export default class ReservationPayment extends Component {
                                         </TouchableOpacity>
                                     )
                             }
-                        </View>
-                        <View style={[styles.viewColumn, styles.viewBorder, { flex: 0, height: 220, alignSelf: 'stretch', marginTop: 24, padding: 8 }]}>
+                        </View> */}
+                        <CardView style={[styles.viewColumn, styles.viewBorder, { flex: 0, height: 220, alignSelf: 'stretch', marginTop: 24, padding: 8 }]}>
                             <View style={styles.viewColumn}>
                                 <Text style={styles.textStandardBold} >{this.state.reservation.items} Aufblas-SUP</Text>
                                 <Text style={styles.textStandard} >Ein normales SUP.</Text>
@@ -128,11 +171,11 @@ export default class ReservationPayment extends Component {
                                 <Text style={styles.textStandard} >{this.state.reservation.branch.location_street}</Text>
                             </View>
                             <Text style={[styles.textLargeBold, styles.marginSpacer]} >{this.state.reservation.tariff.price * this.state.reservation.items} €</Text>
-                        </View>
+                        </CardView>
                     </View>
                     <View style={[styles.viewFooter, { marginTop: 8, height: 40 }]}>
                         <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationRules({ reservation: this.state.reservation, user: this.state.user })}>
-                            <Text style={styles.textButtonPrimary} >WEITER</Text>
+                            <Text style={styles.textButtonPrimary} >JETZT BUCHEN</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

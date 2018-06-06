@@ -58,16 +58,15 @@ export default {
         //borderColor: "#0F0",
     },
     viewInput: {
-        marginTop: 6,
+        marginTop: 20,
         backgroundColor: whiteOpacityColor4,
-        borderRadius: standardBorderRadius,
-        borderWidth: standardBorderWidth,
-        borderColor: primaryColor,
+        borderBottomWidth: standardBorderWidth,
+        borderColor: '#9b9b9b',
         alignSelf: 'stretch',
     },
     viewFooter: {
         //flex: 1,
-        flexDirection: 'column',
+        marginTop: 20,
         alignItems: 'center',
         justifyContent: 'flex-end',
     },
@@ -84,7 +83,6 @@ export default {
     },
     viewSpaceBetween: {
         flex: 1,
-        justifyContent: "space-between",
     },
     viewIcon: {
         alignItems: 'center',
@@ -112,6 +110,12 @@ export default {
         color: primaryInvertedColor,
         fontSize: largeFontSize,
         fontWeight: 'bold',
+        marginVertical: standardMargin,
+        textAlign: 'center',
+    },
+    textForgotPwd: {
+        color: primaryColor,
+        fontSize: standardFontSize,
         marginVertical: standardMargin,
         textAlign: 'center',
     },

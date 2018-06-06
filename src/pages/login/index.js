@@ -41,7 +41,7 @@ export default class Login extends Component {
                     <View style={styles.viewInput}>
                         <TextInput
                             style={styles.inputText}
-                            placeholderTextColor={primaryColor}
+                            placeholderTextColor="#9b9b9b"
                             placeholder={"E-Mail Adresse"}
                             underlineColorAndroid="transparent"
                             keyboardType="email-address"
@@ -53,7 +53,7 @@ export default class Login extends Component {
                     <View style={styles.viewInput}>
                         <TextInput
                             style={styles.inputText}
-                            placeholderTextColor={primaryColor}
+                            placeholderTextColor="#9b9b9b"
                             placeholder={"Password"}
                             underlineColorAndroid="transparent"
                             keyboardType="visible-password"
@@ -63,9 +63,12 @@ export default class Login extends Component {
                             onChangeText={pwd => this.setState({ pwd })}
                         />
                     </View>
-                    <View style={[styles.viewFooter, { marginTop: 8 }]}>
-                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationBranch({ type: ActionConst.RESET })}>
-                            <Text style={styles.textButtonPrimary} >FERTIG</Text>
+                    <View style={styles.viewFooter}>
+                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationPayment({ type: ActionConst.RESET })}>
+                            <Text style={styles.textButtonPrimary} >LOGIN</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity >
+                            <Text style={styles.textForgotPwd} >Passwort vergessen?</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
