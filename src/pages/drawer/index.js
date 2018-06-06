@@ -191,6 +191,16 @@ class DrawerContent extends Component {
                                 <Text style={styles.textLarge}>E-Mail-Adresse & Passwort</Text>
                             </TouchableOpacity>
                         </View>
+                        <View style={[styles.viewSeparator, styles.marginSpacer]}>
+                            <TouchableOpacity  style={styles.viewButton} >
+                                <Text style={styles.textLarge}>Support</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={[styles.viewSeparator, styles.marginSpacer]}>
+                            <TouchableOpacity  style={styles.viewButton} >
+                                <Text style={styles.textLarge}>Abmelden</Text>
+                            </TouchableOpacity>
+                        </View>
                         <View style={[styles.viewSeparator, styles.marginSpacer, {marginTop: 64}]}>
                             <TouchableOpacity  style={styles.viewButton} onPress={() => { this.logoutUser(); }}>
                                 <Text style={styles.textLarge}>Debug -> log</Text>

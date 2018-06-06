@@ -45,6 +45,7 @@ import Login from './src/pages/login/index';
 
 import menuIcon from './src/images/others/menu_hamburger.png';
 
+import { Metrics, Styles, Images, Icons, Colors, Fonts, Global } from '@theme/';
 
 export default class App extends Component {
     render() {
@@ -55,9 +56,9 @@ export default class App extends Component {
                         hideNavBar
                         key="drawer"
                         contentComponent={DrawerContent}
-                        drawerImage={menuIcon}
+                        drawerImage={Icons.iconPerson}
                         drawerWidth={350}
-                        drawerPosition='right'
+                        drawerPosition="left"
                     >
                         <Scene key="root">
                             <Scene key="home" component={Home} title="home" hideNavBar={true} initial={true} />
