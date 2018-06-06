@@ -173,4 +173,18 @@ export default {
         marginVertical: 4,
         textAlign: 'center',
     },
+    bottomButton: {
+        backgroundColor: primaryColor,
+        width: 400,
+        height: 40,
+        margin: 10,
+        borderRadius: 5,
+        justifyContent: 'center',
+    },
+    bottomText: {
+        textAlign: 'center',
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: largeFontSize,
+    }
 };

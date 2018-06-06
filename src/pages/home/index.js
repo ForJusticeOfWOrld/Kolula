@@ -39,7 +39,7 @@ export default class Login extends Component {
     componentDidMount() {
         setTimeout(() => {
             Actions.reservationBranch({ type: ActionConst.RESET });
-        }, 3000);
+        }, 500);
     }
 
     render() {

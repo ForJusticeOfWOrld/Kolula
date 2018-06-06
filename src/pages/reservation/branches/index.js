@@ -29,7 +29,7 @@ const mapDummy = require('../../../images/dummys/mapdummy.png');
 
 const dummyNearBranch = {
     "id": 2,
-    "location_name": "Seerestaurant XY, Hufeisensee",
+    "location_name": "Seerestaurant Tom",
     "items": "4 x Aufblas SUP L",
     "items_desc": "Ein Aufblas SUP der Größe L",
     "time": "24.02.2018 10:30 - 18:00 Uhr",
@@ -52,18 +52,18 @@ const dummyBranches = {
     "branches": [
         {
             "id": 0,
-            "location_name": "Eiscafé Antonio, Scharmützelsee",
+            "location_name": "Strandbad Wannsee",
             "items": "3 x Aufblas SUP XL",
             "items_desc": "Ein Aufblas SUP der Größe XL",
             "time": "11.03.2018 11:00 - 13:00 Uhr",
-            "location_street": "Parkallee 1, 15526 Bad Saarow",
+            "location_street": "Wannsee, 14129 Berlin",
             "location_transport": "Bad Saarow, Silberberg",
             "location_desc": "Der Scharmützelsee ist ein See in Brandenburg. Er liegt zwischen Frankfurt (Oder) und Berlin, südlich von FürstenwaldeSpree.",
             "longitude": 14.027054,
             "latitude": 52.239662,
             "contingent_id": 0,
             "new": 0,
-            "distance": 14,
+            "distance": 5,
             "tempWater": "11",
             "tempAir": "18",
             "weather": "cloudy",
@@ -72,18 +72,18 @@ const dummyBranches = {
         },
         {
             "id": 1,
-            "location_name": "Helenesee",
+            "location_name": "Eiscafé Antonio",
             "items": "13 x Aufblas SUP Standard",
             "items_desc": "Ein Aufblas SUP der Standard Größe",
             "time": "10.03.2018 12:00 - 15:00 Uhr",
-            "location_street": "Seeweg 12, 15316 Frankfurt (Oder)",
+            "location_street": "Scharmützelsee,15526 Bad Saarow",
             "location_transport": "Helenesee, Frankfurt (Oder)",
             "location_desc": "Der Helenesee ist ein See in der Nähe von Frankfurt (Oder) im Oder-Spree-Seengebiet. Er ist ein Naherholungsgebiet und liegt im Landschaftsschutzgebiet Ehemaliges Grubengelände Finkenheerd, in dem sich auch der südöstlich anschließende Katjasee befindet.",
             "longitude": 15.027054,
             "latitude": 51.239662,
             "contingent_id": 0,
             "new": 0,
-            "distance": 22,
+            "distance": 77,
             "tempWater": "8",
             "tempAir": "12",
             "weather": "cloudy",
@@ -96,13 +96,32 @@ const dummyBranches = {
             "items": "1 x Aufblas SUP XS",
             "items_desc": "Ein Aufblas SUP der Größe XS",
             "time": "11.02.2018 10:30 - 14:30 Uhr",
-            "location_street": "Parkallee 1, 15526 Bad Saarow",
+            "location_street": "Senftenberger See, 01968 Senftenberg",
             "location_transport": "Bad Saarow, Silberberg",
             "location_desc": "Der Senftenberger See, früher auch Speicherbecken Niemtsch, liegt im Lausitzer Seenland, einer künstlich geschaffenen Seenkette. Der See befindet sich an der Grenze von Nieder- und Oberlausitz zwischen der südbrandenburgischen Stadt Senftenberg und deren Ortsteilen Niemtsch und Großkoschen im Landkreis Oberspreewald-Lausitz. Der Senftenberger See gehört mit einer Fläche von 1300 Hektar zu den größten künstlich angelegten Seen Deutschlands.",
             "longitude": 13.027054,
             "latitude": 51.259662,
             "contingent_id": 0,
-            "distance": 56,
+            "distance": 90,
+            "tempWater": "12",
+            "tempAir": "14",
+            "weather": "rainy",
+            "highlights": ["Senftenberger See Highlight 1", " Highlight 2", "Highlight 3", "Highlight 4", "Highlight 5", "Highlight 6", "Highlight 7", "Highlight 8"],
+            "tariffs": [{ "time": 60, "desc": "1:00h", "price": 9.99 }, { "time": 90, "desc": "1:30h", "price": 12.99 }, { "time": 120, "desc": "2:00h", "price": 14.99 }, { "time": 180, "desc": "3:00h", "price": 19.99 }, { "time": 240, "desc": "4:00h", "price": 29.99 }],
+        },
+        {
+            "id": 4,
+            "location_name": "Café Helensee",
+            "items": "1 x Aufblas SUP XS",
+            "items_desc": "Ein Aufblas SUP der Größe XS",
+            "time": "11.02.2018 10:30 - 14:30 Uhr",
+            "location_street": "Helensee, 15263 Frankfurt Oder",
+            "location_transport": "Bad Saarow, Silberberg",
+            "location_desc": "Der Senftenberger See, früher auch Speicherbecken Niemtsch, liegt im Lausitzer Seenland, einer künstlich geschaffenen Seenkette. Der See befindet sich an der Grenze von Nieder- und Oberlausitz zwischen der südbrandenburgischen Stadt Senftenberg und deren Ortsteilen Niemtsch und Großkoschen im Landkreis Oberspreewald-Lausitz. Der Senftenberger See gehört mit einer Fläche von 1300 Hektar zu den größten künstlich angelegten Seen Deutschlands.",
+            "longitude": 13.027054,
+            "latitude": 51.259662,
+            "contingent_id": 0,
+            "distance": 120,
             "tempWater": "12",
             "tempAir": "14",
             "weather": "rainy",
@@ -172,16 +191,21 @@ export default class ReservationBranches extends Component {
                                     <View style={{ height: 36, width: 30 }}>
                                         <Image source={mapMarkerGeneric} style={{ flex: 1 }} resizeMode='contain' />
                                     </View>
-                                    <View style={[styles.viewColumn, { marginLeft: 40 }]}>
-                                        <Text style={styles.textStandardBold} >{dummyNearBranch.location_name}</Text>
-                                        <Text style={styles.textStandard} >{dummyNearBranch.distance} km entfernt</Text>
+                                    <View style={[styles.viewColumn, { marginLeft: 40, flexDirection: 'row' }]}>
+                                        <View>
+                                            <Text style={styles.textStandardBold} >{dummyNearBranch.location_name}</Text>
+                                            <Text style={styles.textStandard} >Jungfernsee, 14469 Potsdam</Text>
+                                        </View>
+                                        <View style={{ marginLeft: 15 , justifyContent: 'center' }}>
+                                            <Text style={ styles.textStandardBold } >0,2 km</Text>
+                                        </View>
                                     </View>
                                 </View>
                             </View>
                         </TouchableOpacity>
                         <View style={[styles.viewColumn, { backgroundColor: "#f7f7f7", paddingHorizontal: containerPaddingHorizontal, paddingVertical: 8 }]}>
                             <View style={[styles.viewSeparator]}>
-                                <Text style={styles.textLarge} >Weitere Stationen</Text>
+                                <Text style={styles.textLarge} >Alle Stationen</Text>
                             </View>
                             <View style={styles.viewColumn}>
                                 <ListView
@@ -191,10 +215,10 @@ export default class ReservationBranches extends Component {
                                     enableEmptySections={true}
                                 />
                             </View>
-                            <View style={[styles.viewButtonInactive, { marginTop: 16, padding: 8 }]}>
+                            {/* <View style={[styles.viewButtonInactive, { marginTop: 16, padding: 8 }]}>
                                 <Text style={styles.textNoStationHeading} >Keine Station in der Nähe?</Text>
                                 <Text style={styles.textNoStation} >Standort vorschlagen & Updates erhalten</Text>
-                            </View>
+                            </View> */}
                         </View>
                     </View>
                 </ScrollView>

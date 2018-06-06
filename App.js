@@ -67,7 +67,7 @@ export default class App extends Component {
                             <Scene key="myReservationsCancel" component={MyReservationsCancel} title="Stornieren" />
                             <Scene key="myReservationsReschedule" component={MyReservationsReschedule} title="Verschieben" />
 
-                            <Scene key="reservationBranch" component={ReservationBranches} title="Stationen" initial={false} />
+                            <Scene key="reservationBranch" component={ReservationBranches} title="Login" initial={false} />
                             <Scene key="reservationBranchDetail" component={ReservationBranchDetail} title="Station" initial={false} />
                             <Scene key="reservationCalendar" component={ReservationCalendar} title="SUP Mieten" initial={false} />
                             <Scene key="reservationResource" component={ReservationResource} title="Board wählen" initial={false} />

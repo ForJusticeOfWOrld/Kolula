@@ -14,6 +14,7 @@ import {
 import { Actions } from "react-native-router-flux";
 import { ActionConst } from "react-native-router-flux";
 import { Metrics, Styles, Images, Icons, Colors, Fonts, Global } from '@theme/';
+import CardView from 'react-native-cardview'
 
 const mapDummy = require('../../../images/dummys/dummyBanner.png');
 
@@ -32,15 +33,39 @@ export default class AccountPersonalData extends Component {
         console.log(this.props);
     }
 
-    render () {
+    render() {
         return (
             <View style={styles.container}>
                 <View style={styles.viewSpaceBetween}>
-                    <View style={styles.viewBody}>
-                        <Text style={styles.textLargeBold}>Persönliche Daten Dummy</Text>
-                    </View>
-                    <View style={[styles.viewFooter, {marginTop: 8}]}>
-                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationBranch({type: ActionConst.RESET})}>
+                    <CardView
+                        style={{ width: 350, height: 100 }}
+                        cardElevation={3}
+                        cardMaxElevation={3}
+                        cornerRadius={5}>
+                        <Text>
+                            Vor- und Nachname
+                        </Text>
+                    </CardView>
+                    <CardView
+                        style={{ width: 350, height: 300 }}
+                        cardElevation={3}
+                        cardMaxElevation={3}
+                        cornerRadius={5}>
+                        <Text>
+                            Straß und Hausnummer
+                        </Text>
+                    </CardView>
+                    <CardView
+                        style={{ width: 350, height: 100 }}
+                        cardElevation={3}
+                        cardMaxElevation={3}
+                        cornerRadius={5}>
+                        <Text>
+                            Handynummer
+                        </Text>
+                    </CardView>
+                    <View style={[styles.viewFooter, { marginTop: 8 }]}>
+                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationBranch({ type: ActionConst.RESET })}>
                             <Text style={styles.textButtonPrimary} >FERTIG</Text>
                         </TouchableOpacity>
                     </View>

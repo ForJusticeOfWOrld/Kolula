@@ -4,6 +4,7 @@ import {
     View,
     ScrollView,
     Text,
+    Image,
     TouchableOpacity,
     AsyncStorage,
 } from 'react-native';
@@ -160,12 +161,17 @@ class DrawerContent extends Component {
     render() {
         return (
             <View style={styles.container}>
-                {/* <Image source={background} style={styles.containerImage} resizeMode={'cover'}> */}
                 <View style={styles.viewColumn}>
                     <View style={styles.viewHeader}>
-                        <Text style={styles.textLargeBold}>Account</Text>
+                        <Image source={Icons.iconPerson} style={styles.containerImage} resizeMode={'cover'} />
+                        <Text style={styles.textLargeBold}>Jane Morrison</Text>
                     </View>
                     <View style={styles.line} />
+                    <View style={[styles.viewSeparator, styles.marginSpacer]}>
+                        <TouchableOpacity style={styles.viewButton}>
+                            <Text style={styles.textLarge}>Kunden Konto</Text>
+                        </TouchableOpacity>
+                    </View>
                     <View style={[styles.viewSeparator, styles.marginSpacer]}>
                         <TouchableOpacity style={styles.viewButton} onPress={() => Actions.myReservationsOverview({ type: ActionConst.RESET })}>
                             <Text style={styles.textLarge}>Meine Buchungen</Text>
@@ -178,12 +184,17 @@ class DrawerContent extends Component {
                     </View>
                     <View style={[styles.viewSeparator, styles.marginSpacer]}>
                         <TouchableOpacity style={styles.viewButton} onPress={() => Actions.accountEmailPassword()}>
-                            <Text style={styles.textLarge}>E-Mail-Adresse & Passwort</Text>
+                            <Text style={styles.textLarge}>Passwort ändern</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={[styles.viewSeparator, styles.marginSpacer]}>
                         <TouchableOpacity style={styles.viewButton} >
                             <Text style={styles.textLarge}>Support</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={[styles.viewSeparator, styles.marginSpacer]}>
+                        <TouchableOpacity style={styles.viewButton} >
+                            <Text style={styles.textLarge}>Impressum</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={[styles.viewSeparator, styles.marginSpacer]}>

@@ -100,6 +100,7 @@ export default {
         //Width: 100,
     },
     viewButtonPrimary: {
+        marginTop: 10,
         borderRadius: standardBorderRadius,
         borderWidth: standardBorderWidth,
         borderColor: primaryColor,
@@ -124,8 +125,8 @@ export default {
         marginTop: 6,
         backgroundColor: whiteOpacityColor4,
         borderRadius: standardBorderRadius,
-        borderWidth: standardBorderWidth,
-        borderColor: primaryColor,
+        borderBottomWidth: standardBorderWidth,
+        borderColor: '#9b9b9b',
         alignSelf: 'stretch',
     },
     textInput: {
@@ -142,6 +143,12 @@ export default {
         fontWeight: 'bold',
         marginVertical: standardMargin,
         textAlign: 'center',
+    },
+    textDescription: {
+        marginTop: 12,
+        color: '#9b9b9b',
+        textAlign: 'center',
+        fontSize: 10,
     },
     viewButtonInactive: {
         borderRadius: standardBorderRadius,

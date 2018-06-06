@@ -135,6 +135,11 @@ export default class ReservationCalendar extends Component {
                                 enableEmptySections={true}
                             />
                         </View>
+                        <TouchableOpacity>
+                            <View style={ styles.bottomButton }>
+                                <Text style={ styles.bottomText }>WEITER</Text>
+                            </View>
+                        </TouchableOpacity>
                     </View>
                 </View>
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
     Text,
+    Image,
     View,
     TextInput,
     TouchableOpacity,
@@ -69,11 +70,12 @@ export default class RegisterEmail extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.viewSpaceBetween}>
+                    <Image source={Images.imgLogoColor} style={{ marginTop: 50 }} resizeMode='contain' />
                     <View style={[styles.viewBody, styles.viewEmail]}>
                         <View style={styles.viewInput}>
                             <TextInput
                                 style={styles.inputText}
-                                placeholderTextColor={primaryColor}
+                                placeholderTextColor="#9b9b9b"
                                 placeholder={"E-Mail Adresse"}
                                 underlineColorAndroid="transparent"
                                 keyboardType="email-address"
@@ -84,15 +86,15 @@ export default class RegisterEmail extends Component {
                                 onChangeText={email => this.setState({ email })}
                             />
                         </View>
-                        <TouchableOpacity style={[styles.viewButtonSecondary, { marginTop: 18 }]} onPress={() => Actions.myReservationsCancel()}>
-                            <Text style={styles.textButtonSecondary} >Login with Facebook</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={[styles.viewFooter, { marginTop: 8 }]}>
                         <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.registerAccount({ reservation: this.state.reservation, user: { email: this.state.email } })}>
                             <Text style={styles.textButtonPrimary} >WEITER</Text>
                         </TouchableOpacity>
+                        <TouchableOpacity style={[styles.viewButtonSecondary, { marginTop: 18 }]} onPress={() => Actions.myReservationsCancel()}>
+                            <Text style={styles.textButtonSecondary} >MIT HANDY VERIFIZIEREN</Text>
+                        </TouchableOpacity>
+                        <Text style={styles.textDescription} >*über Mobile Connect - ein Service der Telefonica</Text>
                     </View>
+
                 </View>
             </View>
         )

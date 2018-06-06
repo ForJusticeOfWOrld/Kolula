@@ -46,6 +46,7 @@ export default {
         justifyContent: 'flex-start',
         paddingTop: (Platform.OS === 'ios') ? 32 : 0,
         margin: 6,
+        flexDirection: 'row',
     },
     viewBody: {
         flex: 1,
@@ -61,7 +62,7 @@ export default {
     },
     viewSeparator: {
         borderBottomWidth: separatorBorderWidth,
-        borderBottomColor: primaryColor,
+        borderBottomColor: '#9b9b9b',
         margin: standardMargin,
     },
     viewBorder: {
@@ -133,17 +134,18 @@ export default {
     line: {
         height: 1,
         alignSelf: 'stretch',
-        backgroundColor: primaryColor,
+        backgroundColor: '#9b9b9b',
         marginVertical: 10,
     },
     textLargeBold: {
-        fontSize: largeFontSize,
-        color: primaryColor,
-        fontWeight: 'bold',
+        color: '#9b9b9b',
+        fontSize: standardFontSize,
+        alignSelf: 'center',
+        marginLeft: 5,
     },
     textLarge: {
         fontSize: largeFontSize,
-        color: primaryColor,
+        color: '#000',
     },
     textStandardBold: {
         fontSize: standardFontSize,
