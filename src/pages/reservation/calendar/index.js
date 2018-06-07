@@ -11,6 +11,16 @@ import {
 import { Actions } from 'react-native-router-flux';
 import styles from './styles';
 import { Metrics, Styles, Images, Icons, Colors, Fonts, Global } from '@theme/';
+import DateTimePicker from 'react-native-modal-datetime-picker';
+import { ActionSheetCustom as ActionSheet } from 'react-native-actionsheet'
+
+const options = [
+    'Cancel', 
+    'Apple', 
+    <Text style={{color: 'yellow'}}>Banana</Text>,
+    'Watermelon', 
+    <Text style={{color: 'red'}}>Durian</Text>
+  ]
 
 const dummyBranch = {
     "id": 2,
@@ -52,9 +62,28 @@ export default class ReservationCalendar extends Component {
             reservation: false,
             actualDate: false,
             actualDateString: "",
+            isDatePickerVisible: false,
+            isTimePickerVisible: false,
         };
-    }
 
+    }
+    showActionSheet = () => {
+        this.ActionSheet.show()
+      }
+    _showDatePicker = () => this.setState({ isDatePickerVisible: true });
+    _showTimePicker = () => this.setState({ isTimePickerVisible: true });
+
+    _hideDatePicker = () => this.setState({ isDatePickerVisible: false });
+    _hideTimePicker = () => this.setState({ isTimePickerVisible: false });
+
+    _handleDatePicked = (date) => {
+        console.log('A date has been picked: ', date);
+        this._hideDatePicker();
+    };
+    _handleTimePicked = (time) => {
+        console.log('A time has been picked: ', time);
+        this._hideTimePicker();
+    };
     componentWillMount() {
         console.log("ReservationCalendar props:")
         console.log(this.props);
@@ -121,12 +150,42 @@ export default class ReservationCalendar extends Component {
                         <TouchableOpacity style={styles.viewButtonSecondary} onPress={() => this.showPicker()}>
                             <Text style={styles.textButtonSecondary} >{this.state.actualDateString}</Text>
                         </TouchableOpacity>
-
+                        <View style={{ flex: 1 }}>
+                            <TouchableOpacity onPress={this._showDatePicker}>
+                                <Text>Show DatePicker</Text>
+                            </TouchableOpacity>
+                            <DateTimePicker
+                                isVisible={this.state.isDatePickerVisible}
+                                onConfirm={this._handleDatePicked}
+                                onCancel={this._hideDatePicker}
+                                mode='date'
+                            />
+                        </View>
+                        <View style={{ flex: 1 }}>
+                            <TouchableOpacity onPress={this._showTimePicker}>
+                                <Text>Show TimePicker</Text>
+                            </TouchableOpacity>
+                            <DateTimePicker
+                                isVisible={this.state.isTimePickerVisible}
+                                onConfirm={this._handleTimePicked}
+                                onCancel={this._hideTimePicker}
+                                mode='time'
+                            />
+                        </View>
                     </View>
                     <View style={styles.viewFooter}>
                         <View style={[styles.viewSeparator, styles.marginSpacer, { alignSelf: 'stretch' }]}>
                             <Text style={[styles.textSeparator, { alignSelf: 'stretch', }]} >Tarif wählen</Text>
                         </View>
+                        <Text onPress={this.showActionSheet}>Open ActionSheet</Text>
+                        <ActionSheet
+                          ref={o => this.ActionSheet = o}
+                          title={<Text style={{color: '#000', fontSize: 18}}>Which one do you like?</Text>}
+                          options={options}
+                          cancelButtonIndex={0}
+                          destructiveButtonIndex={4}
+                          onPress={(index) => { /* do something */ }}
+                        />
                         <View style={[styles.viewColumn, { alignSelf: 'stretch', }]}>
                             <ListView
                                 dataSource={this.state.dataSource}
@@ -136,8 +195,8 @@ export default class ReservationCalendar extends Component {
                             />
                         </View>
                         <TouchableOpacity>
-                            <View style={ styles.bottomButton }>
-                                <Text style={ styles.bottomText }>WEITER</Text>
+                            <View style={styles.bottomButton}>
+                                <Text style={styles.bottomText}>WEITER</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
