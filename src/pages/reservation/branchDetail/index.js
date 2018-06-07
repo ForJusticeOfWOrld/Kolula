@@ -8,7 +8,7 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-//import MapView from 'react-native-maps';
+import MapView from 'react-native-maps';
 import styles from './styles';
 import {
     primaryColor,
@@ -131,7 +131,18 @@ export default class ReservationBranchDetail extends Component {
                             />
                         </View>
                         <View style={[styles.viewMap, styles.marginSpacer]}>
-                            <Image source={mapDummy} style={{ flex: 1, height: undefined, width: undefined, minHeight: 150 }} resizeMode={'cover'} />
+                            <View style={styles.mapView}>
+                                <MapView
+                                    style={styles.mapView}
+                                    provider={MapView.PROVIDER_GOOGLE}
+                                    initialRegion={{
+                                        latitude: 37.78825,
+                                        longitude: -122.4324,
+                                        latitudeDelta: 0.0922,
+                                        longitudeDelta: 0.0421,
+                                    }}
+                                />
+                            </View>
                         </View>
                         <Text style={styles.textStandardBold} >{this.state.reservation.branch.location_name}</Text>
                         <Text style={styles.textStandard} >{this.state.reservation.branch.location_street}</Text>

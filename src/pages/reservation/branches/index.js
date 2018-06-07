@@ -9,7 +9,7 @@ import {
     StatusBar,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-//import MapView from 'react-native-maps';
+import MapView from 'react-native-maps';
 import styles from './styles';
 import {
     primaryColor,
@@ -182,10 +182,20 @@ export default class ReservationBranches extends Component {
                         <View style={styles.viewRow}>
                             <Text style={[styles.textLargeBold, { textAlign: "center", flex: 1, color: "#FFF", marginTop: 12, fontSize: 26 }]} >Nächste Station</Text>
                         </View>
-                        <TouchableOpacity onPress={() => Actions.reservationBranchDetail({ reservation: { branch: dummyNearBranch } })}>
+                        <View onPress={() => Actions.reservationBranchDetail({ reservation: { branch: dummyNearBranch } })}>
                             <View style={[styles.viewColumn, styles.viewBorderMap, { backgroundColor: "#FFF", marginHorizontal: containerPaddingHorizontal, marginBottom: containerPaddingVertical }]}>
-                                <View style={styles.viewMap}>
-                                    <Image source={mapDummy} style={{ flex: 1, height: undefined, width: undefined, minHeight: 150 }} resizeMode={'cover'} />
+                                {/* <Image source={mapDummy} style={{ flex: 1, height: undefined, width: undefined, minHeight: 150 }} resizeMode={'cover'} /> */}
+                                <View style={styles.mapView}>
+                                    <MapView
+                                        style={styles.mapView}
+                                        provider={MapView.PROVIDER_GOOGLE}
+                                        initialRegion={{
+                                            latitude: 37.78825,
+                                            longitude: -122.4324,
+                                            latitudeDelta: 0.0922,
+                                            longitudeDelta: 0.0421,
+                                        }}
+                                    />
                                 </View>
                                 <View style={[styles.viewRow, { justifyContent: "center", alignContent: "center", margin: 12 }]}>
                                     <View style={{ height: 36, width: 30 }}>
@@ -196,13 +206,13 @@ export default class ReservationBranches extends Component {
                                             <Text style={styles.textStandardBold} >{dummyNearBranch.location_name}</Text>
                                             <Text style={styles.textStandard} >Jungfernsee, 14469 Potsdam</Text>
                                         </View>
-                                        <View style={{ marginLeft: 5 , justifyContent: 'center' }}>
-                                            <Text style={ styles.textStandardBold } >0,2 km</Text>
+                                        <View style={{ marginLeft: 5, justifyContent: 'center' }}>
+                                            <Text style={styles.textStandardBold} >0,2 km</Text>
                                         </View>
                                     </View>
                                 </View>
                             </View>
-                        </TouchableOpacity>
+                        </View>
                         <View style={[styles.viewColumn, { backgroundColor: "#f7f7f7", paddingHorizontal: containerPaddingHorizontal, paddingVertical: 8 }]}>
                             <View style={[styles.viewSeparator]}>
                                 <Text style={styles.textLarge} >Alle Stationen</Text>

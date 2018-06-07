@@ -20,15 +20,24 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
-project.xcworkspace
+*.xcworkspace
+Pods/
+podfile.lock
 
 # Android/IntelliJ
 #
 build/
+release/
 .idea
 .gradle
 local.properties
 *.iml
+*.apk
+assets_*
+node_modules_*
+# *.bundle*
+*.keystore
+*.class
 
 # node.js
 #

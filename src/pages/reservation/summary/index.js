@@ -8,7 +8,7 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-//import MapView from 'react-native-maps';
+import MapView from 'react-native-maps';
 import styles from './styles';
 import {
     primaryColor,
@@ -109,7 +109,18 @@ export default class ReservationSummary extends Component {
                                 </View>
                             </View>
                             <View style={[styles.viewMap, styles.marginSpacer, { height: 200 }]}>
-                                <Image source={mapDummy} style={{ flex: 1 }} resizeMode={'cover'} />
+                                <View style={styles.mapView}>
+                                    <MapView
+                                        style={styles.mapView}
+                                        provider={MapView.PROVIDER_GOOGLE}
+                                        initialRegion={{
+                                            latitude: 37.78825,
+                                            longitude: -122.4324,
+                                            latitudeDelta: 0.0922,
+                                            longitudeDelta: 0.0421,
+                                        }}
+                                    />
+                                </View>
                             </View>
                         </ScrollView>
                     </View>

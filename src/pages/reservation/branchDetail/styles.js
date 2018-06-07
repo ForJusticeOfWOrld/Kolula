@@ -89,10 +89,10 @@ export default {
         justifyContent: 'center',
         width: 18,
     },
-    viewMap: {
-        flex: 1,
-        //height: 100,
-        //Width: 100,
+    mapView: {
+        width: 400,
+        height: 200,
+        backgroundColor: 'red'
     },
     viewButtonPrimary: {
         borderRadius: standardBorderRadius,
