@@ -82,7 +82,7 @@ export default class ReservationPayment extends Component {
             });
         } else {
             this.setState({
-                reservation: { tariff: { "time": 120, "desc": "2:00h", "price": 14.99 }, branch: dummyBranch, date: { "date": 22, "month": 11, "year": 2018 }, timeWindow: { "timeStart": "10:00", "timeEnd": "11:30" }, items: 5 },
+                reservation: { tariff: { "time": 120, "desc": "2:00h", "price": 14.99 }, branch: dummyBranch, date: { "date": 23, "month": 5, "year": 2018 }, timeWindow: { "timeStart": "10:00", "timeEnd": "11:30" }, items: 2 },
                 user: { email: "debugdaten@email.com", password: "password", surname: "Max", name: "Mustermann", street: "Musterweg 12", postCode: "12345", place: "Musterhausen" }
             });
         }
@@ -96,19 +96,19 @@ export default class ReservationPayment extends Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.textStandardBold}>Zahlmethode Wählen</Text>
-                <ScrollView style={{ height: 150, width: 150 }} horizontal={true}
+                <ScrollView horizontal style={{ flex: 1 }}
                 >
-                    <TouchableOpacity style={styles.paymentType} >
+                    <TouchableOpacity >
                         <CardView
                             style={styles.paymentType}
-                            cardElevation={2}
-                            cardMaxElevation={2}
+                            cardElevation={3}
+                            cardMaxElevation={3}
                             cornerRadius={5}>
                             <Image style={styles.paymentIcon} source={Icons.iconCard} />
                             <Text style={styles.textStandardBold}>KreditKarte</Text>
                         </CardView>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.paymentType} >
+                    <TouchableOpacity >
                         <CardView
                             style={styles.paymentType}
                             cardElevation={2}
@@ -118,7 +118,7 @@ export default class ReservationPayment extends Component {
                             <Text style={styles.textStandardBold}>PayPal</Text>
                         </CardView>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.paymentType} >
+                    <TouchableOpacity >
                         <CardView
                             style={styles.paymentType}
                             cardElevation={2}
@@ -157,24 +157,47 @@ export default class ReservationPayment extends Component {
                                     )
                             }
                         </View> */}
-                        <CardView style={[styles.viewColumn, styles.viewBorder, { flex: 0, height: 220, alignSelf: 'stretch', marginTop: 24, padding: 8 }]}>
-                            <View style={styles.viewColumn}>
-                                <Text style={styles.textStandardBold} >{this.state.reservation.items} Aufblas-SUP</Text>
-                                <Text style={styles.textStandard} >Ein normales SUP.</Text>
-                            </View>
-                            <View style={styles.viewColumn}>
-                                <Text style={styles.textStandardBold} >{this.state.reservation.date.date + "-" + this.state.reservation.date.month + "-" + this.state.reservation.date.year}</Text>
-                                <Text style={styles.textStandardBold} >{this.state.reservation.timeWindow.timeStart + " - " + this.state.reservation.timeWindow.timeEnd + " Uhr"}</Text>
-                            </View>
-                            <View style={[styles.viewColumn, styles.marginSpacer]}>
-                                <Text style={styles.textStandardBold} >{this.state.reservation.branch.location_name}</Text>
-                                <Text style={styles.textStandard} >{this.state.reservation.branch.location_street}</Text>
-                            </View>
-                            <Text style={[styles.textLargeBold, styles.marginSpacer]} >{this.state.reservation.tariff.price * this.state.reservation.items} €</Text>
-                        </CardView>
+                        <ScrollView>
+                            <CardView style={[styles.viewColumn, styles.borderWrapper, { flex: 0, height: 220, alignSelf: 'stretch', padding: 8 }]}>
+                                <View style={styles.viewColumn}>
+                                    <Text style={styles.textStandardBold} >{this.state.reservation.items}x Aufblas-SUP</Text>
+                                </View>
+                                <View style={styles.viewColumn}>
+                                    <Text style={styles.textStandardBold} >{this.state.reservation.date.date + "." + this.state.reservation.date.month + "." + this.state.reservation.date.year}</Text>
+                                    <Text style={styles.textTimeWrapper} >{this.state.reservation.timeWindow.timeStart + " - " + this.state.reservation.timeWindow.timeEnd + " Uhr"}</Text>
+                                </View>
+                                <View style={[styles.viewColumn, styles.marginSpacer]}>
+                                    <Text style={styles.textStandardBold} >{this.state.reservation.branch.location_name}</Text>
+                                    <Text style={styles.textStandard} >{this.state.reservation.branch.location_street}</Text>
+                                </View>
+                                {/* <Text style={[styles.textLargeBold, styles.marginSpacer]} >{this.state.reservation.tariff.price * this.state.reservation.items} €</Text> */}
+                            </CardView>
+
+                            <CardView style={[styles.viewColumn, styles.borderWrapper, { flex: 0, height: 100, alignSelf: 'stretch', marginTop: 24, padding: 8 }]}>
+                                <View style={styles.viewRow}>
+                                    <Text style={styles.textStandardBold} >{this.state.reservation.items}x Aufblas-SUP</Text>
+                                    <Text style={styles.textStandardBold} >1 h</Text>
+                                </View>
+                                <View style={styles.viewRow}>
+                                    <Text style={styles.textStandardBold} >{this.state.reservation.date.date + "." + this.state.reservation.date.month + "." + this.state.reservation.date.year}</Text>
+                                    <Text style={styles.textStandardBold} >-1 h</Text>
+                                </View>
+                            </CardView>
+
+                            <CardView style={[styles.viewColumn, styles.borderWrapper, { flex: 0, height: 100, alignSelf: 'stretch', marginTop: 24, padding: 8 }]}>
+                                <View style={styles.viewRow}>
+                                    <Text style={styles.textStandardBold} >{this.state.reservation.items}x Aufblas-SUP</Text>
+                                    <Text style={styles.textStandardBold} >2 h</Text>
+                                </View>
+                                <View style={styles.viewRow}>
+                                    <Text style={styles.textStandardBold} >{this.state.reservation.date.date + "." + this.state.reservation.date.month + "." + this.state.reservation.date.year}</Text>
+                                    <Text style={styles.textStandardBold} >0 c</Text>
+                                </View>
+                            </CardView>
+                        </ScrollView>
                     </View>
                     <View style={[styles.viewFooter, { marginTop: 8, height: 40 }]}>
-                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationRules({ reservation: this.state.reservation, user: this.state.user })}>
+                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationBranch({ reservation: this.state.reservation, user: this.state.user })}>
                             <Text style={styles.textButtonPrimary} >JETZT BUCHEN</Text>
                         </TouchableOpacity>
                     </View>

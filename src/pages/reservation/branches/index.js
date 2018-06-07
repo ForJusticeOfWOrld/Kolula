@@ -196,7 +196,7 @@ export default class ReservationBranches extends Component {
                                             <Text style={styles.textStandardBold} >{dummyNearBranch.location_name}</Text>
                                             <Text style={styles.textStandard} >Jungfernsee, 14469 Potsdam</Text>
                                         </View>
-                                        <View style={{ marginLeft: 15 , justifyContent: 'center' }}>
+                                        <View style={{ marginLeft: 5 , justifyContent: 'center' }}>
                                             <Text style={ styles.textStandardBold } >0,2 km</Text>
                                         </View>
                                     </View>

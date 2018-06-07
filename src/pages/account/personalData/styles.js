@@ -77,6 +77,12 @@ export default{
         flex: 1,
         justifyContent: "space-between",
     },
+    cardWrapper: {
+        borderColor: '#9b9b9b',
+        borderWidth: 1,
+        marginTop: 5,
+        borderRadius: 5,
+    },
     viewIcon: {
         alignItems: 'center',
         justifyContent: 'center',

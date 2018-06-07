@@ -183,7 +183,7 @@ class DrawerContent extends Component {
                         </TouchableOpacity>
                     </View>
                     <View style={[styles.viewSeparator, styles.marginSpacer]}>
-                        <TouchableOpacity style={styles.viewButton} onPress={() => Actions.accountEmailPassword()}>
+                        <TouchableOpacity style={styles.viewButton} >
                             <Text style={styles.textLarge}>Passwort ändern</Text>
                         </TouchableOpacity>
                     </View>
@@ -202,7 +202,7 @@ class DrawerContent extends Component {
                             <Text style={styles.textLarge}>Abmelden</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={[styles.viewSeparator, styles.marginSpacer, { marginTop: 64 }]}>
+                    {/* <View style={[styles.viewSeparator, styles.marginSpacer, { marginTop: 64 }]}>
                         <TouchableOpacity style={styles.viewButton} onPress={() => { this.logoutUser(); }}>
                             <Text style={styles.textLarge}>Debug -> log</Text>
                         </TouchableOpacity>
@@ -221,7 +221,7 @@ class DrawerContent extends Component {
                         <TouchableOpacity style={styles.viewButton} onPress={() => Actions.lockTests({ type: ActionConst.RESET })}>
                             <Text style={styles.textLarge}>Schloss Test</Text>
                         </TouchableOpacity>
-                    </View>
+                    </View> */}
 
                     {
                         (this.state.version && this.state.version.Version !== '') && (

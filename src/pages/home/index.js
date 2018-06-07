@@ -51,7 +51,7 @@ export default class Login extends Component {
                 />
                 <View style={[styles.viewColumn, { justifyContent: "center" }]}>
                     <Image source={logoKolula} style={{ marginTop: 100, marginBottom: 64 }} resizeMode='contain' />
-                    <ActivityIndicator size={50} color="#b2e3e5" />
+                    <ActivityIndicator color="#b2e3e5" />
                 </View>
             </View>
         )

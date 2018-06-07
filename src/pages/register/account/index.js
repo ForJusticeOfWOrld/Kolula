@@ -4,6 +4,7 @@ import {
     View,
     TextInput,
     TouchableOpacity,
+    ScrollView,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 //import MapView from 'react-native-maps';
@@ -45,7 +46,7 @@ export default class RegisterAccount extends Component {
         super(props);
         this.state = {
             user: { email: "", password: "", surname: "", name: "", postCode: "", place: "", street: "", isSmall: true },
-            isTermsChecked: false,
+            isTermsChecked: true,
             reservation: false,
             apiCallWorking: false,
             debug: false
@@ -89,134 +90,184 @@ export default class RegisterAccount extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <ScrollView style={styles.container}>
                 <View style={styles.viewSpaceBetween}>
                     <View style={[styles.viewBody, styles.viewEmail]}>
-                        <View style={styles.viewInput}>
-                            <TextInput
-                                style={styles.inputText}
-                                placeholderTextColor={primaryColor}
-                                placeholder={"E-Mail Adresse"}
-                                defaultValue={this.state.user.email}
-                                underlineColorAndroid="transparent"
-                                keyboardType="email-address"
-                                autoCapitalize="none"
-                                autoCorrect={false}
-                                returnKeyType="next"
-                                editable={!this.state.apiCallWorking}
-                                onChangeText={email => this.setState({ user: { ...this.state.user, email: email } })}
-                            />
-                        </View>
-                        <View style={styles.viewInput}>
-                            <TextInput
-                                style={styles.inputText}
-                                placeholderTextColor={primaryColor}
-                                placeholder={"Neues Passwort"}
-                                underlineColorAndroid="transparent"
-                                keyboardType="default"
-                                autoCapitalize="none"
-                                autoCorrect={false}
-                                returnKeyType="next"
-                                secureTextEntry
-                                editable={!this.state.apiCallWorking}
-                                onChangeText={password => this.setState({ user: { ...this.state.user, password: password } })}
-                            />
-                        </View>
-                        <Text style={styles.textLargeBold} >Persönliche Daten</Text>
-                        <View style={styles.viewInput}>
-                            <TextInput
-                                style={styles.inputText}
-                                placeholderTextColor={primaryColor}
-                                placeholder={"Vorname"}
-                                underlineColorAndroid="transparent"
-                                keyboardType="default"
-                                autoCapitalize="none"
-                                autoCorrect={false}
-                                returnKeyType="next"
-                                editable={!this.state.apiCallWorking}
-                                onChangeText={surname => this.setState({ user: { ...this.state.user, surname: surname } })}
-                            />
-                        </View>
-                        <View style={styles.viewInput}>
-                            <TextInput
-                                style={styles.inputText}
-                                placeholderTextColor={primaryColor}
-                                placeholder={"Nachname"}
-                                underlineColorAndroid="transparent"
-                                keyboardType="default"
-                                autoCapitalize="none"
-                                returnKeyType="next"
-                                editable={!this.state.apiCallWorking}
-                                onChangeText={name => this.setState({ user: { ...this.state.user, name: name } })}
-                            />
-                        </View>
-                        <View style={styles.viewInput}>
-                            <TextInput
-                                style={styles.inputText}
-                                placeholderTextColor={primaryColor}
-                                placeholder={"Straße"}
-                                underlineColorAndroid="transparent"
-                                keyboardType="default"
-                                autoCapitalize="none"
-                                autoCorrect={false}
-                                returnKeyType="next"
-                                editable={!this.state.apiCallWorking}
-                                onChangeText={street => this.setState({ user: { ...this.state.user, street: street } })}
-                            />
-                        </View>
-                        <View style={[styles.viewRow, { flex: 0 }]}>
-                            <View style={[styles.viewInput, { width: 80, alignSelf: 'auto' }]}>
+                        <Text style={styles.textLargeBold} >Login Daten</Text>
+                        <View style={styles.borderWrapper}>
+                            <View style={styles.viewInput}>
                                 <TextInput
                                     style={styles.inputText}
-                                    placeholderTextColor={primaryColor}
-                                    placeholder={"PLZ"}
+                                    placeholderTextColor="#9b9b9b"
+                                    placeholder={"EMail"}
+                                    defaultValue={this.state.user.email}
                                     underlineColorAndroid="transparent"
-                                    keyboardType="numeric"
+                                    keyboardType="email-address"
                                     autoCapitalize="none"
+                                    autoCorrect={false}
                                     returnKeyType="next"
                                     editable={!this.state.apiCallWorking}
-                                    onChangeText={postCode => this.setState({ user: { ...this.state.user, postCode: postCode } })}
+                                    onChangeText={email => this.setState({ user: { ...this.state.user, email: email } })}
                                 />
                             </View>
-                            <View style={[styles.viewInput, { marginLeft: 4, flex: 1 }]}>
+                            <View style={styles.viewInput}>
                                 <TextInput
                                     style={styles.inputText}
-                                    placeholderTextColor={primaryColor}
-                                    placeholder={"Ort"}
+                                    placeholderTextColor="#9b9b9b"
+                                    placeholder={"Passwort"}
+                                    underlineColorAndroid="transparent"
+                                    keyboardType="default"
+                                    autoCapitalize="none"
+                                    autoCorrect={false}
+                                    returnKeyType="next"
+                                    secureTextEntry
+                                    editable={!this.state.apiCallWorking}
+                                    onChangeText={password => this.setState({ user: { ...this.state.user, password: password } })}
+                                />
+                            </View>
+                        </View>
+                        <Text style={styles.textLargeBold} >Persönliche Daten</Text>
+                        <View style={styles.borderWrapper}>
+                            <View style={styles.viewInput}>
+                                <TextInput
+                                    style={styles.inputText}
+                                    placeholderTextColor="#9b9b9b"
+                                    placeholder={"Vor -und Nachname *"}
                                     underlineColorAndroid="transparent"
                                     keyboardType="default"
                                     autoCapitalize="none"
                                     autoCorrect={false}
                                     returnKeyType="next"
                                     editable={!this.state.apiCallWorking}
-                                    onChangeText={place => this.setState({ user: { ...this.state.user, place: place } })}
+                                    onChangeText={surname => this.setState({ user: { ...this.state.user, surname: surname } })}
                                 />
                             </View>
                         </View>
-                        <View style={[styles.viewRow, { alignSelf: 'stretch', alignItems: 'center', justifyContent: 'flex-start', }]}>
+                        <View style={styles.borderWrapper}>
+                            <View style={styles.viewInput}>
+                                <TextInput
+                                    style={styles.inputText}
+                                    placeholderTextColor="#9b9b9b"
+                                    placeholder={"Straße und Hausnummer *"}
+                                    underlineColorAndroid="transparent"
+                                    keyboardType="default"
+                                    autoCapitalize="none"
+                                    returnKeyType="next"
+                                    editable={!this.state.apiCallWorking}
+                                    onChangeText={name => this.setState({ user: { ...this.state.user, name: name } })}
+                                />
+                            </View>
+                            <View style={styles.viewInput}>
+                                <TextInput
+                                    style={styles.inputText}
+                                    placeholderTextColor="#9b9b9b"
+                                    placeholder={"Adresszusatz"}
+                                    underlineColorAndroid="transparent"
+                                    keyboardType="default"
+                                    autoCapitalize="none"
+                                    autoCorrect={false}
+                                    returnKeyType="next"
+                                    editable={!this.state.apiCallWorking}
+                                    onChangeText={street => this.setState({ user: { ...this.state.user, street: street } })}
+                                />
+                            </View>
+                            <View style={[styles.viewRow, { flex: 0 }]}>
+                                <View style={[styles.viewInput, { width: 100, alignSelf: 'auto' }]}>
+                                    <TextInput
+                                        style={styles.inputText}
+                                        placeholderTextColor="#9b9b9b"
+                                        placeholder={"Postleitzahl *"}
+                                        underlineColorAndroid="transparent"
+                                        keyboardType="numeric"
+                                        autoCapitalize="none"
+                                        returnKeyType="next"
+                                        editable={!this.state.apiCallWorking}
+                                        onChangeText={postCode => this.setState({ user: { ...this.state.user, postCode: postCode } })}
+                                    />
+                                </View>
+                                <View style={[styles.viewInput, { marginLeft: 4, flex: 1 }]}>
+                                    <TextInput
+                                        style={styles.inputText}
+                                        placeholderTextColor="#9b9b9b"
+                                        placeholder={"Stadt *"}
+                                        underlineColorAndroid="transparent"
+                                        keyboardType="default"
+                                        autoCapitalize="none"
+                                        autoCorrect={false}
+                                        returnKeyType="next"
+                                        editable={!this.state.apiCallWorking}
+                                        onChangeText={place => this.setState({ user: { ...this.state.user, place: place } })}
+                                    />
+                                </View>
+                            </View>
+                        </View>
+                        <View style={styles.borderWrapper}>
+                            <View style={styles.viewInput}>
+                                <TextInput
+                                    style={styles.inputText}
+                                    placeholderTextColor="#9b9b9b"
+                                    placeholder={"Vor -und Nachname *"}
+                                    underlineColorAndroid="transparent"
+                                    keyboardType="default"
+                                    autoCapitalize="none"
+                                    autoCorrect={false}
+                                    returnKeyType="next"
+                                    editable={!this.state.apiCallWorking}
+                                    onChangeText={surname => this.setState({ user: { ...this.state.user, surname: surname } })}
+                                />
+                            </View>
                             <CheckBox
-                                label=""
+                                label="lch bin über 18 Jahre alt *"
                                 size={20}
                                 checked={this.state.user.isSmall}
                                 onPress={this.handleSelectRadioButtonSmall}
                                 uncheckedIconName="radio-button-unchecked"
                                 checkedIconName="radio-button-checked"
                             />
-                            <Text style={styles.textStandard} >Ich bin kleiner als 1,70m</Text>
                         </View>
-                        <View style={[styles.viewRow, { alignSelf: 'stretch', alignItems: 'center', justifyContent: 'flex-start', }]}>
-                            <CheckBox
-                                label=""
-                                size={20}
-                                checked={!this.state.user.isSmall}
-                                onPress={this.handleSelectRadioButtonLarge}
-                                uncheckedIconName="radio-button-unchecked"
-                                checkedIconName="radio-button-checked"
-                            />
-                            <Text style={styles.textStandard} >Ich bin mindestens 1,70m</Text>
+                        <Text style={styles.textLargeBold} >Körpergröße</Text>
+                        <View style={styles.borderWrapper}>
+                            <View style={styles.viewInput}>
+                                <TextInput
+                                    style={styles.inputText}
+                                    placeholderTextColor="#9b9b9b"
+                                    placeholder={"Vor -und Nachname *"}
+                                    underlineColorAndroid="transparent"
+                                    keyboardType="default"
+                                    autoCapitalize="none"
+                                    autoCorrect={false}
+                                    returnKeyType="next"
+                                    editable={!this.state.apiCallWorking}
+                                    onChangeText={surname => this.setState({ user: { ...this.state.user, surname: surname } })}
+                                />
+                            </View>
+                            <Text style={styles.textStandard} >Diese Angabe benötigen wir, um ein Board in einem für dich gut erreichbarem Fach zu reservieren. Falls dies nicht möglich sein sollte, bitten wir dies zu entschuldigen.</Text>
                         </View>
-                        <Text style={styles.textStandard} >Diese Angabe benötigen wir, um ein Board in einem für dich gut erreichbarem Fach zu reservieren.</Text>
-                        <View style={[styles.viewRow, { alignSelf: 'stretch', alignItems: 'center', justifyContent: 'flex-start', }]}>
+                        <View style={styles.borderWrapper}>
+                            <View style={[styles.viewRow, { alignSelf: 'stretch', alignItems: 'center', justifyContent: 'flex-start', }]}>
+                                <CheckBox
+                                    label=""
+                                    size={20}
+                                    checked={this.state.user.isSmall}
+                                    onPress={this.handleSelectRadioButtonSmall}
+                                    uncheckedIconName="radio-button-unchecked"
+                                    checkedIconName="radio-button-checked"
+                                />
+                                <Text style={styles.textStandard} >Ich habe die AGB gelesen</Text>
+                            </View>
+                            <View style={[styles.viewRow, { alignSelf: 'stretch', alignItems: 'center', justifyContent: 'flex-start', }]}>
+                                <CheckBox
+                                    label=""
+                                    size={20}
+                                    checked={!this.state.user.isSmall}
+                                    onPress={this.handleSelectRadioButtonLarge}
+                                    uncheckedIconName="radio-button-unchecked"
+                                    checkedIconName="radio-button-checked"
+                                />
+                                <Text style={styles.textStandard} >Ich akzeptiere die Datenschutzerklärung</Text>
+                            </View>
+                        </View>
+                        {/* <View style={[styles.viewRow, { alignSelf: 'stretch', alignItems: 'center', justifyContent: 'flex-start', }]}>
                             <CheckBox
                                 label=""
                                 size={30}
@@ -224,27 +275,30 @@ export default class RegisterAccount extends Component {
                                 onPress={this.handlePressCheckedBox}
                             />
                             <Text style={styles.textStandardBold} >Ich habe die AGB gelesen</Text>
-                        </View>
+                        </View> */}
                     </View>
                     <View style={[styles.viewFooter, { marginTop: 8 }]}>
-                        {
+                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationPayment({ reservation: this.state.reservation, user: this.state.user })}>
+                            <Text style={styles.textButtonPrimary} >ACCOUNT ERSTELLEN</Text>
+                        </TouchableOpacity>
+                        {/* {
                             (this.state.isTermsChecked === true) ? (
                                 <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationPayment({ reservation: this.state.reservation, user: this.state.user })}>
-                                    <Text style={styles.textButtonPrimary} >WEITER</Text>
+                                    <Text style={styles.textButtonPrimary} >ACCOUNT ERSTELLEN</Text>
                                 </TouchableOpacity>
                             ) : (this.state.debug === true) ? (
                                 <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => console.log(this.state)}>
-                                    <Text style={styles.textButtonPrimary} >WEITER</Text>
+                                    <Text style={styles.textButtonPrimary} >ACCOUNT ERSTELLEN</Text>
                                 </TouchableOpacity>
                             ) : (
                                         <View style={styles.viewButtonInactive}>
-                                            <Text style={styles.textButtonInactive} >WEITER</Text>
+                                            <Text style={styles.textButtonInactive} >ACCOUNT ERSTELLEN</Text>
                                         </View>
                                     )
-                        }
+                        } */}
                     </View>
                 </View>
-            </View>
+            </ScrollView>
         )
     }
 }

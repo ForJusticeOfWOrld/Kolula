@@ -120,12 +120,21 @@ export default {
         backgroundColor: primaryInvertedColor,
         alignSelf: 'stretch',
     },
+    borderWrapper: {
+        borderColor: '#9b9b9b',
+        borderWidth: 1,
+        borderRadius: 5,
+        margin: 5,
+        alignSelf: 'stretch',
+        padding: 10,
+        
+    },
     viewInput: {
-        marginTop: 6,
+        marginTop: 10,
         backgroundColor: whiteOpacityColor4,
         borderRadius: standardBorderRadius,
-        borderWidth: standardBorderWidth,
-        borderColor: primaryColor,
+        borderBottomWidth: standardBorderWidth,
+        borderColor: '#9b9b9b',
         alignSelf: 'stretch',
     },
     textInput: {
@@ -159,7 +168,7 @@ export default {
     },
     textLargeBold: {
         fontSize: largeFontSize,
-        color: primaryColor,
+        color: '#000',
         fontWeight: 'bold',
     },
     textStandardBold: {

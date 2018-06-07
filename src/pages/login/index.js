@@ -56,7 +56,7 @@ export default class Login extends Component {
                             placeholderTextColor="#9b9b9b"
                             placeholder={"Password"}
                             underlineColorAndroid="transparent"
-                            keyboardType="visible-password"
+                            //keyboardType="visible-password"
                             autoCapitalize="none"
                             autoCorrect={false}
                             returnKeyType="go"

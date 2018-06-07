@@ -38,10 +38,15 @@ export default {
         width: 150,
         height: 150,
         margin: 5,
+        borderColor: '#9b9b9b',
+        borderWidth: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     paymentIcon: {
         width: 100,
         height: 100,
+        resizeMode: 'contain',
     },
     viewColumn: {
         flex: 1,
@@ -50,6 +55,8 @@ export default {
     viewRow: {
         flex: 1,
         flexDirection: 'row',
+        justifyContent: "space-between",
+        alignItems: 'center'
     },
     viewHeader: {
         //(flex: 1,
@@ -89,8 +96,13 @@ export default {
         borderColor: primaryColor,
         marginVertical: standardMargin,
     },
+    borderWrapper: {
+        borderRadius: standardBorderRadius,
+        borderWidth: standardBorderWidth,
+        borderColor: primaryColor,
+    },
     viewSpaceBetween: {
-        flex: 1,
+        flex: 2,
     },
     viewIcon: {
         alignItems: 'center',
@@ -174,8 +186,12 @@ export default {
     },
     textStandardBold: {
         fontSize: standardFontSize,
-        color: primaryColor,
+        color: '#000',
         fontWeight: 'bold',
+    },
+    textTimeWrapper: {
+        fontSize: standardFontSize,
+        color: '#9b9b9b',
     },
     textStandard: {
         fontSize: standardFontSize,

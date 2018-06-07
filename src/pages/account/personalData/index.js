@@ -37,33 +37,41 @@ export default class AccountPersonalData extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.viewSpaceBetween}>
-                    <CardView
-                        style={{ width: 350, height: 100 }}
-                        cardElevation={3}
-                        cardMaxElevation={3}
-                        cornerRadius={5}>
-                        <Text>
-                            Vor- und Nachname
+                    <View style={styles.cardWrapper}>
+                        <CardView
+                            style={{ width: 350, height: 100 }}
+                            cardElevation={3}
+                            cardMaxElevation={3}
+                            cornerRadius={5}>
+                            <Text>
+                                Vor- und Nachname
                         </Text>
-                    </CardView>
-                    <CardView
-                        style={{ width: 350, height: 300 }}
-                        cardElevation={3}
-                        cardMaxElevation={3}
-                        cornerRadius={5}>
-                        <Text>
-                            Straß und Hausnummer
+                        </CardView>
+                    </View>
+                    <View style={styles.cardWrapper}>
+
+                        <CardView
+                            style={{ width: 350, height: 300 }}
+                            cardElevation={3}
+                            cardMaxElevation={3}
+                            cornerRadius={5}>
+                            <Text>
+                                Straß und Hausnummer
                         </Text>
-                    </CardView>
-                    <CardView
-                        style={{ width: 350, height: 100 }}
-                        cardElevation={3}
-                        cardMaxElevation={3}
-                        cornerRadius={5}>
-                        <Text>
-                            Handynummer
+                        </CardView>
+                    </View>
+                    <View style={styles.cardWrapper}>
+
+                        <CardView
+                            style={{ width: 350, height: 100 }}
+                            cardElevation={3}
+                            cardMaxElevation={3}
+                            cornerRadius={5}>
+                            <Text>
+                                Handynummer
                         </Text>
-                    </CardView>
+                        </CardView>
+                    </View>
                     <View style={[styles.viewFooter, { marginTop: 8 }]}>
                         <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationBranch({ type: ActionConst.RESET })}>
                             <Text style={styles.textButtonPrimary} >FERTIG</Text>
