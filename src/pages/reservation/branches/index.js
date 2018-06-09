@@ -144,6 +144,7 @@ export default class ReservationBranches extends Component {
     }
 
     componentWillMount() {
+        this.apiGet();
         console.log("ReservationBranches props:")
         console.log(this.props);
         this.setState({
@@ -169,6 +170,73 @@ export default class ReservationBranches extends Component {
             </TouchableOpacity>
         );
     }
+
+    apiPost () {
+        fetch("https://dev.inbooma.net/api/locations", {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdWg3ZnQ2Zi00ZjU4LTQ5NWYtYTc3YS1iNGE0YjI2aDEyZDQiLCJleHAiOjE1NDY2MDUwMjR9.NHAxDEbMQnmZ3DNSOEagcMiKxXg9bZoUuHkz8q5ZAcg'
+            },
+            method: "POST",
+            body: JSON.stringify(
+                {
+                    useremail: this.state.user.toLowerCase(),
+                    // useremail: 'mob.web@yahoo.com',
+                    password: this.state.pass,
+                    // password: 'System1234',
+                }
+            )
+        })
+            .then((response) => response.text())
+            .then((responseData) => {
+                this._checkJson(responseData)
+
+            })
+            .done();
+        // this.props.navigation.navigate('HomePage');
+
+    }
+    _checkJson (jsonData) {//alert(JSON.stringify(jsonData))
+
+        var data = JSON.parse(jsonData);
+
+        if (data.status == 200) {
+            this.props.setUser(data.userinfo);
+            //alert(data.userinfo._id)
+            this.props.navigation.navigate('HomePage');
+        }else{
+            alert(data.Message);
+        }
+    };
+
+    apiGet () {
+        fetch("https://dev.inbooma.net/api/locations", {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdWg3ZnQ2Zi00ZjU4LTQ5NWYtYTc3YS1iNGE0YjI2aDEyZDQiLCJleHAiOjE1NDY2MDUwMjR9.NHAxDEbMQnmZ3DNSOEagcMiKxXg9bZoUuHkz8q5ZAcg'
+            },
+            method: "GET",
+        })
+            .then((response) => response.text())
+            .then((responseData) => {
+                this._checkJsonForgetAquariums(responseData)
+
+            })
+            .done();
+    }
+    _checkJsonForgetAquariums (jsonData) { alert(JSON.stringify(jsonData))
+
+        var data = JSON.parse(jsonData);
+
+        if (data.success == 'true') { //alert(JSON.stringify(data));
+            // this.props.navigation.navigate('HomePage');
+            // this.setState({data: data.aquariums});
+        }else{
+            //alert(data.Message);
+        }
+    };
 
     render() {
         return (
