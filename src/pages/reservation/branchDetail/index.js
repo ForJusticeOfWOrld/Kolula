@@ -12,6 +12,9 @@ import MapView from 'react-native-maps';
 import styles from './styles';
 import {
     primaryColor,
+    containerPaddingHorizontal,
+    containerPaddingVertical,
+    primaryBackgroundColor,
 } from './../../../styles/common'
 import { Actions } from "react-native-router-flux";
 import { Metrics, Styles, Images, Icons, Colors, Fonts, Global } from '@theme/';
@@ -20,6 +23,7 @@ const ASPECT_RATIO = 4 / 2;
 const LATITUDE_DELTA = 0.1;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
+const mapMarkerGeneric = require('../../../images/icons/icon_map_marker_generic.png');
 const mapDummy = require('../../../images/dummys/mapdummy.png');
 const bannerDummy = require('../../../images/dummys/dummyBanner.png');
 
@@ -80,6 +84,7 @@ export default class ReservationBranchDetail extends Component {
     }
 
     render() {
+        const { reservation } = this.props;
         return (
             <View style={styles.container}>
                 <View style={styles.viewSpaceBetween}>
@@ -87,8 +92,16 @@ export default class ReservationBranchDetail extends Component {
                         <Image source={bannerDummy} style={{ flex: 1, height: 100, minWidth: 200 }} resizeMode={'cover'} />
                     </View>
                     <ScrollView style={styles.viewBody}>
+                        <View style={[styles.viewColumn, styles.viewBorderMap, { backgroundColor: "#FFF", marginHorizontal: containerPaddingHorizontal, marginBottom: containerPaddingVertical }]}>
+                            <Text style={styles.textStandard} >HightLight</Text>
+                            <Text style={styles.textStandard} >HightLight</Text>
+                            <Text style={styles.textStandard} >HightLight</Text>
+                            <Text style={styles.textStandard} >HightLight</Text>
+                            <Text style={styles.textStandard} >HightLight</Text>
+                            <Text style={styles.textStandard} >HightLight</Text>
+                        </View>
 
-                        <View style={[styles.viewRow, styles.marginSpacer, { justifyContent: "space-between" }]}>
+                        {/* <View style={[styles.viewRow, styles.marginSpacer, { justifyContent: "space-between" }]}>
                             <View style={styles.viewColumn}>
                                 <Text style={styles.textStandardBold} >{this.state.reservation.branch.location_name}</Text>
                                 <Text style={styles.textStandard} >{this.state.reservation.branch.location_street}</Text>
@@ -129,30 +142,45 @@ export default class ReservationBranchDetail extends Component {
                                 style={styles.listView}
                                 enableEmptySections={true}
                             />
-                        </View>
-                        <View style={[styles.viewMap, styles.marginSpacer]}>
-                            <View style={styles.mapView}>
-                                <MapView
-                                    style={styles.mapView}
-                                    provider={MapView.PROVIDER_GOOGLE}
-                                    initialRegion={{
-                                        latitude: 37.78825,
-                                        longitude: -122.4324,
-                                        latitudeDelta: 0.0922,
-                                        longitudeDelta: 0.0421,
-                                    }}
-                                />
+                        </View> */}
+                        <View>
+                            <View style={[styles.viewColumn, styles.viewBorderMap, { backgroundColor: "#FFF", marginHorizontal: containerPaddingHorizontal, marginBottom: containerPaddingVertical }]}>
+                                <View style={styles.mapView}>
+                                    <MapView
+                                        style={styles.mapView}
+                                        provider={MapView.PROVIDER_GOOGLE}
+                                        region={{
+                                            latitude: reservation.latitude,
+                                            longitude: reservation.longitude,
+                                            latitudeDelta: 0.0922,
+                                            longitudeDelta: 0.0421,
+                                        }}
+                                    />
+                                </View>
+                                <View style={[styles.viewRow, { justifyContent: "center", alignContent: "center", margin: 12 }]}>
+                                    <View style={{ height: 36, width: 30 }}>
+                                        <Image source={mapMarkerGeneric} style={{ flex: 1 }} resizeMode='contain' />
+                                    </View>
+                                    <View style={[styles.viewColumn, { marginLeft: 40, flexDirection: 'row', justifyContent: 'space-between' }]}>
+                                        <View>
+                                            <Text style={styles.textStandardBold} >{reservation.name}</Text>
+                                            <Text style={styles.textStandard} >{reservation.street}</Text>
+                                        </View>
+                                        <View style={{ marginLeft: 5, justifyContent: 'center' }}>
+                                            <Text style={styles.textStandardBold} >{reservation.geofence / 1000} km</Text>
+                                        </View>
+                                    </View>
+                                </View>
                             </View>
                         </View>
-                        <Text style={styles.textStandardBold} >{this.state.reservation.branch.location_name}</Text>
+                        {/* <Text style={styles.textStandardBold} >{this.state.reservation.branch.location_name}</Text>
                         <Text style={styles.textStandard} >{this.state.reservation.branch.location_street}</Text>
                         <View style={styles.viewRow}>
                             <View style={styles.viewIconSmall}>
                                 <Icon name="info-circle" size={16} color={primaryColor} />
                             </View>
                             <Text style={styles.textStandard} >{this.state.reservation.branch.location_transport}</Text>
-                        </View>
-
+                        </View> */}
                     </ScrollView>
                     <View style={[styles.viewFooter, { marginTop: 8 }]}>
                         <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationCalendar({ reservation: this.state.reservation })}>

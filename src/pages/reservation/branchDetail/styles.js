@@ -75,6 +75,13 @@ export default {
         borderColor: primaryColor,
         marginVertical: standardMargin,
     },
+    viewBorderMap: {
+        borderRadius: 16,
+        borderWidth: 0.5,
+        borderColor: "#333",
+        marginVertical: standardMargin,
+        overflow: 'hidden',
+    },
     viewSpaceBetween: {
         flex: 1,
         justifyContent: "space-between",

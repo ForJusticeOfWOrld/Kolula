@@ -4,7 +4,7 @@ import {
     View,
     Image,
     ScrollView,
-    ListView,
+    FlatList,
     TouchableOpacity,
     StatusBar,
 } from 'react-native';
@@ -136,9 +136,7 @@ export default class ReservationBranches extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            dataSource: new ListView.DataSource({
-                rowHasChanged: (row1, row2) => row1 !== row2,
-            }),
+            dataSource: [],
             reservation: false,
         };
     }
@@ -147,23 +145,19 @@ export default class ReservationBranches extends Component {
         this.apiGet();
         console.log("ReservationBranches props:")
         console.log(this.props);
-        this.setState({
-            dataSource: this.state.dataSource.cloneWithRows(dummyBranches.branches),
-            reservation: { branch: dummyNearBranch },
-        });
     }
 
     renderBranches(branches) {
         return (
-            <TouchableOpacity onPress={() => Actions.reservationBranchDetail({ reservation: { branch: branches } })}>
+            <TouchableOpacity onPress={() => Actions.reservationBranchDetail({ reservation: branches })}>
                 <View style={[styles.viewBorder, { marginTop: 16, backgroundColor: "#FFF" }]}>
                     <View style={[styles.viewRow, { margin: 8 }]}>
                         <View style={[styles.viewColumn, styles.viewMargin]}>
-                            <Text style={styles.textStandardBold}>{branches.location_name}</Text>
+                            <Text style={styles.textStandardBold}>{branches.name}</Text>
                             <Text style={styles.textStandard}>{branches.location_street}</Text>
                         </View>
                         <View style={{ justifyContent: "center" }}>
-                            <Text style={[styles.textStandard, { fontSize: 18, color: "#000" }]}>{branches.distance} km</Text>
+                            <Text style={[styles.textStandard, { fontSize: 18, color: "#000" }]}>{branches.geofence / 1000} km</Text>
                         </View>
                     </View>
                 </View>
@@ -171,7 +165,7 @@ export default class ReservationBranches extends Component {
         );
     }
 
-    apiPost () {
+    apiPost() {
         fetch("https://dev.inbooma.net/api/locations", {
             headers: {
                 'Accept': 'application/json',
@@ -197,7 +191,7 @@ export default class ReservationBranches extends Component {
         // this.props.navigation.navigate('HomePage');
 
     }
-    _checkJson (jsonData) {//alert(JSON.stringify(jsonData))
+    _checkJson(jsonData) {//alert(JSON.stringify(jsonData))
 
         var data = JSON.parse(jsonData);
 
@@ -205,12 +199,12 @@ export default class ReservationBranches extends Component {
             this.props.setUser(data.userinfo);
             //alert(data.userinfo._id)
             this.props.navigation.navigate('HomePage');
-        }else{
+        } else {
             alert(data.Message);
         }
     };
 
-    apiGet () {
+    apiGet() {
         fetch("https://dev.inbooma.net/api/locations", {
             headers: {
                 'Accept': 'application/json',
@@ -226,14 +220,16 @@ export default class ReservationBranches extends Component {
             })
             .done();
     }
-    _checkJsonForgetAquariums (jsonData) { alert(JSON.stringify(jsonData))
+    _checkJsonForgetAquariums(jsonData) {
 
         var data = JSON.parse(jsonData);
 
-        if (data.success == 'true') { //alert(JSON.stringify(data));
+        if (data.success) {
             // this.props.navigation.navigate('HomePage');
-            // this.setState({data: data.aquariums});
-        }else{
+            this.setState({
+                dataSource: data.data,
+            });
+        } else {
             //alert(data.Message);
         }
     };
@@ -250,16 +246,16 @@ export default class ReservationBranches extends Component {
                         <View style={styles.viewRow}>
                             <Text style={[styles.textLargeBold, { textAlign: "center", flex: 1, color: "#FFF", marginTop: 12, fontSize: 26 }]} >Nächste Station</Text>
                         </View>
-                        <View onPress={() => Actions.reservationBranchDetail({ reservation: { branch: dummyNearBranch } })}>
+                        <View onPress={() => Actions.reservationBranchDetail({ reservation: { data: dummyNearBranch } })}>
                             <View style={[styles.viewColumn, styles.viewBorderMap, { backgroundColor: "#FFF", marginHorizontal: containerPaddingHorizontal, marginBottom: containerPaddingVertical }]}>
                                 {/* <Image source={mapDummy} style={{ flex: 1, height: undefined, width: undefined, minHeight: 150 }} resizeMode={'cover'} /> */}
                                 <View style={styles.mapView}>
                                     <MapView
                                         style={styles.mapView}
                                         provider={MapView.PROVIDER_GOOGLE}
-                                        initialRegion={{
-                                            latitude: 37.78825,
-                                            longitude: -122.4324,
+                                        region={{
+                                            latitude: this.state.dataSource[0] ? this.state.dataSource[0].latitude : 0,
+                                            longitude: this.state.dataSource[0] ? this.state.dataSource[0].longitude : 0,
                                             latitudeDelta: 0.0922,
                                             longitudeDelta: 0.0421,
                                         }}
@@ -269,13 +265,13 @@ export default class ReservationBranches extends Component {
                                     <View style={{ height: 36, width: 30 }}>
                                         <Image source={mapMarkerGeneric} style={{ flex: 1 }} resizeMode='contain' />
                                     </View>
-                                    <View style={[styles.viewColumn, { marginLeft: 40, flexDirection: 'row' }]}>
+                                    <View style={[styles.viewColumn, { marginLeft: 40, flexDirection: 'row', justifyContent: 'space-between' }]}>
                                         <View>
-                                            <Text style={styles.textStandardBold} >{dummyNearBranch.location_name}</Text>
-                                            <Text style={styles.textStandard} >Jungfernsee, 14469 Potsdam</Text>
+                                            <Text style={styles.textStandardBold} >{this.state.dataSource[0] ? this.state.dataSource[0].name : ''}</Text>
+                                            <Text style={styles.textStandard} >{this.state.dataSource[0] ? this.state.dataSource[0].location_street : ''}</Text>
                                         </View>
                                         <View style={{ marginLeft: 5, justifyContent: 'center' }}>
-                                            <Text style={styles.textStandardBold} >0,2 km</Text>
+                                            <Text style={styles.textStandardBold} >{this.state.dataSource[0] ? this.state.dataSource[0].geofence/1000 + ' km' : ''}</Text>
                                         </View>
                                     </View>
                                 </View>
@@ -286,11 +282,11 @@ export default class ReservationBranches extends Component {
                                 <Text style={styles.textLarge} >Alle Stationen</Text>
                             </View>
                             <View style={styles.viewColumn}>
-                                <ListView
-                                    dataSource={this.state.dataSource}
-                                    renderRow={this.renderBranches.bind(this)}
+                                <FlatList
+                                    keyExtractor={(item, index) => index}
+                                    data={this.state.dataSource}
+                                    renderItem={({ item, index }) => this.renderBranches(item)}
                                     style={styles.listView}
-                                    enableEmptySections={true}
                                 />
                             </View>
                             {/* <View style={[styles.viewButtonInactive, { marginTop: 16, padding: 8 }]}>
