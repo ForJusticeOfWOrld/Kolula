@@ -183,8 +183,8 @@ export default class ReservationBranchDetail extends Component {
                         </View> */}
                     </ScrollView>
                     <View style={[styles.viewFooter, { marginTop: 8 }]}>
-                        {/* <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationCalendar({ reservation: this.state.reservation })}> */}
-                        <TouchableOpacity style={styles.viewButtonPrimary} >
+                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationCalendar({ reservation: this.state.reservation })}>
+                        {/* <TouchableOpacity style={styles.viewButtonPrimary} > */}
                             <Text style={styles.textButtonPrimary} >SUP MIETEN</Text>
                         </TouchableOpacity>
                     </View>
