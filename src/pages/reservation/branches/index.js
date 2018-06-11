@@ -209,7 +209,7 @@ export default class ReservationBranches extends Component {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdWg3ZnQ2Zi00ZjU4LTQ5NWYtYTc3YS1iNGE0YjI2aDEyZDQiLCJleHAiOjE1NDY2MDUwMjR9.NHAxDEbMQnmZ3DNSOEagcMiKxXg9bZoUuHkz8q5ZAcg'
+                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxZWQ3NGRiZC0xNTFhLTQzMjctYWU5NC00ZDE3YmM3ZTY5NDIiLCJleHAiOjE1NDY4NDg3NDR9.dYllBo2sCVQWC0RZGulG8X-m4zzEHF8ZxNEpTGlkjkw'
             },
             method: "GET",
         })
