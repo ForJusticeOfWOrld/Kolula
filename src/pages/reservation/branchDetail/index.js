@@ -8,7 +8,7 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 import styles from './styles';
 import {
     primaryColor,
@@ -24,6 +24,7 @@ const LATITUDE_DELTA = 0.1;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 const mapMarkerGeneric = require('../../../images/icons/icon_map_marker_generic.png');
+const mapMarker = require('../../../images/icons/icon_map_marker_kolula.png');
 const mapDummy = require('../../../images/dummys/mapdummy.png');
 const bannerDummy = require('../../../images/dummys/dummyBanner.png');
 
@@ -93,12 +94,8 @@ export default class ReservationBranchDetail extends Component {
                     </View>
                     <ScrollView style={styles.viewBody}>
                         <View style={[styles.viewColumn, styles.viewBorderMap, { backgroundColor: "#FFF", marginHorizontal: containerPaddingHorizontal, marginBottom: containerPaddingVertical }]}>
-                            <Text style={styles.textStandard} >HightLight</Text>
-                            <Text style={styles.textStandard} >HightLight</Text>
-                            <Text style={styles.textStandard} >HightLight</Text>
-                            <Text style={styles.textStandard} >HightLight</Text>
-                            <Text style={styles.textStandard} >HightLight</Text>
-                            <Text style={styles.textStandard} >HightLight</Text>
+                            <Text style={[styles.textStandardBold, { marginLeft: 10 }]} >Highlights</Text>
+                            <Text style={[styles.textStandard, { marginLeft: 15 }]} >&#183; {reservation.description}</Text>
                         </View>
 
                         {/* <View style={[styles.viewRow, styles.marginSpacer, { justifyContent: "space-between" }]}>
@@ -155,7 +152,12 @@ export default class ReservationBranchDetail extends Component {
                                             latitudeDelta: 0.0922,
                                             longitudeDelta: 0.0421,
                                         }}
-                                    />
+                                    >
+                                        <Marker
+                                            coordinate={{ latitude: reservation.latitude, longitude: reservation.longitude }}
+                                            image={mapMarker}
+                                        />
+                                    </MapView>
                                 </View>
                                 <View style={[styles.viewRow, { justifyContent: "center", alignContent: "center", margin: 12 }]}>
                                     <View style={{ height: 36, width: 30 }}>
@@ -166,9 +168,9 @@ export default class ReservationBranchDetail extends Component {
                                             <Text style={styles.textStandardBold} >{reservation.name}</Text>
                                             <Text style={styles.textStandard} >{reservation.street}</Text>
                                         </View>
-                                        <View style={{ marginLeft: 5, justifyContent: 'center' }}>
+                                        {/* <View style={{ marginLeft: 5, justifyContent: 'center' }}>
                                             <Text style={styles.textStandardBold} >{reservation.geofence / 1000} km</Text>
-                                        </View>
+                                        </View> */}
                                     </View>
                                 </View>
                             </View>
@@ -183,8 +185,8 @@ export default class ReservationBranchDetail extends Component {
                         </View> */}
                     </ScrollView>
                     <View style={[styles.viewFooter, { marginTop: 8 }]}>
-                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationCalendar({ reservation: this.state.reservation })}>
-                        {/* <TouchableOpacity style={styles.viewButtonPrimary} > */}
+                        {/* <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationCalendar({ reservation: this.state.reservation })}> */}
+                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationCalendar({})}>
                             <Text style={styles.textButtonPrimary} >SUP MIETEN</Text>
                         </TouchableOpacity>
                     </View>

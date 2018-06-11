@@ -15,12 +15,12 @@ import DateTimePicker from 'react-native-modal-datetime-picker';
 import { ActionSheetCustom as ActionSheet } from 'react-native-actionsheet'
 
 const options = [
-    'Cancel', 
-    'Apple', 
-    <Text style={{color: 'yellow'}}>Banana</Text>,
-    'Watermelon', 
-    <Text style={{color: 'red'}}>Durian</Text>
-  ]
+    'Cancel',
+    'Apple',
+    <Text style={{ color: 'yellow' }}>Banana</Text>,
+    'Watermelon',
+    <Text style={{ color: 'red' }}>Durian</Text>
+]
 
 const dummyBranch = {
     "id": 2,
@@ -69,7 +69,7 @@ export default class ReservationCalendar extends Component {
     }
     showActionSheet = () => {
         this.ActionSheet.show()
-      }
+    }
     _showDatePicker = () => this.setState({ isDatePickerVisible: true });
     _showTimePicker = () => this.setState({ isTimePickerVisible: true });
 
@@ -95,17 +95,17 @@ export default class ReservationCalendar extends Component {
             actualDate: { "date": date, "month": month, "year": year },
             actualDateString: (date + '-' + month + '-' + year),
         });
-        if (this.props.reservation.branch) {
-            this.setState({
-                reservation: this.props.reservation,
-                dataSource: this.state.dataSource.cloneWithRows(this.props.reservation.branch.tariffs),
-            });
-        } else {
-            this.setState({
-                reservation: { branch: dummyBranch },
-                dataSource: this.state.dataSource.cloneWithRows(dummyBranch.tariffs),
-            });
-        }
+        // if (this.props.reservation.branch) {
+        //     this.setState({
+        //         reservation: this.props.reservation,
+        //         dataSource: this.state.dataSource.cloneWithRows(this.props.reservation.branch.tariffs),
+        //     });
+        // } else {
+        //     this.setState({
+        //         reservation: { branch: dummyBranch },
+        //         dataSource: this.state.dataSource.cloneWithRows(dummyBranch.tariffs),
+        //     });
+        // }
     }
 
     renderTariffs(tariffs) {
@@ -178,14 +178,14 @@ export default class ReservationCalendar extends Component {
                             <Text style={[styles.textSeparator, { alignSelf: 'stretch', }]} >Tarif wählen</Text>
                         </View>
                         <Text onPress={this.showActionSheet}>Open ActionSheet</Text>
-                        <ActionSheet
-                          ref={o => this.ActionSheet = o}
-                          title={<Text style={{color: '#000', fontSize: 18}}>Which one do you like?</Text>}
-                          options={options}
-                          cancelButtonIndex={0}
-                          destructiveButtonIndex={4}
-                          onPress={(index) => { /* do something */ }}
-                        />
+                        {/* <ActionSheet
+                            ref={o => this.ActionSheet = o}
+                            title={<Text style={{ color: '#000', fontSize: 18 }}>Which one do you like?</Text>}
+                            options={options}
+                            cancelButtonIndex={0}
+                            destructiveButtonIndex={4}
+                            onPress={(index) => { /* do something */ }}
+                        /> */}
                         <View style={[styles.viewColumn, { alignSelf: 'stretch', }]}>
                             <ListView
                                 dataSource={this.state.dataSource}
@@ -194,7 +194,8 @@ export default class ReservationCalendar extends Component {
                                 enableEmptySections={true}
                             />
                         </View>
-                        <TouchableOpacity>
+                        {/* <TouchableOpacity onPress={() => Actions.reservationResource({ reservation: { ...this.state.reservation, tariff: tariffs, date: this.state.actualDate } })}> */}
+                        <TouchableOpacity onPress={() => Actions.reservationResource({ reservation: {  }})}>
                             <View style={styles.bottomButton}>
                                 <Text style={styles.bottomText}>WEITER</Text>
                             </View>

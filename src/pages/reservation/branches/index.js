@@ -9,7 +9,7 @@ import {
     StatusBar,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 import styles from './styles';
 import {
     primaryColor,
@@ -25,6 +25,7 @@ const LATITUDE_DELTA = 0.1;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 const mapMarkerGeneric = require('../../../images/icons/icon_map_marker_generic.png');
+const mapMarker = require('../../../images/icons/icon_map_marker_kolula.png');
 const mapDummy = require('../../../images/dummys/mapdummy.png');
 
 const dummyNearBranch = {
@@ -259,7 +260,12 @@ export default class ReservationBranches extends Component {
                                             latitudeDelta: 0.0922,
                                             longitudeDelta: 0.0421,
                                         }}
-                                    />
+                                    >
+                                        <Marker
+                                            coordinate={{ latitude: this.state.dataSource[0] ? this.state.dataSource[0].latitude : 0, longitude: this.state.dataSource[0] ? this.state.dataSource[0].longitude : 0 }}
+                                            image={mapMarker}
+                                        />
+                                    </MapView>
                                 </View>
                                 <View style={[styles.viewRow, { justifyContent: "center", alignContent: "center", margin: 12 }]}>
                                     <View style={{ height: 36, width: 30 }}>
@@ -271,7 +277,7 @@ export default class ReservationBranches extends Component {
                                             <Text style={styles.textStandard} >{this.state.dataSource[0] ? this.state.dataSource[0].location_street : ''}</Text>
                                         </View>
                                         <View style={{ marginLeft: 5, justifyContent: 'center' }}>
-                                            <Text style={styles.textStandardBold} >{this.state.dataSource[0] ? this.state.dataSource[0].geofence/1000 + ' km' : ''}</Text>
+                                            <Text style={styles.textStandardBold} >{this.state.dataSource[0] ? this.state.dataSource[0].geofence / 1000 + ' km' : ''}</Text>
                                         </View>
                                     </View>
                                 </View>

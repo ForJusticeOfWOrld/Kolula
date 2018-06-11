@@ -65,17 +65,17 @@ export default class ReservationResource extends Component {
         console.log("ReservationResource props:")
         console.log(this.props);
         // debugdata
-        if (this.props.reservation.branch && this.props.reservation.date && this.props.reservation.tariff) {
-            this.setState({
-                dataSource: this.state.dataSource.cloneWithRows(dummyReservationNext),
-                reservation: this.props.reservation,
-            });
-        } else {
-            this.setState({
-                dataSource: this.state.dataSource.cloneWithRows(dummyReservationNext),
-                reservation: { branch: dummyBranch, tariff: { "time": 120, "desc": "2:00h", "price": 14.99 }, date: { "date": 22, "month": 11, "year": 2018 } },
-            });
-        }
+        // if (this.props.reservation.branch && this.props.reservation.date && this.props.reservation.tariff) {
+        //     this.setState({
+        //         dataSource: this.state.dataSource.cloneWithRows(dummyReservationNext),
+        //         reservation: this.props.reservation,
+        //     });
+        // } else {
+        //     this.setState({
+        //         dataSource: this.state.dataSource.cloneWithRows(dummyReservationNext),
+        //         reservation: { branch: dummyBranch, tariff: { "time": 120, "desc": "2:00h", "price": 14.99 }, date: { "date": 22, "month": 11, "year": 2018 } },
+        //     });
+        // }
     }
 
     addItem() {

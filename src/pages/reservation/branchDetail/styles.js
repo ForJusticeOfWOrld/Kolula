@@ -76,7 +76,7 @@ export default {
         marginVertical: standardMargin,
     },
     viewBorderMap: {
-        borderRadius: 16,
+        borderRadius: 5,
         borderWidth: 0.5,
         borderColor: "#333",
         marginVertical: standardMargin,
@@ -150,12 +150,12 @@ export default {
     },
     textStandardBold: {
         fontSize: standardFontSize,
-        color: primaryColor,
+        color: '#000',
         fontWeight: 'bold',
     },
     textStandard: {
         fontSize: standardFontSize,
-        color: primaryColor,
+        color: '#9b9b9b',
     },
     textSeparator: {
         fontSize: standardFontSize,
