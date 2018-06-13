@@ -19,6 +19,7 @@ import {
 } from './../../../styles/common'
 import { Actions } from "react-native-router-flux";
 import { Metrics, Styles, Images, Icons, Colors, Fonts, Global } from '@theme/';
+import { getDistance } from '@utils/geoLocation';
 
 const ASPECT_RATIO = 4 / 2;
 const LATITUDE_DELTA = 0.1;
@@ -234,6 +235,16 @@ export default class ReservationBranches extends Component {
             //alert(data.Message);
         }
     };
+
+    getLocation () {
+        this.watchID = navigator.geolocation.watchPosition(
+            (position) => {
+            },
+            (error) => {
+            },
+            {enableHighAccuracy: true, timeout: 10000, maximumAge: 5000, distanceFilter: 5}
+        );
+    }
 
     render() {
         return (
