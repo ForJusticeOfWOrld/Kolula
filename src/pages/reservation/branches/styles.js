@@ -150,7 +150,7 @@ export default {
         fontWeight: 'bold',
     },
     textStandard: {
-        fontSize: standardFontSize,
+        fontSize: 12,
         color: '#666',
     },
     textSeparator: {

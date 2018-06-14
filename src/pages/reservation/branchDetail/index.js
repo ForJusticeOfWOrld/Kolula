@@ -166,7 +166,7 @@ export default class ReservationBranchDetail extends Component {
                                     <View style={[styles.viewColumn, { marginLeft: 40, flexDirection: 'row', justifyContent: 'space-between' }]}>
                                         <View>
                                             <Text style={styles.textStandardBold} >{reservation.name}</Text>
-                                            <Text style={styles.textStandard} >{reservation.street}</Text>
+                                            <Text style={styles.textStandard} >{reservation.location_addres.street+ ',' + reservation.location_addres.zip_code + ' ' + reservation.location_addres.city }</Text>
                                         </View>
                                         {/* <View style={{ marginLeft: 5, justifyContent: 'center' }}>
                                             <Text style={styles.textStandardBold} >{reservation.geofence / 1000} km</Text>
