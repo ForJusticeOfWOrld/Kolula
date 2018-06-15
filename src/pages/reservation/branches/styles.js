@@ -6,19 +6,15 @@ import {
     secondaryColor,
     primaryInvertedColor,
     inactiveColor,
-    inactiveBackgroundColor,
     largeFontSize,
     standardFontSize,
-    smallFontSize,
     standardBorderRadius,
     standardBorderWidth,
     separatorBorderWidth,
     standardMargin,
-    standardMmarginHorizontal,
     standardMarginVertical,
     containerPaddingHorizontal,
     containerPaddingVertical,
-    rowViewPaddingVertical,
     standardSpacerMarginVertical,
 } from './../../../styles/common'
 
@@ -30,9 +26,7 @@ export default {
         left: 0,
         right: 0,
         flex: 1,
-        //paddingHorizontal: containerPaddingHorizontal,
-        //paddingVertical: containerPaddingVertical,
-        backgroundColor: primaryBackgroundColor, //Debug
+        backgroundColor: primaryBackgroundColor,
     },
     viewColumn: {
         flex: 1,
@@ -49,14 +43,11 @@ export default {
         justifyContent: 'flex-start',
     },
     viewFooter: {
-        //flex: 1,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'flex-end',
     },
     viewSeparator: {
-        //borderBottomWidth: separatorBorderWidth,
-        //borderBottomColor: primaryColor,
         marginVertical: standardMargin,
     },
     viewBorderMap: {

@@ -182,10 +182,10 @@ export default class ReservationBranches extends Component {
                 preventBackClick: false,
                 providerListener: true
             }).then(success => {
-                console.log('Location Test', success); // success => {alreadyEnabled: false, enabled: true, status: "enabled"}
+                console.log('Location Test', success);
                 this.fetchLocation();
             }).catch(error => {
-                console.log('Location Error', error.message); // error.message => "disabled"
+                console.log('Location Error', error.message);
             });
         } else {
             this.fetchLocation();
@@ -218,19 +218,6 @@ export default class ReservationBranches extends Component {
                 console.log('Location Error2', error)
             });
     }
-
-    // fetchData() {
-    //     this.setState({ refreshing: true });
-    //     this.unsubscribe = firebase.firestore().collection('test').onSnapshot(snapshot => {
-    //         let data = [];
-    //         snapshot.forEach(doc => {
-    //             data.unshift(doc.data());
-    //         });
-    //         this.state.refreshing = false;
-    //         this.state.data = data;
-    //         this.getDistances();
-    //     });
-    // }
 
     getDistances() {
         let dataSource = this.state.dataSource;
@@ -268,7 +255,7 @@ export default class ReservationBranches extends Component {
         );
     }
 
-    apiPost() {
+    apiGet() {
         fetch("https://dev.inbooma.net/api/locations", {
             headers: {
                 'Accept': 'application/json',
@@ -307,50 +294,6 @@ export default class ReservationBranches extends Component {
         }
     };
 
-    apiGet() {
-        fetch("https://dev.inbooma.net/api/locations", {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxZWQ3NGRiZC0xNTFhLTQzMjctYWU5NC00ZDE3YmM3ZTY5NDIiLCJleHAiOjE1NDY4NDg3NDR9.dYllBo2sCVQWC0RZGulG8X-m4zzEHF8ZxNEpTGlkjkw'
-            },
-            method: "GET",
-        })
-            .then((response) => response.text())
-            .then((responseData) => {
-                this._checkJsonForgetAquariums(responseData)
-
-            })
-            .done();
-    }
-    _checkJsonForgetAquariums(jsonData) {
-
-        var data = JSON.parse(jsonData);
-
-        if (data.success) {
-            // this.props.navigation.navigate('HomePage');
-            this.setState({
-                dataSource: data.data,
-            });
-            this.getDistances();
-        } else {
-            //alert(data.Message);
-        }
-    };
-
-    // getLocation(lat, long) {
-    //     this.watchID = navigator.geolocation.watchPosition(
-    //         (position) => {
-    //             this._isMounted && this.setState({
-    //                 distance: getDistance(position.coords.latitude, position.coords.longitude, lat, long),
-    //             });
-    //         },
-    //         (error) => {
-    //         },
-    //         { enableHighAccuracy: true, timeout: 10000, maximumAge: 5000, distanceFilter: 5 }
-    //     );
-    // }
-
     render() {
         return (
             <View style={styles.container}>
@@ -365,7 +308,6 @@ export default class ReservationBranches extends Component {
                         </View>
                         <View onPress={() => Actions.reservationBranchDetail({ reservation: { data: dummyNearBranch } })}>
                             <View style={[styles.viewColumn, styles.viewBorderMap, { backgroundColor: "#FFF", marginHorizontal: containerPaddingHorizontal, marginBottom: containerPaddingVertical }]}>
-                                {/* <Image source={mapDummy} style={{ flex: 1, height: undefined, width: undefined, minHeight: 150 }} resizeMode={'cover'} /> */}
                                 <View style={styles.mapView}>
                                     <MapView
                                         style={styles.mapView}
@@ -411,10 +353,6 @@ export default class ReservationBranches extends Component {
                                     style={styles.listView}
                                 />
                             </View>
-                            {/* <View style={[styles.viewButtonInactive, { marginTop: 16, padding: 8 }]}>
-                                <Text style={styles.textNoStationHeading} >Keine Station in der Nähe?</Text>
-                                <Text style={styles.textNoStation} >Standort vorschlagen & Updates erhalten</Text>
-                            </View> */}
                         </View>
                     </View>
                 </ScrollView>
