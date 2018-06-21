@@ -265,10 +265,10 @@ export default class ReservationBranches extends Component {
             method: "POST",
             body: JSON.stringify(
                 {
-                    useremail: this.state.user.toLowerCase(),
-                    // useremail: 'mob.web@yahoo.com',
-                    password: this.state.pass,
-                    // password: 'System1234',
+                    //useremail: this.state.user.toLowerCase(),
+                     useremail: 'mob.web@yahoo.com',
+                    // password: this.state.pass,
+                    password: 'System1234',
                 }
             )
         })
