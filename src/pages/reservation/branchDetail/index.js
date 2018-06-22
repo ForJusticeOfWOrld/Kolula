@@ -61,8 +61,6 @@ export default class ReservationBranchDetail extends Component {
     }
 
     componentWillMount() {
-        console.log("ReservationBranchDetail props:")
-        console.log(this.props);
         if (this.props.reservation.branch) {
             this.setState({
                 dataSource: this.state.dataSource.cloneWithRows(this.props.reservation.branch.highlights),
@@ -97,49 +95,6 @@ export default class ReservationBranchDetail extends Component {
                             <Text style={[styles.textStandardBold, { marginLeft: 10 }]} >Highlights</Text>
                             <Text style={[styles.textStandard, { marginLeft: 15 }]} >&#183; {reservation.description}</Text>
                         </View>
-
-                        {/* <View style={[styles.viewRow, styles.marginSpacer, { justifyContent: "space-between" }]}>
-                            <View style={styles.viewColumn}>
-                                <Text style={styles.textStandardBold} >{this.state.reservation.branch.location_name}</Text>
-                                <Text style={styles.textStandard} >{this.state.reservation.branch.location_street}</Text>
-                                <Text style={styles.textStandard} >{this.state.reservation.branch.distance} km entfernt</Text>
-                            </View>
-                            <View style={{ flexDirection: 'row', width: 60 }}>
-                                <View style={styles.viewColumn}>
-                                    <View style={styles.viewIconSmall}>
-                                        <Icon name="tint" size={16} color={primaryColor} />
-                                    </View>
-                                    <Text style={styles.textStandard} >{this.state.reservation.branch.tempWater}°</Text>
-                                </View>
-                                <View style={styles.viewColumn}>
-                                    <View style={styles.viewIconSmall}>
-                                        {
-                                            this.state.reservation.branch.weather === "sunny" ? (
-                                                <Icon name="sun-o" size={16} color={primaryColor} />
-                                            ) : (this.state.reservation.branch.weather === "cloudy") ? (
-                                                <Icon name="cloud" size={16} color={primaryColor} />
-                                            ) : (this.state.reservation.branch.weather === "rainy") ? (
-                                                <Icon name="mixcloud" size={16} color={primaryColor} />
-                                            ) : (
-                                                            <Icon name="sun-o" size={16} color={primaryColor} />
-                                                        )
-                                        }
-                                    </View>
-                                    <Text style={styles.textStandard} >{this.state.reservation.branch.tempAir}°</Text>
-                                </View>
-                            </View>
-                        </View>
-                        <View style={styles.viewColumn}>
-                            <View style={[styles.viewSeparator, styles.marginSpacer]}>
-                                <Text style={styles.textSeparator} >Highlights</Text>
-                            </View>
-                            <ListView
-                                dataSource={this.state.dataSource}
-                                renderRow={this.renderBranches.bind(this)}
-                                style={styles.listView}
-                                enableEmptySections={true}
-                            />
-                        </View> */}
                         <View>
                             <View style={[styles.viewColumn, styles.viewBorderMap, { backgroundColor: "#FFF", marginHorizontal: containerPaddingHorizontal, marginBottom: containerPaddingVertical }]}>
                                 <View style={styles.mapView}>
@@ -166,23 +121,12 @@ export default class ReservationBranchDetail extends Component {
                                     <View style={[styles.viewColumn, { marginLeft: 40, flexDirection: 'row', justifyContent: 'space-between' }]}>
                                         <View>
                                             <Text style={styles.textStandardBold} >{reservation.name}</Text>
-                                            <Text style={styles.textStandard} >{reservation.location_addres.street+ ',' + reservation.location_addres.zip_code + ' ' + reservation.location_addres.city }</Text>
+                                            <Text style={styles.textStandard} >{reservation.location_addres.street + ',' + reservation.location_addres.zip_code + ' ' + reservation.location_addres.city}</Text>
                                         </View>
-                                        {/* <View style={{ marginLeft: 5, justifyContent: 'center' }}>
-                                            <Text style={styles.textStandardBold} >{reservation.geofence / 1000} km</Text>
-                                        </View> */}
                                     </View>
                                 </View>
                             </View>
                         </View>
-                        {/* <Text style={styles.textStandardBold} >{this.state.reservation.branch.location_name}</Text>
-                        <Text style={styles.textStandard} >{this.state.reservation.branch.location_street}</Text>
-                        <View style={styles.viewRow}>
-                            <View style={styles.viewIconSmall}>
-                                <Icon name="info-circle" size={16} color={primaryColor} />
-                            </View>
-                            <Text style={styles.textStandard} >{this.state.reservation.branch.location_transport}</Text>
-                        </View> */}
                     </ScrollView>
                     <View style={[styles.viewFooter, { marginTop: 8 }]}>
                         {/* <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationCalendar({ reservation: this.state.reservation })}> */}
