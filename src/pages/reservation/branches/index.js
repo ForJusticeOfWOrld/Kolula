@@ -30,7 +30,6 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 const mapMarkerGeneric = require('../../../images/icons/icon_map_marker_generic.png');
 const mapMarker = require('../../../images/icons/icon_map_marker_kolula.png');
-const mapDummy = require('../../../images/dummys/mapdummy.png');
 
 export default class ReservationBranches extends Component {
 
