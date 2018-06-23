@@ -8,8 +8,9 @@ import {
     TouchableOpacity,
     StatusBar,
     DeviceEventEmitter,
-    Platform
+    Platform,
 } from 'react-native';
+import Permissions from 'react-native-permissions'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MapView, { Marker } from 'react-native-maps';
 import styles from './styles';
@@ -39,6 +40,7 @@ export default class ReservationBranches extends Component {
             dataSource: [],
             reservation: false,
             distance: '',
+            locationPermission: '',
         };
     }
 
@@ -56,11 +58,24 @@ export default class ReservationBranches extends Component {
             console.log('Location Enabled', status);
             if (status.enabled) this.fetchLocation();
         });
+        Permissions.check('location').then(response => {
+            // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
+            this.setState({ locationPermission: response })
+        })
     }
 
     componentWillUnmount() {
         navigator.geolocation.clearWatch(this.watchID);
-        // LocationServicesDialogBox.stopListener();
+        LocationServicesDialogBox.stopListener();
+    }
+
+    // Request permission to access photos
+    _requestPermission = () => {
+        Permissions.request('location').then(response => {
+            // Returns once the user has chosen to 'allow' or to 'not allow' access
+            // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
+            this.setState({ locationPermission: response })
+        })
     }
 
     checkLocationPermission() {
@@ -219,7 +234,8 @@ export default class ReservationBranches extends Component {
         }
     };
 
-    render() {
+    render() {alert(locationPermission)
+        const { locationPermission } = this.state;
         return (
             <View style={styles.container}>
                 <StatusBar
@@ -229,7 +245,7 @@ export default class ReservationBranches extends Component {
                 <ScrollView style={{ flex: 1, height: undefined, width: undefined, }}>
                     <View style={[styles.viewColumn]}>
                         <View style={styles.viewRow}>
-                            <Text style={[styles.textLargeBold, { textAlign: "center", flex: 1, color: "#FFF", marginTop: 12, fontSize: 26 }]} >Nächste Station</Text>
+                            <Text style={[styles.textLargeBold, { textAlign: "center", flex: 1, color: "#FFF", marginTop: 12, fontSize: 26 }]} >{locationPermission == "authorized"? 'Nächste Station' : ''}</Text>
                         </View>
                         <View>
                             <View style={[styles.viewColumn, styles.viewBorderMap, { backgroundColor: "#FFF", marginHorizontal: containerPaddingHorizontal, marginBottom: containerPaddingVertical }]}>
