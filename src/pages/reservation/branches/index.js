@@ -41,6 +41,7 @@ export default class ReservationBranches extends Component {
             reservation: false,
             distance: '',
             locationPermission: '',
+            geoDistance: false,
         };
     }
 
@@ -138,6 +139,11 @@ export default class ReservationBranches extends Component {
                         latitude: item.latitude,
                         longitude: item.longitude
                     });
+                    if (!isNaN(distance)) {
+                        this.setState({ geoDistance: true });
+                    }
+                } else {
+                    this.setState({ diff: 'false' })
                 }
                 return { ...item, distance };
             }).sort((a, b) => a.distance > b.distance ? 1 : -1);
@@ -145,63 +151,6 @@ export default class ReservationBranches extends Component {
         console.log('Test Data', dataSource);
         this.setState({ dataSource });
     }
-
-    renderBranches(branches) {
-        return (
-            <TouchableOpacity onPress={() => Actions.reservationBranchDetail({ reservation: branches })}>
-                <View style={[styles.viewBorder, { marginTop: 16, backgroundColor: "#FFF" }]}>
-                    <View style={[styles.viewRow, { margin: 8 }]}>
-                        <View style={[styles.viewColumn, styles.viewMargin]}>
-                            <Text style={styles.textStandardBold}>{branches.name}</Text>
-                            <Text style={styles.textStandard}>{branches.location_addres.street}, {branches.location_addres.zip_code} {branches.location_addres.city}</Text>
-                        </View>
-                        <View style={{ justifyContent: "center" }}>
-                            <Text style={[styles.textStandard, { fontSize: 18, color: "#000" }]}>{(branches.distance / 1000.0).toFixed(2)} km</Text>
-                        </View>
-                    </View>
-                </View>
-            </TouchableOpacity>
-        );
-    }
-
-    apiPost() {
-        fetch("https://dev.inbooma.net/api/locations", {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdWg3ZnQ2Zi00ZjU4LTQ5NWYtYTc3YS1iNGE0YjI2aDEyZDQiLCJleHAiOjE1NDY2MDUwMjR9.NHAxDEbMQnmZ3DNSOEagcMiKxXg9bZoUuHkz8q5ZAcg'
-            },
-            method: "POST",
-            body: JSON.stringify(
-                {
-                    useremail: this.state.user.toLowerCase(),
-                    // useremail: 'mob.web@yahoo.com',
-                    password: this.state.pass,
-                    // password: 'System1234',
-                }
-            )
-        })
-            .then((response) => response.text())
-            .then((responseData) => {
-                this._checkJson(responseData)
-
-            })
-            .done();
-        // this.props.navigation.navigate('HomePage');
-
-    }
-    _checkJson(jsonData) {//alert(JSON.stringify(jsonData))
-
-        var data = JSON.parse(jsonData);
-
-        if (data.status == 200) {
-            this.props.setUser(data.userinfo);
-            //alert(data.userinfo._id)
-            this.props.navigation.navigate('HomePage');
-        } else {
-            alert(data.Message);
-        }
-    };
 
     apiGet() {
         fetch("https://dev.inbooma.net/api/locations", {
@@ -224,7 +173,6 @@ export default class ReservationBranches extends Component {
         var data = JSON.parse(jsonData);
 
         if (data.success) {
-            // this.props.navigation.navigate('HomePage');
             this.setState({
                 dataSource: data.data,
             });
@@ -234,8 +182,27 @@ export default class ReservationBranches extends Component {
         }
     };
 
-    render() {alert(locationPermission)
-        const { locationPermission } = this.state;
+    renderBranches(branches) {
+        const { geoDistance } = this.state;
+        return (
+            <TouchableOpacity onPress={() => Actions.reservationBranchDetail({ reservation: branches })}>
+                <View style={[styles.viewBorder, { marginTop: 16, backgroundColor: "#FFF" }]}>
+                    <View style={[styles.viewRow, { margin: 8 }]}>
+                        <View style={[styles.viewColumn, styles.viewMargin]}>
+                            <Text style={styles.textStandardBold}>{branches.name}</Text>
+                            <Text style={styles.textStandard}>{branches.location_addres.street}, {branches.location_addres.zip_code} {branches.location_addres.city}</Text>
+                        </View>
+                        <View style={{ justifyContent: "center" }}>
+                            <Text style={[styles.textStandard, { fontSize: 18, color: "#000" }]}>{!geoDistance ? '' : (branches.distance / 1000.0).toFixed(2) + 'km'}</Text>
+                        </View>
+                    </View>
+                </View>
+            </TouchableOpacity>
+        );
+    }
+
+    render() {
+        const { locationPermission, diff, geoDistance } = this.state;
         return (
             <View style={styles.container}>
                 <StatusBar
@@ -245,42 +212,52 @@ export default class ReservationBranches extends Component {
                 <ScrollView style={{ flex: 1, height: undefined, width: undefined, }}>
                     <View style={[styles.viewColumn]}>
                         <View style={styles.viewRow}>
-                            <Text style={[styles.textLargeBold, { textAlign: "center", flex: 1, color: "#FFF", marginTop: 12, fontSize: 26 }]} >{locationPermission == "authorized"? 'Nächste Station' : ''}</Text>
+                            <Text style={[styles.textLargeBold, { textAlign: "center", flex: 1, color: "#FFF", marginTop: 12, fontSize: 26 }]} >{geoDistance ? 'Nächste Station' : ''}</Text>
                         </View>
                         <View>
-                            <View style={[styles.viewColumn, styles.viewBorderMap, { backgroundColor: "#FFF", marginHorizontal: containerPaddingHorizontal, marginBottom: containerPaddingVertical }]}>
-                                <View style={styles.mapView}>
-                                    <MapView
-                                        style={styles.mapView}
-                                        provider={MapView.PROVIDER_GOOGLE}
-                                        region={{
-                                            latitude: this.state.dataSource[0] ? this.state.dataSource[0].latitude : 0,
-                                            longitude: this.state.dataSource[0] ? this.state.dataSource[0].longitude : 0,
-                                            latitudeDelta: 0.0922,
-                                            longitudeDelta: 0.0421,
-                                        }}
-                                    >
-                                        <Marker
-                                            coordinate={{ latitude: this.state.dataSource[0] ? this.state.dataSource[0].latitude : 0, longitude: this.state.dataSource[0] ? this.state.dataSource[0].longitude : 0 }}
-                                            image={mapMarker}
-                                        />
-                                    </MapView>
-                                </View>
-                                <View style={[styles.viewRow, { justifyContent: "center", alignContent: "center", margin: 12 }]}>
-                                    <View style={{ height: 36, width: 20, marginLeft: -20 }}>
-                                        <Image source={mapMarkerGeneric} style={{ flex: 1 }} resizeMode='contain' />
+                            {geoDistance ?
+                                <View style={[styles.viewColumn, styles.viewBorderMap, { backgroundColor: "#FFF", marginHorizontal: containerPaddingHorizontal, marginBottom: containerPaddingVertical }]}>
+                                    <View style={styles.mapView}>
+                                        <MapView
+                                            style={styles.mapView}
+                                            provider={MapView.PROVIDER_GOOGLE}
+                                            region={{
+                                                latitude: this.state.dataSource[0] ? this.state.dataSource[0].latitude : 0,
+                                                longitude: this.state.dataSource[0] ? this.state.dataSource[0].longitude : 0,
+                                                latitudeDelta: 0.0922,
+                                                longitudeDelta: 0.0421,
+                                            }}
+                                        >
+                                            <Marker
+                                                coordinate={{ latitude: this.state.dataSource[0] ? this.state.dataSource[0].latitude : 0, longitude: this.state.dataSource[0] ? this.state.dataSource[0].longitude : 0 }}
+                                                image={mapMarker}
+                                            />
+                                        </MapView>
                                     </View>
-                                    <View style={[styles.viewColumn, { marginLeft: 25, flexDirection: 'row', justifyContent: 'space-between' }]}>
-                                        <View>
-                                            <Text style={styles.textStandardBold} >{this.state.dataSource[0] ? this.state.dataSource[0].name : ''}</Text>
-                                            <Text style={styles.textStandard}>{this.state.dataSource[0] ? this.state.dataSource[0].location_addres.street + ',' + this.state.dataSource[0].location_addres.zip_code + ' ' + this.state.dataSource[0].location_addres.city : ''}</Text>
+                                    <View style={[styles.viewRow, { justifyContent: "center", alignContent: "center", margin: 12 }]}>
+                                        <View style={{ height: 36, width: 20, marginLeft: -20 }}>
+                                            <Image source={mapMarkerGeneric} style={{ flex: 1 }} resizeMode='contain' />
                                         </View>
-                                        <View style={{ marginLeft: 5, justifyContent: 'center' }}>
-                                            <Text style={styles.textStandardBold} >{this.state.dataSource[0] ? (this.state.dataSource[0].distance / 1000.0).toFixed(2) + 'km' : ''}</Text>
+                                        <View style={[styles.viewColumn, { marginLeft: 25, flexDirection: 'row', justifyContent: 'space-between' }]}>
+                                            <View>
+                                                <Text style={styles.textStandardBold} >{this.state.dataSource[0] ? this.state.dataSource[0].name : ''}</Text>
+                                                <Text style={styles.textStandard}>{this.state.dataSource[0] ? this.state.dataSource[0].location_addres.street + ',' + this.state.dataSource[0].location_addres.zip_code + ' ' + this.state.dataSource[0].location_addres.city : ''}</Text>
+                                            </View>
+                                            <View style={{ marginLeft: 5, justifyContent: 'center' }}>
+                                                <Text style={styles.textStandardBold} >{this.state.dataSource[0] ? (this.state.dataSource[0].distance / 1000.0).toFixed(2) + 'km' : ''}</Text>
+                                            </View>
                                         </View>
                                     </View>
                                 </View>
-                            </View>
+                                :
+                                <View style={[styles.viewColumn, styles.viewBorderMap, { backgroundColor: "#FFF", marginHorizontal: containerPaddingHorizontal, marginBottom: containerPaddingVertical }]}>
+                                    <View style={styles.mapView}>
+                                        <Text style={styles.topOnMap}>Ohne deine Erlaubnis der</Text>
+                                        <Text style={styles.midOnMap}>Ortungsdienste können wir dir nicht das volle Kolula Erlebnis bieten. Bitte aktiviere deine Ortungsdienste.</Text>
+                                        <Text style={styles.bottomOnMap}>Ortungsdienste zulassen</Text>
+                                    </View>
+                                </View>
+                            }
                         </View>
                         <View style={[styles.viewColumn, { backgroundColor: "#f7f7f7", paddingHorizontal: containerPaddingHorizontal, paddingVertical: 8 }]}>
                             <View style={[styles.viewSeparator]}>

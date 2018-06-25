@@ -90,7 +90,26 @@ export default {
     mapView: {
         width: 400,
         height: 200,
-        backgroundColor: 'red'
+        backgroundColor: 'white'
+    },
+    topOnMap: {
+        color: '#000',
+        marginLeft: 30,
+        marginTop: 10,
+        fontSize: 20,
+        
+    },
+    midOnMap: {
+        color: '#000',
+        marginLeft: 30,
+        marginTop: 10,
+        fontSize: 20,
+    },
+    bottomOnMap: {
+        color: primaryColor,
+        marginLeft: 30,
+        marginTop: 10,
+        fontSize: 20,
     },
     viewButtonPrimary: {
         borderRadius: standardBorderRadius,

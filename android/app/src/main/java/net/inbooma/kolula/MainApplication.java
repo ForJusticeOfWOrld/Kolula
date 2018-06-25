@@ -3,6 +3,7 @@ package net.inbooma.kolula;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.showlocationservicesdialogbox.LocationServicesDialogBoxPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.kishanjvaghela.cardview.RNCardViewPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -26,6 +27,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new LocationServicesDialogBoxPackage(),
             new MapsPackage(),
             new RNCardViewPackage(),
             new VectorIconsPackage()

@@ -43,7 +43,8 @@ export default {
     },
     viewHeader: {
         //(flex: 1,
-        height: 100,
+        // width: 250,
+        // height: 150,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'flex-start',
@@ -151,6 +152,13 @@ export default {
     textStandardBold: {
         fontSize: standardFontSize,
         color: '#000',
+        fontWeight: 'bold',
+    },
+    textOnBand: {
+        position: 'absolute',
+        marginTop: 50,
+        fontSize: standardFontSize,
+        color: '#fff',
         fontWeight: 'bold',
     },
     textStandard: {

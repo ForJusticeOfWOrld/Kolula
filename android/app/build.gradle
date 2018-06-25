@@ -148,6 +148,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-android-location-services-dialog-box')
     compile project(':react-native-maps')
     compile project(':react-native-cardview')
     compile project(':react-native-vector-icons')

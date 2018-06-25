@@ -18,6 +18,7 @@ import {
 } from './../../../styles/common'
 import { Actions } from "react-native-router-flux";
 import { Metrics, Styles, Images, Icons, Colors, Fonts, Global } from '@theme/';
+import { ActionSheetCustom as ActionSheet } from 'react-native-actionsheet'
 
 const ASPECT_RATIO = 4 / 2;
 const LATITUDE_DELTA = 0.1;
@@ -25,9 +26,14 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 const mapMarkerGeneric = require('../../../images/icons/icon_map_marker_generic.png');
 const mapMarker = require('../../../images/icons/icon_map_marker_kolula.png');
-const mapDummy = require('../../../images/dummys/mapdummy.png');
 const bannerDummy = require('../../../images/dummys/dummyBanner.png');
 
+const options = [
+    'Abbrechen',
+    <Text style={{ color: 'red' }}>Adresse Kopieren</Text>,
+    <Text style={{ color: '#2c8cff' }}>Apple Maps</Text>,
+    <Text style={{ color: '#2c8cff' }}>Google Maps</Text>
+]
 export default class ReservationBranchDetail extends Component {
 
     constructor(props) {
@@ -57,13 +63,18 @@ export default class ReservationBranchDetail extends Component {
         );
     }
 
+    showActionSheet = () => {
+        this.ActionSheet.show()
+    }
+
     render() {
         const { reservation } = this.props;
         return (
             <View style={styles.container}>
                 <View style={styles.viewSpaceBetween}>
-                    <View style={[styles.viewHeader]}>
-                        <Image source={bannerDummy} style={{ flex: 1, height: 100, minWidth: 200 }} resizeMode={'cover'} />
+                    <View style={styles.viewHeader}>
+                        <Text style={styles.textOnBand} >{reservation.name}</Text>
+                        <Image source={bannerDummy} />
                     </View>
                     <ScrollView style={styles.viewBody}>
                         <View style={[styles.viewColumn, styles.viewBorderMap, { backgroundColor: "#FFF", marginHorizontal: containerPaddingHorizontal, marginBottom: containerPaddingVertical }]}>
@@ -93,12 +104,19 @@ export default class ReservationBranchDetail extends Component {
                                     <View style={{ height: 36, width: 30 }}>
                                         <Image source={mapMarkerGeneric} style={{ flex: 1 }} resizeMode='contain' />
                                     </View>
-                                    <View style={[styles.viewColumn, { marginLeft: 40, flexDirection: 'row', justifyContent: 'space-between' }]}>
+                                    <TouchableOpacity onPress={this.showActionSheet} style={[styles.viewColumn, { marginLeft: 40, flexDirection: 'row', justifyContent: 'space-between' }]}>
                                         <View>
                                             <Text style={styles.textStandardBold} >{reservation.name}</Text>
                                             <Text style={styles.textStandard} >{reservation.location_addres.street + ',' + reservation.location_addres.zip_code + ' ' + reservation.location_addres.city}</Text>
                                         </View>
-                                    </View>
+                                    </TouchableOpacity>
+                                    <ActionSheet
+                                        ref={o => this.ActionSheet = o}
+                                        options={options}
+                                        cancelButtonIndex={0}
+                                        destructiveButtonIndex={3}
+                                        onPress={(index) => { /* do something */ }}
+                                    />
                                 </View>
                             </View>
                         </View>
