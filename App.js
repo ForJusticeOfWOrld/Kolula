@@ -27,6 +27,7 @@ import ReservationCalendar from './src/pages/reservation/calendar/index';
 import ReservationResource from './src/pages/reservation/resource/index';
 import ReservationSummary from './src/pages/reservation/summary/index';
 import ReservationPayment from './src/pages/reservation/payment/index';
+import Paypal from './src/pages/reservation/paypal/index';
 import ReservationRules from './src/pages/reservation/rules/index';
 import ReservationConfirmation from './src/pages/reservation/confirmation/index';
 
@@ -82,7 +83,7 @@ export default class App extends Component {
                             <Scene key="reservationPayment" component={ReservationPayment} title="Bezahlen" initial={false} />
                             <Scene key="reservationRules" component={ReservationRules} title="Regeln und Hinweise" initial={false} />
                             <Scene key="reservationConfirmation" component={ReservationConfirmation} title="Bestätigung" initial={false} />
-
+                            <Scene key="paypal" component={Paypal} title="Paypal" initial={false}/>
                             <Scene key="rentStart" component={RentStart} title="Miete starten" initial={false} />
                             <Scene key="rentStatus" component={RentStatus} title="Mietstatus" initial={false} />
 

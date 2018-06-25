@@ -10,11 +10,10 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 //import MapView from 'react-native-maps';
 import CheckBox from 'react-native-icon-checkbox';
 import styles from './styles';
-import { Actions } from "react-native-router-flux";
 import {
     primaryColor,
 } from './../../../styles/common';
-
+import { ActionConst, Actions} from "react-native-router-flux";
 import CardView from 'react-native-cardview'
 import { PagerTabIndicator, IndicatorViewPager, PagerTitleIndicator, PagerDotIndicator } from 'rn-viewpager';
 import { Metrics, Styles, Images, Icons, Colors, Fonts, Global } from '@theme/';
@@ -91,14 +90,19 @@ export default class ReservationPayment extends Component {
     _renderDotIndicator() {
         return <PagerDotIndicator pageCount={3} />;
     }
-
+    gotoCredit = () => {
+        
+    }
+    gotoPaypal = () => {
+        Actions.paypal({ type: ActionConst.PUSH });
+    }
     render() {
         return (
             <View style={styles.container}>
                 <Text style={styles.textStandardBold}>Zahlmethode Wählen</Text>
                 <ScrollView horizontal style={{ flex: 1 }}
                 >
-                    <TouchableOpacity >
+                    <TouchableOpacity onPress={this.gotoCredit}>
                         <CardView
                             style={styles.paymentType}
                             cardElevation={3}
@@ -108,7 +112,7 @@ export default class ReservationPayment extends Component {
                             <Text style={styles.textStandardBold}>KreditKarte</Text>
                         </CardView>
                     </TouchableOpacity>
-                    <TouchableOpacity >
+                    <TouchableOpacity onPress={this.gotoPaypal}>
                         <CardView
                             style={styles.paymentType}
                             cardElevation={2}

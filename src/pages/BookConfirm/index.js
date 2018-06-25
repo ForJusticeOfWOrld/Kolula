@@ -21,6 +21,7 @@ import {
     containerPaddingVertical,
 } from '../../styles/common'
 import { Actions } from "react-native-router-flux";
+import { ActionConst } from "react-native-router-flux";
 import { Metrics, Styles, Images, Icons, Colors, Fonts, Global } from '@theme/';
 // import { getDistance } from '@utils/geoLocation';
 import geolib from 'geolib';
