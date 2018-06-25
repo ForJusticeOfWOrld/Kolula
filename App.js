@@ -45,6 +45,9 @@ import Login from './src/pages/login/index';
 
 import menuIcon from './src/images/others/menu_hamburger.png';
 
+import TimeSelect from './src/pages/TimeSelect';
+import BoardSelect from './src/pages/BoardSelect';
+
 import { Metrics, Styles, Images, Icons, Colors, Fonts, Global } from '@theme/';
 
 export default class App extends Component {
@@ -52,16 +55,18 @@ export default class App extends Component {
         return (
             <Provider store={store}>
                 <Router leftButtonIconStyle={styles.leftButtonIconStyle} navigationBarStyle={styles.navStyle} titleStyle={styles.titleStyle}>
-                    <Drawer
+                    {/* <Drawer
                         hideNavBar
                         key="drawer"
                         contentComponent={DrawerContent}
                         drawerImage={Icons.iconPerson}
                         drawerWidth={350}
                         drawerPosition="left"
-                    >
+                    > */}
                         <Scene key="root">
-                            <Scene key="home" component={Home} title="home" hideNavBar={true} initial={true} />
+                            <Scene key="timeSelect" component={TimeSelect} title="Zeit Wählen" initial={false} />
+                            <Scene key="boardSelect"  renderBackButton={()=>(null)} component={BoardSelect} title="Boards Wählen" initial={true} />
+                            <Scene key="home" component={Home} title="home" hideNavBar={true} />
                             <Scene key="myReservationsOverview" component={MyReservationsOverview} title="Reservierungen" initial={false} />
                             <Scene key="myReservationsReservation" component={MyReservationsReservation} title="Details" />
                             <Scene key="myReservationsCancel" component={MyReservationsCancel} title="Stornieren" />
@@ -90,13 +95,12 @@ export default class App extends Component {
 
                             <Scene key="login" component={Login} title="Login" initial={false} />
                         </Scene>
-                    </Drawer>
+                    {/* </Drawer> */}
                 </Router>
             </Provider>
         )
     }
 }
-
 
 const styles = StyleSheet.create({
     leftButtonIconStyle: {

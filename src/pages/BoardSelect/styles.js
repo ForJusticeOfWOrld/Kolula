@@ -1,0 +1,221 @@
+const React = require('react-native');
+const { StyleSheet } = React;
+import {
+    primaryBackgroundColor,
+    secondaryBackgroundColor,
+    primaryColor,
+    secondaryColor,
+    primaryInvertedColor,
+    inactiveColor,
+    inactiveBackgroundColor,
+    largeFontSize,
+    standardFontSize,
+    smallFontSize,
+    standardBorderRadius,
+    standardBorderWidth,
+    separatorBorderWidth,
+    standardMargin,
+    standardMmarginHorizontal,
+    standardMarginVertical,
+    containerPaddingHorizontal,
+    containerPaddingVertical,
+    rowViewPaddingVertical,
+    standardSpacerMarginVertical,
+} from './../../styles/common'
+
+import { Metrics, Styles, Images, Icons, Colors, Fonts, Global } from '@theme/';
+
+export default {
+    shadowContainer: {
+        borderWidth: 1,
+        borderRadius: 2,
+        borderColor: '#ddd',
+        borderTopWidth: 0,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.8,
+        shadowRadius: 2,
+        elevation: 1,
+        padding: Metrics.margin,
+        backgroundColor: 'white',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: Metrics.buttonWidth,
+        marginBottom: 10,
+        alignItems: 'center',
+      },
+    container: {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        paddingHorizontal: containerPaddingHorizontal,
+        paddingVertical: containerPaddingVertical,
+        //backgroundColor: primaryBackgroundColor, //Debug
+        backgroundColor: 'rgba(1,1,1,0)',
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    viewColumn: {
+        flex: 1,
+        flexDirection: 'column',
+    },
+    boardicon: {
+        width: Metrics.WIDTH(28),
+        height: Metrics.HEIGHT(60),
+        marginRight: 20
+    },
+    iconInfoDark: {
+        width: Metrics.WIDTH(16),
+        height: Metrics.HEIGHT(30),
+        marginLeft: 30
+    },
+    viewRow: {
+        flex: 1,
+        flexDirection: 'row',
+    },
+    viewHeader: {
+        //(flex: 1,
+        height: 100,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        borderWidth: 1,
+        borderColor: primaryColor,
+    },
+    viewBody: {
+        flex: 1,
+        flexDirection: 'column',
+        //borderWidth: 1,
+        //borderColor: "#0F0",
+    },
+    viewFooter: {
+        // flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+        position: 'absolute',
+        width: Metrics.buttonWidth,
+        bottom: Metrics.HEIGHT(45),
+    },
+    viewSeparator: {
+        borderBottomWidth: separatorBorderWidth,
+        borderBottomColor: primaryColor,
+        marginVertical: standardMargin,
+    },
+    viewBorder: {
+        borderRadius: standardBorderRadius,
+        borderWidth: standardBorderWidth,
+        borderColor: primaryColor,
+        marginVertical: standardMargin,
+    },
+    viewSpaceBetween: {
+        flex: 1,
+    },
+    viewIcon: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 64,
+    },
+    viewIconSmall: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 18,
+    },
+    viewMap: {
+        flex: 1,
+        //height: 100,
+        //width: 100,
+    },
+    viewButtonPrimary: {
+        borderRadius: standardBorderRadius,
+        borderWidth: standardBorderWidth,
+        borderColor: primaryColor,
+        backgroundColor: primaryColor,
+        alignSelf: 'stretch',
+    },
+    normalText: {
+        color: 'black',
+        fontSize: 16,
+        fontWeight: '600',
+        marginBottom: 11,
+    },
+    smallText: {
+        color: 'black',
+        fontSize: 14,
+        fontWeight: '600',
+        marginBottom: 11,
+    },
+    textButtonPrimary: {
+        color: primaryInvertedColor,
+        fontSize: largeFontSize,
+        fontWeight: 'bold',
+        marginVertical: standardMargin,
+        textAlign: 'center',
+    },
+    viewButtonSecondary: {
+        borderRadius: standardBorderRadius,
+        borderWidth: standardBorderWidth,
+        borderColor: primaryColor,
+        backgroundColor: primaryInvertedColor,
+        alignSelf: 'stretch',
+    },
+    textButtonSecondary: {
+        color: primaryColor,
+        fontSize: standardFontSize,
+        fontWeight: 'bold',
+        marginVertical: standardMargin,
+        textAlign: 'center',
+    },
+    viewButtonInactive: {
+        borderRadius: standardBorderRadius,
+        borderWidth: standardBorderWidth,
+        borderColor: inactiveColor,
+        backgroundColor: inactiveBackgroundColor,
+        alignSelf: 'stretch',
+    },
+    textButtonInactive: {
+        color: inactiveColor,
+        fontSize: largeFontSize,
+        fontWeight: 'bold',
+        marginVertical: standardMargin,
+        textAlign: 'center',
+    },
+    textLargeBold: {
+        fontSize: largeFontSize,
+        color: primaryColor,
+        fontWeight: 'bold',
+    },
+    textStandardBold: {
+        fontSize: standardFontSize,
+        color: primaryColor,
+        fontWeight: 'bold',
+    },
+    textStandard: {
+        fontSize: standardFontSize,
+        color: primaryColor,
+    },
+    textSeparator: {
+        fontSize: standardFontSize,
+        color: primaryColor,
+        fontWeight: 'bold',
+    },
+    marginSpacer: {
+        marginTop: standardSpacerMarginVertical,
+    },
+    viewMargin: {
+        margin: standardMargin,
+    },
+    textNoStationHeading: {
+        color: inactiveColor,
+        fontSize: largeFontSize,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    textNoStation: {
+        color: inactiveColor,
+        fontSize: standardFontSize,
+        marginVertical: 4,
+        textAlign: 'center',
+    },
+};
