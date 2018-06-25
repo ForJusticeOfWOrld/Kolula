@@ -1,0 +1,438 @@
+import React, { Component } from 'react';
+import {
+    Text,
+    View,
+    Image,
+    ScrollView,
+    FlatList,
+    TouchableOpacity,
+    StatusBar,
+    DeviceEventEmitter,
+    Platform,
+    SafeAreaView
+} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import MapView, { Marker } from 'react-native-maps';
+import styles from './styles';
+import {
+    primaryColor,
+    primaryBackgroundColor,
+    containerPaddingHorizontal,
+    containerPaddingVertical,
+} from '../../styles/common'
+import { Actions } from "react-native-router-flux";
+import { Metrics, Styles, Images, Icons, Colors, Fonts, Global } from '@theme/';
+// import { getDistance } from '@utils/geoLocation';
+import geolib from 'geolib';
+import LocationServicesDialogBox from "react-native-android-location-services-dialog-box";
+
+const ASPECT_RATIO = 4 / 2;
+const LATITUDE_DELTA = 0.1;
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+
+const mapMarkerGeneric = require('../../images/icons/icon_map_marker_generic.png');
+const mapMarker = require('../../images/icons/icon_map_marker_kolula.png');
+const mapDummy = require('../../images/dummys/mapdummy.png');
+
+const dummyNearBranch = {
+    "id": 2,
+    "location_name": "Seerestaurant Tom",
+    "items": "4 x Aufblas SUP L",
+    "items_desc": "Ein Aufblas SUP der Größe L",
+    "time": "24.02.2018 10:30 - 18:00 Uhr",
+    "location_street": "Schkeuditzer Str. 70, 06116 Halle (Saale)",
+    "location_transport": "Halle, Alfred-Schneider-Str",
+    "location_desc": "Der Hufeisensee, ein Tagebaurestloch, ist der größte See im Stadtgebiet von Halle (Saale). Er liegt im östlichen Teil zwischen den Ortsteilen Büschdorf und Kanena. In der Gegend wurde 1832 erstmals Braunkohle abgebaut. 1926 fand man größere Vorkommen und es entstand der Tagebau zwischen den beiden Ortsteilen. Nachdem die Braunkohlevorkommen 1942 abgebaut waren, wurde bis zur Stilllegung des Tagebaus in den 1960er Jahren Kies gefördert.",
+    "longitude": 12.022662,
+    "latitude": 51.466134,
+    "contingent_id": 0,
+    "new": 0,
+    "distance": 12,
+    "tempWater": "15",
+    "tempAir": "24",
+    "weather": "sunny",
+    "highlights": ["Hufeisensee Highlight 1", " Hufeisensee Highlight 2", "Highlight 3", "Highlight 4", "Highlight 5"],
+    "tariffs": [{ "time": 60, "desc": "1:00h", "price": 9.99 }, { "time": 90, "desc": "1:30h", "price": 12.99 }, { "time": 120, "desc": "2:00h", "price": 14.99 }, { "time": 180, "desc": "3:00h", "price": 19.99 }, { "time": 240, "desc": "4:00h", "price": 29.99 }],
+};
+
+const dummyBranches = {
+    "branches": [
+        {
+            "id": 0,
+            "location_name": "Strandbad Wannsee",
+            "items": "3 x Aufblas SUP XL",
+            "items_desc": "Ein Aufblas SUP der Größe XL",
+            "time": "11.03.2018 11:00 - 13:00 Uhr",
+            "location_street": "Wannsee, 14129 Berlin",
+            "location_transport": "Bad Saarow, Silberberg",
+            "location_desc": "Der Scharmützelsee ist ein See in Brandenburg. Er liegt zwischen Frankfurt (Oder) und Berlin, südlich von FürstenwaldeSpree.",
+            "longitude": 14.027054,
+            "latitude": 52.239662,
+            "contingent_id": 0,
+            "new": 0,
+            "distance": 5,
+            "tempWater": "11",
+            "tempAir": "18",
+            "weather": "cloudy",
+            "highlights": ["Scharmützelsee Highlight 1", " Scharmützelsee Highlight 2", " Scharmützelsee Highlight 3", "Highlight 4"],
+            "tariffs": [{ "time": 60, "desc": "1:00h", "price": 9.99 }, { "time": 90, "desc": "1:30h", "price": 12.99 }, { "time": 120, "desc": "2:00h", "price": 14.99 }, { "time": 180, "desc": "3:00h", "price": 19.99 }, { "time": 240, "desc": "4:00h", "price": 29.99 }],
+        },
+        {
+            "id": 1,
+            "location_name": "Eiscafé Antonio",
+            "items": "13 x Aufblas SUP Standard",
+            "items_desc": "Ein Aufblas SUP der Standard Größe",
+            "time": "10.03.2018 12:00 - 15:00 Uhr",
+            "location_street": "Scharmützelsee,15526 Bad Saarow",
+            "location_transport": "Helenesee, Frankfurt (Oder)",
+            "location_desc": "Der Helenesee ist ein See in der Nähe von Frankfurt (Oder) im Oder-Spree-Seengebiet. Er ist ein Naherholungsgebiet und liegt im Landschaftsschutzgebiet Ehemaliges Grubengelände Finkenheerd, in dem sich auch der südöstlich anschließende Katjasee befindet.",
+            "longitude": 15.027054,
+            "latitude": 51.239662,
+            "contingent_id": 0,
+            "new": 0,
+            "distance": 77,
+            "tempWater": "8",
+            "tempAir": "12",
+            "weather": "cloudy",
+            "highlights": ["Helenesee Highlight 1", " Helenesee Highlight 2", "Helenesee Highlight 3"],
+            "tariffs": [{ "time": 60, "desc": "1:00h", "price": 9.99 }, { "time": 90, "desc": "1:30h", "price": 12.99 }, { "time": 120, "desc": "2:00h", "price": 14.99 }, { "time": 180, "desc": "3:00h", "price": 19.99 }, { "time": 240, "desc": "4:00h", "price": 29.99 }],
+        },
+        {
+            "id": 3,
+            "location_name": "Strandbad Senftenberger See",
+            "items": "1 x Aufblas SUP XS",
+            "items_desc": "Ein Aufblas SUP der Größe XS",
+            "time": "11.02.2018 10:30 - 14:30 Uhr",
+            "location_street": "Senftenberger See, 01968 Senftenberg",
+            "location_transport": "Bad Saarow, Silberberg",
+            "location_desc": "Der Senftenberger See, früher auch Speicherbecken Niemtsch, liegt im Lausitzer Seenland, einer künstlich geschaffenen Seenkette. Der See befindet sich an der Grenze von Nieder- und Oberlausitz zwischen der südbrandenburgischen Stadt Senftenberg und deren Ortsteilen Niemtsch und Großkoschen im Landkreis Oberspreewald-Lausitz. Der Senftenberger See gehört mit einer Fläche von 1300 Hektar zu den größten künstlich angelegten Seen Deutschlands.",
+            "longitude": 13.027054,
+            "latitude": 51.259662,
+            "contingent_id": 0,
+            "distance": 90,
+            "tempWater": "12",
+            "tempAir": "14",
+            "weather": "rainy",
+            "highlights": ["Senftenberger See Highlight 1", " Highlight 2", "Highlight 3", "Highlight 4", "Highlight 5", "Highlight 6", "Highlight 7", "Highlight 8"],
+            "tariffs": [{ "time": 60, "desc": "1:00h", "price": 9.99 }, { "time": 90, "desc": "1:30h", "price": 12.99 }, { "time": 120, "desc": "2:00h", "price": 14.99 }, { "time": 180, "desc": "3:00h", "price": 19.99 }, { "time": 240, "desc": "4:00h", "price": 29.99 }],
+        },
+        {
+            "id": 4,
+            "location_name": "Café Helensee",
+            "items": "1 x Aufblas SUP XS",
+            "items_desc": "Ein Aufblas SUP der Größe XS",
+            "time": "11.02.2018 10:30 - 14:30 Uhr",
+            "location_street": "Helensee, 15263 Frankfurt Oder",
+            "location_transport": "Bad Saarow, Silberberg",
+            "location_desc": "Der Senftenberger See, früher auch Speicherbecken Niemtsch, liegt im Lausitzer Seenland, einer künstlich geschaffenen Seenkette. Der See befindet sich an der Grenze von Nieder- und Oberlausitz zwischen der südbrandenburgischen Stadt Senftenberg und deren Ortsteilen Niemtsch und Großkoschen im Landkreis Oberspreewald-Lausitz. Der Senftenberger See gehört mit einer Fläche von 1300 Hektar zu den größten künstlich angelegten Seen Deutschlands.",
+            "longitude": 13.027054,
+            "latitude": 51.259662,
+            "contingent_id": 0,
+            "distance": 120,
+            "tempWater": "12",
+            "tempAir": "14",
+            "weather": "rainy",
+            "highlights": ["Senftenberger See Highlight 1", " Highlight 2", "Highlight 3", "Highlight 4", "Highlight 5", "Highlight 6", "Highlight 7", "Highlight 8"],
+            "tariffs": [{ "time": 60, "desc": "1:00h", "price": 9.99 }, { "time": 90, "desc": "1:30h", "price": 12.99 }, { "time": 120, "desc": "2:00h", "price": 14.99 }, { "time": 180, "desc": "3:00h", "price": 19.99 }, { "time": 240, "desc": "4:00h", "price": 29.99 }],
+        }
+    ]
+};
+
+export default class ReservationBranches extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            dataSource: [],
+            reservation: false,
+            distance: '',
+        };
+    }
+
+    componentWillMount() {
+        // this.apiGet();
+        console.log("ReservationBranches props:")
+        console.log(this.props);
+    }
+
+    componentDidMount() {
+        // this.checkLocationPermission();
+        this.apiGet();
+        this.fetchLocation();
+        DeviceEventEmitter.addListener('locationProviderStatusChange', function (status) {
+            console.log('Location Enabled', status);
+            if (status.enabled) this.fetchLocation();
+        });
+    }
+
+    componentWillUnmount() {
+        navigator.geolocation.clearWatch(this.watchID);
+        LocationServicesDialogBox.stopListener();
+    }
+
+    checkLocationPermission() {
+        if (Platform.OS === 'android') {
+            LocationServicesDialogBox.checkLocationServicesIsEnabled({
+                message: "<h2>Use Location ?</h2>This app wants to change your device settings:<br/><br/>Use GPS, Wi-Fi, and cell network for location<br/><br/><a href='#'>Learn more</a>",
+                ok: "YES",
+                cancel: "NO",
+                enableHighAccuracy: true,
+                showDialog: true,
+                openLocationServices: true,
+                preventOutSideTouch: false,
+                preventBackClick: false,
+                providerListener: true
+            }).then(success => {
+                console.log('Location Test', success);
+                this.fetchLocation();
+            }).catch(error => {
+                console.log('Location Error', error.message);
+            });
+        } else {
+            this.fetchLocation();
+        }
+    }
+
+    fetchLocation() {
+        navigator.geolocation.getCurrentPosition(
+            ({ coords }) => {
+                this.currentCoord = {
+                    latitude: coords.latitude,
+                    longitude: coords.longitude
+                };
+                this.getDistances();
+            },
+            error => console.log('Location Error1', error),
+            {
+                timeout: 50000,
+                enableHighAccuracy: true,
+            });
+        this.watchID = navigator.geolocation.watchPosition(
+            ({ coords }) => {
+                this.currentCoord = {
+                    latitude: coords.latitude,
+                    longitude: coords.longitude
+                };
+                this.getDistances();
+            },
+            (error) => {
+                console.log('Location Error2', error)
+            });
+    }
+
+    getDistances() {
+        let dataSource = this.state.dataSource;
+        if (this.currentCoord) {
+            dataSource = dataSource.map(item => {
+                let distance = 0;
+                if (!isNaN(item.latitude) && !isNaN(item.longitude)) {
+                    distance = geolib.getDistance(this.currentCoord, {
+                        latitude: item.latitude,
+                        longitude: item.longitude
+                    });
+                }
+                return { ...item, distance };
+            }).sort((a, b) => a.distance > b.distance ? 1 : -1);
+        }
+        console.log('Test Data', dataSource);
+        this.setState({ dataSource });
+    }
+
+    renderBranches(branches) {
+        return (
+            <TouchableOpacity onPress={() => Actions.reservationBranchDetail({ reservation: branches })}>
+                <View style={[styles.viewBorder, { marginTop: 16, backgroundColor: "#FFF" }]}>
+                    <View style={[styles.viewRow, { margin: 8 }]}>
+                        <View style={[styles.viewColumn, styles.viewMargin]}>
+                            <Text style={styles.textStandardBold}>{branches.name}</Text>
+                            <Text style={styles.textStandard}>{branches.location_addres.street}, {branches.location_addres.zip_code} {branches.location_addres.city}</Text>
+                        </View>
+                        <View style={{ justifyContent: "center" }}>
+                            <Text style={[styles.textStandard, { fontSize: 18, color: "#000" }]}>{(branches.distance / 1000.0).toFixed(2)} km</Text>
+                        </View>
+                    </View>
+                </View>
+            </TouchableOpacity>
+        );
+    }
+
+    apiGet() {
+        fetch("https://dev.inbooma.net/api/locations", {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdWg3ZnQ2Zi00ZjU4LTQ5NWYtYTc3YS1iNGE0YjI2aDEyZDQiLCJleHAiOjE1NDY2MDUwMjR9.NHAxDEbMQnmZ3DNSOEagcMiKxXg9bZoUuHkz8q5ZAcg'
+            },
+            method: "POST",
+            body: JSON.stringify(
+                {
+                    //useremail: this.state.user.toLowerCase(),
+                     useremail: 'mob.web@yahoo.com',
+                    // password: this.state.pass,
+                    password: 'System1234',
+                }
+            )
+        })
+            .then((response) => response.text())
+            .then((responseData) => {
+                this._checkJson(responseData)
+
+            })
+            .done();
+        // this.props.navigation.navigate('HomePage');
+
+    }
+    _checkJson(jsonData) {//alert(JSON.stringify(jsonData))
+
+        var data = JSON.parse(jsonData);
+
+        if (data.status == 200) {
+            this.props.setUser(data.userinfo);
+            //alert(data.userinfo._id)
+            this.props.navigation.navigate('HomePage');
+        } else {
+            //alert(data.Message);
+        }
+    };
+
+    render() {
+        return (
+            <SafeAreaView style={styles.container}>
+                <StatusBar
+                    backgroundColor={primaryBackgroundColor}
+                    barStyle="light-content"
+                />
+                <ScrollView style={{ flex: 1, height: undefined, width: undefined, }}>
+                    <View style={[styles.viewColumn]}>
+                        <View onPress={() => Actions.reservationBranchDetail({ reservation: { data: dummyNearBranch } })}>
+                            <View style={[styles.viewColumn, styles.viewBorderMap, { backgroundColor: "#FFF", marginHorizontal: containerPaddingHorizontal, marginBottom: containerPaddingVertical }]}>
+                                <View style={styles.mapView}>
+                                    {/* <MapView
+                                        style={styles.mapView}
+                                        provider={MapView.PROVIDER_GOOGLE}
+                                        region={{
+                                            latitude: this.state.dataSource[0] ? this.state.dataSource[0].latitude : 0,
+                                            longitude: this.state.dataSource[0] ? this.state.dataSource[0].longitude : 0,
+                                            latitudeDelta: 0.0922,
+                                            longitudeDelta: 0.0421,
+                                        }}
+                                    >
+                                        <Marker
+                                            coordinate={{ latitude: this.state.dataSource[0] ? this.state.dataSource[0].latitude : 0, longitude: this.state.dataSource[0] ? this.state.dataSource[0].longitude : 0 }}
+                                            image={mapMarker}
+                                        />
+                                    </MapView> */}
+     
+                                    <MapView
+                                        style={styles.mapView}
+                                        provider={MapView.PROVIDER_GOOGLE}
+                                        region={{
+                                            latitude: 6.414992,
+                                            longitude: 3.385156, 
+                                            latitudeDelta: 0.0922,
+                                            longitudeDelta: 0.0421,
+                                        }}
+                                    >
+                                        <Marker
+                                            coordinate={{ latitude: 6.414992, longitude: 3.385156 }}
+                                            image={mapMarker}
+                                        />
+                                        
+                                    </MapView> 
+                                </View>
+                                <View style={[styles.viewRow, { justifyContent: "center", alignItems: "center",  }]}>
+                                    <View style={{ height: 36, width: 20, marginLeft: -30, marginRight: 30  }}>
+                                        <Image source={mapMarkerGeneric} style={{ flex: 1 }} resizeMode='contain' />
+                                    </View>
+                                    
+                                    <View style={{flexDirection: 'column', justifyContent: 'center'}}>
+                                        <Text style={styles.normalText}>
+                                            Eiscafé Antonio
+                                        </Text>
+                                        <Text style={[styles.smallText, {color: 'grey'}]}>
+                                            Scharmützelsee, 15526 Bad Saar…
+                                        </Text>
+                                    </View>
+
+                                    <Text style={styles.normalText}>
+                                        0,2 km
+                                    </Text>
+                                             
+                                       
+                                    {/* <View style={[styles.viewColumn, { marginLeft: 25, flexDirection: 'row', justifyContent: 'space-between' }]}>
+                                        <View>
+                                            <Text style={styles.textStandardBold} >{this.state.dataSource[0] ? this.state.dataSource[0].name : ''}</Text>
+                                            <Text style={styles.textStandard}>{this.state.dataSource[0] ? this.state.dataSource[0].location_addres.street + ',' + this.state.dataSource[0].location_addres.zip_code + ' ' + this.state.dataSource[0].location_addres.city : ''}</Text>
+                                        </View>
+                                        <View style={{ marginLeft: 5, justifyContent: 'center' }}>
+                                            <Text style={styles.textStandardBold} >{this.state.dataSource[0] ? (this.state.dataSource[0].distance / 1000.0).toFixed(2) + 'km' : ''}</Text>
+                                        </View>
+                                    </View> */}
+                                </View>
+                            </View>
+                        </View>
+                        <View style={{flexDirection: 'row', marginLeft: Metrics.margin, alignItems: 'center'}}>
+                            <Image resizeMode='stretch' source={Icons.iconBoardBlack} style={styles.boardicon}/>
+                            <View style={{flexDirection: 'column', justifyContent: 'center'}}>
+                                <Text style={styles.normalText}>
+                                    SUP-Aufblasbar
+                                </Text>
+                                <Text style={[styles.smallText, {color: 'grey'}]}>
+                                    leichtes Board für Anfänger
+                                </Text>
+                            </View>
+                        </View>
+                        <View style={{flexDirection: 'row', marginLeft: Metrics.margin, alignItems: 'center'}}>
+                            <Image resizeMode='stretch' source={Icons.iconCalendar} style={styles.boardicon}/>
+                            <View style={{flexDirection: 'column', justifyContent: 'center'}}>
+                                <Text style={styles.normalText}>
+                                    23.05.2018
+                                </Text>
+                                <Text style={[styles.smallText, {color: 'grey'}]}>
+                                    11:30 – 12:30 Uhr
+                                </Text>
+                            </View>
+                        </View>
+                        <View style={{marginLeft: Metrics.margin}}>
+                            
+                            <View style={{height: 1, backgroundColor: 'grey', marginBottom: 16}}/>
+                            <Text style={[styles.normalText,{color: 'grey'}]}>
+                                Gutschein einlösen
+                            </Text>
+                            <View style={{height: 1, backgroundColor: 'grey', marginBottom: 16}}/>
+                            <View onPress={this.confirmBook} style={styles.spaceContainer}>
+                                <Text style={{fontSize: 20 }}>
+                                    Gesamtkosten
+                                </Text>  
+                                <Text style={{fontSize: 20}}>
+                                    12,99 €
+                                </Text>
+                            </View>
+                        </View>
+
+
+                        {/* <View style={[styles.viewColumn, { backgroundColor: "#f7f7f7", paddingHorizontal: containerPaddingHorizontal, paddingVertical: 8 }]}>
+                            <View style={[styles.viewSeparator]}>
+                                <Text style={styles.textLarge} >Alle Stationen</Text>
+                            </View>
+                            <View style={styles.viewColumn}>
+                                <FlatList
+                                    keyExtractor={(item, index) => index}
+                                    data={this.state.dataSource}
+                                    renderItem={({ item, index }) => this.renderBranches(item)}
+                                    style={styles.listView}
+                                />
+                            </View>
+                        </View> */}
+                    </View>
+                   
+                </ScrollView>
+                    <View style={[styles.viewFooter,{marginLeft: Metrics.margin}]}>
+                        <TouchableOpacity style={[styles.viewButtonPrimary]} onPress={() => Actions.reservationPayment({ type: ActionConst.PUSH })}>
+                            <Text style={styles.textButtonPrimary} >Zahlen</Text>
+                        </TouchableOpacity>
+                    </View>
+            </SafeAreaView>
+        )
+    }
+}

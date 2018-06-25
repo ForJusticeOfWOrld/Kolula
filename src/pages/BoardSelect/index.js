@@ -40,6 +40,10 @@ export default class BoardSelect extends Component {
         console.log("ReservationRules props:")
         console.log(this.props);
     }
+    
+    confirmBook = () => {
+        Actions.confirmBook({ type: ActionConst.PUSH })
+    }
 
     render() {
         return (
@@ -90,7 +94,7 @@ export default class BoardSelect extends Component {
                         Verfügbare Zeiten
                     </Text>
                     <View style={{height: 1, backgroundColor: 'grey', marginBottom: 16}}/>
-                    <TouchableOpacity style={styles.shadowContainer}>
+                    <TouchableOpacity onPress={this.confirmBook} style={styles.shadowContainer}>
                         <Text style={{fontSize: 20 }}>
                             frühere Zeiten
                         </Text>
@@ -106,7 +110,7 @@ export default class BoardSelect extends Component {
                             Nicht Verfügbar
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.shadowContainer}>
+                    <TouchableOpacity onPress={this.confirmBook} style={styles.shadowContainer}>
                         <Text style={{fontSize: 20 }}>
                             11:30 – 12:30
                         </Text>
@@ -114,7 +118,7 @@ export default class BoardSelect extends Component {
                             Auswählen
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.shadowContainer}>
+                    <TouchableOpacity onPress={this.confirmBook} style={styles.shadowContainer}>
                         <Text style={{fontSize: 20 }}>
                             spätere Zeiten
                         </Text>
@@ -122,11 +126,6 @@ export default class BoardSelect extends Component {
                             Prüfen
                         </Text>
                     </TouchableOpacity>
-                    <View style={styles.viewFooter}>
-                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationPayment({ type: ActionConst.RESET })}>
-                            <Text style={styles.textButtonPrimary} >WEITER</Text>
-                        </TouchableOpacity>
-                    </View>
                 </View>
             </SafeAreaView>
         )

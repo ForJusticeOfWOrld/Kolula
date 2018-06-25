@@ -41,6 +41,8 @@ import AccountEmailPassword from './src/pages/account/emailPassword/index';
 
 import LockTests from './src/pages/tests/locktests/index';
 
+import ConfirmBook from './src/pages/BookConfirm';
+
 import Login from './src/pages/login/index';
 
 import menuIcon from './src/images/others/menu_hamburger.png';
@@ -55,23 +57,23 @@ export default class App extends Component {
         return (
             <Provider store={store}>
                 <Router leftButtonIconStyle={styles.leftButtonIconStyle} navigationBarStyle={styles.navStyle} titleStyle={styles.titleStyle}>
-                    {/* <Drawer
+                    <Drawer
                         hideNavBar
                         key="drawer"
                         contentComponent={DrawerContent}
                         drawerImage={Icons.iconPerson}
                         drawerWidth={350}
                         drawerPosition="left"
-                    > */}
+                    >
                         <Scene key="root">
                             <Scene key="timeSelect" component={TimeSelect} title="Zeit Wählen" initial={false} />
-                            <Scene key="boardSelect"  renderBackButton={()=>(null)} component={BoardSelect} title="Boards Wählen" initial={true} />
+                            <Scene key="boardSelect"  renderBackButton={()=>(null)} component={BoardSelect} title="Boards Wählen" />
                             <Scene key="home" component={Home} title="home" hideNavBar={true} />
                             <Scene key="myReservationsOverview" component={MyReservationsOverview} title="Reservierungen" initial={false} />
                             <Scene key="myReservationsReservation" component={MyReservationsReservation} title="Details" />
                             <Scene key="myReservationsCancel" component={MyReservationsCancel} title="Stornieren" />
                             <Scene key="myReservationsReschedule" component={MyReservationsReschedule} title="Verschieben" />
-
+                            <Scene key="confirmBook" component={ConfirmBook} title="Bestätigen" initial={true} />
                             <Scene key="reservationBranch" component={ReservationBranches} title="Login" initial={false} />
                             <Scene key="reservationBranchDetail" component={ReservationBranchDetail} title="Station" initial={false} />
                             <Scene key="reservationCalendar" component={ReservationCalendar} title="SUP Mieten" initial={false} />
@@ -95,7 +97,7 @@ export default class App extends Component {
 
                             <Scene key="login" component={Login} title="Login" initial={false} />
                         </Scene>
-                    {/* </Drawer> */}
+                    </Drawer>
                 </Router>
             </Provider>
         )
