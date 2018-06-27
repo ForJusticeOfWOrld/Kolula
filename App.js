@@ -28,6 +28,8 @@ import ReservationResource from './src/pages/reservation/resource/index';
 import ReservationSummary from './src/pages/reservation/summary/index';
 import ReservationPayment from './src/pages/reservation/payment/index';
 import Paypal from './src/pages/reservation/paypal/index';
+import CreditCard from './src/pages/reservation/creditCard/index';
+
 import ReservationRules from './src/pages/reservation/rules/index';
 import ReservationConfirmation from './src/pages/reservation/confirmation/index';
 
@@ -58,32 +60,33 @@ export default class App extends Component {
         return (
             <Provider store={store}>
                 <Router leftButtonIconStyle={styles.leftButtonIconStyle} navigationBarStyle={styles.navStyle} titleStyle={styles.titleStyle}>
-                    <Drawer
+                    {/* <Drawer
                         hideNavBar
                         key="drawer"
                         contentComponent={DrawerContent}
                         drawerImage={Icons.iconPerson}
                         drawerWidth={350}
                         drawerPosition="left"
-                    >
+                    > */}
                         <Scene key="root">
-                            <Scene key="timeSelect" component={TimeSelect} title="Zeit Wählen" initial={false} />
+                            <Scene key="timeSelect" component={TimeSelect} title="Zeit Wählen" initial={true} />
                             <Scene key="boardSelect"  renderBackButton={()=>(null)} component={BoardSelect} title="Boards Wählen" />
                             <Scene key="home" component={Home} title="home" hideNavBar={true} />
                             <Scene key="myReservationsOverview" component={MyReservationsOverview} title="Reservierungen" initial={false} />
                             <Scene key="myReservationsReservation" component={MyReservationsReservation} title="Details" />
                             <Scene key="myReservationsCancel" component={MyReservationsCancel} title="Stornieren" />
                             <Scene key="myReservationsReschedule" component={MyReservationsReschedule} title="Verschieben" />
-                            <Scene key="confirmBook" component={ConfirmBook} title="Bestätigen" initial={true} />
+                            <Scene key="confirmBook" renderBackButton={()=>(null)}  component={ConfirmBook} title="Bestätigen" initial={false} />
                             <Scene key="reservationBranch" component={ReservationBranches} title="Login" initial={false} />
                             <Scene key="reservationBranchDetail" component={ReservationBranchDetail} title="Station" initial={false} />
                             <Scene key="reservationCalendar" component={ReservationCalendar} title="SUP Mieten" initial={false} />
                             <Scene key="reservationResource" component={ReservationResource} title="Board wählen" initial={false} />
                             <Scene key="reservationSummary" component={ReservationSummary} title="Zusammenfassung" initial={false} />
-                            <Scene key="reservationPayment" component={ReservationPayment} title="Bezahlen" initial={false} />
+                            <Scene key="reservationPayment" renderBackButton={()=>(null)}  component={ReservationPayment} title="Bezahlen" initial={false} />
                             <Scene key="reservationRules" component={ReservationRules} title="Regeln und Hinweise" initial={false} />
                             <Scene key="reservationConfirmation" component={ReservationConfirmation} title="Bestätigung" initial={false} />
-                            <Scene key="paypal" component={Paypal} title="Paypal" initial={false}/>
+                            <Scene key="paypal" renderBackButton={()=>(null)}  component={Paypal} title="Paypal" initial={false}/>
+                            <Scene key="creditCard" renderBackButton={()=>(null)}  component={CreditCard} title="CreditCard" initial={false}/>
                             <Scene key="rentStart" component={RentStart} title="Miete starten" initial={false} />
                             <Scene key="rentStatus" component={RentStatus} title="Mietstatus" initial={false} />
 
@@ -96,9 +99,9 @@ export default class App extends Component {
 
                             <Scene key="lockTests" component={LockTests} title="Schloss Test" initial={false} />
 
-                            <Scene key="login" component={Login} title="Login" initial={false} />
+                            <Scene key="login" renderBackButton={()=>(null)}  component={Login} title="Login" initial={false} />
                         </Scene>
-                    </Drawer>
+                    {/* </Drawer> */}
                 </Router>
             </Provider>
         )

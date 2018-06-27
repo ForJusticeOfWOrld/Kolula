@@ -91,10 +91,13 @@ export default class ReservationPayment extends Component {
         return <PagerDotIndicator pageCount={3} />;
     }
     gotoCredit = () => {
-        
+        Actions.creditCard({ type: ActionConst.PUSH });
     }
     gotoPaypal = () => {
         Actions.paypal({ type: ActionConst.PUSH });
+    }
+    gotoLogin = () => {
+        Actions.login({ type: ActionConst.PUSH });
     }
     render() {
         return (
@@ -122,7 +125,7 @@ export default class ReservationPayment extends Component {
                             <Text style={styles.textStandardBold}>PayPal</Text>
                         </CardView>
                     </TouchableOpacity>
-                    <TouchableOpacity >
+                    <TouchableOpacity onPress={this.gotoLogin}>
                         <CardView
                             style={styles.paymentType}
                             cardElevation={2}

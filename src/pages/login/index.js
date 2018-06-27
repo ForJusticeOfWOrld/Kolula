@@ -37,7 +37,7 @@ export default class Login extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.viewSpaceBetween}>
-                    <Image source={Images.imgLogoColor} style={{ marginTop: 50 }} resizeMode='contain' />
+                    <Image source={Images.imgLogoColor} style={{alignSelf: 'center', marginTop: 50 }} resizeMode='contain' />
                     <View style={styles.viewInput}>
                         <TextInput
                             style={styles.inputText}
@@ -64,7 +64,7 @@ export default class Login extends Component {
                         />
                     </View>
                     <View style={styles.viewFooter}>
-                        <TouchableOpacity style={styles.viewButtonPrimary} onPress={() => Actions.reservationPayment({ type: ActionConst.RESET })}>
+                        <TouchableOpacity style={styles.viewButtonPrimary} >
                             <Text style={styles.textButtonPrimary} >LOGIN</Text>
                         </TouchableOpacity>
                         <TouchableOpacity >

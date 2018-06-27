@@ -17,6 +17,7 @@
     "react-native-android-location-services-dialog-box": "^2.5.0",
     "react-native-cardview": "^1.1.5",
     "react-native-countdown-circle": "3.0.0",
+    "react-native-credit-card-input": "^0.4.1",
     "react-native-datepicker": "^1.7.2",
     "react-native-icon-checkbox": "git+https://github.com/Pianist038801/react-native-icon-checkbox",
     "react-native-maps": "0.20.1",

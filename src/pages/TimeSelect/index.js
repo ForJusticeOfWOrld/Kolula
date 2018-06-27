@@ -46,7 +46,7 @@ export default class TimeSelect extends Component {
             <SafeAreaView style={styles.container}>
                 <View style={styles.viewSpaceBetween}>
                     <DatePicker
-                        style={{width: 200}}
+                        style={{width: Metrics.buttonWidth}}
                         date={this.state.date}
                         mode="datetime"
                         placeholder="select date"
