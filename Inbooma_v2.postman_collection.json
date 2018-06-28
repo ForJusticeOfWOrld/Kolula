@@ -1,0 +1,5638 @@
+{
+	"info": {
+		"_postman_id": "e9b14ceb-553e-44de-b2ff-bb165d6faa53",
+		"name": "Inbooma_v2",
+		"description": "# Introduction\nWhat does your API do?\nOfficial REST Api Documentation Inbooma Booking System\n\n# Overview\nThings that the developers should know about\n- Using Bearer Token to authenticate (JWT)\n- Trying to follow the jsonapi specification including hypermedia links\n- based on cakephp 3\n- based on crud and crud-json-api plugins\n\n# Authentication\nWhat is the preferred way of using the API?\n- Using Bearer Token to authenticate (JWT)\n\n\n# Error Codes\nWhat errors and status codes can a user expect?\n- In general the HTTP codes are used.\n\n# Rate limit\nIs there a limit to the number of requests an user can send?\nNot implemented",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Tests",
+			"description": null,
+			"item": [
+				{
+					"name": "Test Request",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "13c1a749-2b92-409a-843c-78136517167a",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "65d412e5-a3a5-44cf-b144-bde53875c938",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});",
+									"",
+									"pm.test(\"new Test example\", function () {",
+									"    //var reqBody = JSON.parse(request.data);",
+									"    var resBody = JSON.parse(responseBody).data[0].id;",
+									"    console.log(resBody);",
+									"    pm.expect(resBody).to.equal(17); ",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "{{jsontype}}"
+							},
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"data\":{\n  \n    \"type\": \"event_exceptions\",\n    \"id\":4,\n    \"relationships\": {\n      \"event\": {\n        \"data\": { \"type\": \"events\", \"id\": \"5\" }\n      }\n    }\n  }\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/contingents",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"contingents"
+							]
+						},
+						"description": "Returns all Users which is the requesting user allowed to see.\ne.g.: As Admin or Manager of a client, he can see all users of this client."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"description": null,
+			"item": [
+				{
+					"name": "[Public] GetToken demo_admin",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "aae52538-1789-49bb-8e82-e2ea5a8ff811",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "6e081ffe-cd7c-4893-b4f4-7761942fcb91",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});",
+									"jsonData = pm.response.json();",
+									"pm.environment.set(\"jwt_token\", jsonData.data.token);"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "{{jsontype}}"
+							},
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\":\"admin_2wave\",\n  \"password\":\"p6PqWqegth\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/users/token",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"token"
+							]
+						},
+						"description": "Request the Bearer Authentication Token"
+					},
+					"response": [
+						{
+							"id": "357d2a16-f4a7-40f0-9170-988bb3b9ac3a",
+							"name": "GetToken ksc",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\":\"demo\",\n  \"password\":\"Test123\"\n}"
+								},
+								"url": {
+									"raw": "{{URL}}/api/users/token",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"token"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true",
+									"name": "Access-Control-Allow-Credentials",
+									"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Accept, Authorization, Cache-Control, Content-Type, X-Requested-With, x-csrf-token, X-DEBUGKIT-ID",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, OPTIONS, PATCH, POST, PUT, DELETE",
+									"name": "Access-Control-Allow-Methods",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Access-Control-Max-Age",
+									"value": "3600",
+									"name": "Access-Control-Max-Age",
+									"description": "Indicates how long the results of a preflight request can be cached in seconds."
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=UTF-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 15 May 2018 18:05:48 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "nginx/1.14.0 (Ubuntu)",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"name": "Transfer-Encoding",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								},
+								{
+									"key": "X-DEBUGKIT-ID",
+									"value": "*",
+									"name": "X-DEBUGKIT-ID",
+									"description": "Custom header"
+								}
+							],
+							"cookie": [],
+							"body": "{\"success\":true,\"data\":{\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ3ZjBlYnQ2Zi00ZjU4LTQ5NWYtYTc3YS1iNGE0YjI2aDEyZDQiLCJleHAiOjE1NDQ1NTE1NDh9.P13-o6UmyP_2ClKQXXaWuZzry7TIgXsjP32voXxpk2I\"},\"user\":{\"id\":\"wf0ebt6f-4f58-495f-a77a-b4a4b26h12d4\",\"created_by\":null,\"modified_by\":null,\"client_id\":1,\"username\":\"demo\",\"email\":\"test@tests.freizeitplan.net\",\"first_name\":\"Demo\",\"last_name\":\"User\",\"title\":null,\"api_token\":null,\"activation_date\":null,\"secret\":null,\"secret_verified\":null,\"tos_date\":\"2018-03-02T08:43:23+01:00\",\"active\":true,\"role\":\"user\",\"lang\":\"en_US\",\"created\":\"2018-03-02T05:10:46+01:00\",\"modified\":\"2018-03-02T05:11:47+01:00\",\"deleted\":null}}"
+						}
+					]
+				},
+				{
+					"name": "[Public] GetToken demo_admin Copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "aae52538-1789-49bb-8e82-e2ea5a8ff811",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "6e081ffe-cd7c-4893-b4f4-7761942fcb91",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});",
+									"jsonData = pm.response.json();",
+									"pm.environment.set(\"jwt_token\", jsonData.data.token);"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "{{jsontype}}"
+							},
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\":\"demo_admin\",\n  \"password\":\"Test123\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/users/token",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"token"
+							]
+						},
+						"description": "Request the Bearer Authentication Token"
+					},
+					"response": [
+						{
+							"id": "da789288-19d4-4012-b23d-fcb514cb4446",
+							"name": "GetToken ksc",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\":\"demo\",\n  \"password\":\"Test123\"\n}"
+								},
+								"url": {
+									"raw": "{{URL}}/api/users/token",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"token"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true",
+									"name": "Access-Control-Allow-Credentials",
+									"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Accept, Authorization, Cache-Control, Content-Type, X-Requested-With, x-csrf-token, X-DEBUGKIT-ID",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, OPTIONS, PATCH, POST, PUT, DELETE",
+									"name": "Access-Control-Allow-Methods",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Access-Control-Max-Age",
+									"value": "3600",
+									"name": "Access-Control-Max-Age",
+									"description": "Indicates how long the results of a preflight request can be cached in seconds."
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=UTF-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 15 May 2018 18:05:48 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "nginx/1.14.0 (Ubuntu)",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"name": "Transfer-Encoding",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								},
+								{
+									"key": "X-DEBUGKIT-ID",
+									"value": "*",
+									"name": "X-DEBUGKIT-ID",
+									"description": "Custom header"
+								}
+							],
+							"cookie": [],
+							"body": "{\"success\":true,\"data\":{\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ3ZjBlYnQ2Zi00ZjU4LTQ5NWYtYTc3YS1iNGE0YjI2aDEyZDQiLCJleHAiOjE1NDQ1NTE1NDh9.P13-o6UmyP_2ClKQXXaWuZzry7TIgXsjP32voXxpk2I\"},\"user\":{\"id\":\"wf0ebt6f-4f58-495f-a77a-b4a4b26h12d4\",\"created_by\":null,\"modified_by\":null,\"client_id\":1,\"username\":\"demo\",\"email\":\"test@tests.freizeitplan.net\",\"first_name\":\"Demo\",\"last_name\":\"User\",\"title\":null,\"api_token\":null,\"activation_date\":null,\"secret\":null,\"secret_verified\":null,\"tos_date\":\"2018-03-02T08:43:23+01:00\",\"active\":true,\"role\":\"user\",\"lang\":\"en_US\",\"created\":\"2018-03-02T05:10:46+01:00\",\"modified\":\"2018-03-02T05:11:47+01:00\",\"deleted\":null}}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"description": null,
+			"item": [
+				{
+					"name": "[Public] GetToken demo_admin",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "aae52538-1789-49bb-8e82-e2ea5a8ff811",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "6e081ffe-cd7c-4893-b4f4-7761942fcb91",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});",
+									"jsonData = pm.response.json();",
+									"pm.environment.set(\"jwt_token\", jsonData.data.token);"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "{{jsontype}}"
+							},
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\":\"admin_2wave\",\n  \"password\":\"p6PqWqegth\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/users/token",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"token"
+							]
+						},
+						"description": "Request the Bearer Authentication Token"
+					},
+					"response": [
+						{
+							"id": "5333ddbf-e3e3-4720-adbc-c5e45a28ff26",
+							"name": "GetToken ksc",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\":\"demo\",\n  \"password\":\"Test123\"\n}"
+								},
+								"url": {
+									"raw": "{{URL}}/api/users/token",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"token"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true",
+									"name": "Access-Control-Allow-Credentials",
+									"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Accept, Authorization, Cache-Control, Content-Type, X-Requested-With, x-csrf-token, X-DEBUGKIT-ID",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, OPTIONS, PATCH, POST, PUT, DELETE",
+									"name": "Access-Control-Allow-Methods",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Access-Control-Max-Age",
+									"value": "3600",
+									"name": "Access-Control-Max-Age",
+									"description": "Indicates how long the results of a preflight request can be cached in seconds."
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=UTF-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 15 May 2018 18:05:48 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "nginx/1.14.0 (Ubuntu)",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"name": "Transfer-Encoding",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								},
+								{
+									"key": "X-DEBUGKIT-ID",
+									"value": "*",
+									"name": "X-DEBUGKIT-ID",
+									"description": "Custom header"
+								}
+							],
+							"cookie": [],
+							"body": "{\"success\":true,\"data\":{\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ3ZjBlYnQ2Zi00ZjU4LTQ5NWYtYTc3YS1iNGE0YjI2aDEyZDQiLCJleHAiOjE1NDQ1NTE1NDh9.P13-o6UmyP_2ClKQXXaWuZzry7TIgXsjP32voXxpk2I\"},\"user\":{\"id\":\"wf0ebt6f-4f58-495f-a77a-b4a4b26h12d4\",\"created_by\":null,\"modified_by\":null,\"client_id\":1,\"username\":\"demo\",\"email\":\"test@tests.freizeitplan.net\",\"first_name\":\"Demo\",\"last_name\":\"User\",\"title\":null,\"api_token\":null,\"activation_date\":null,\"secret\":null,\"secret_verified\":null,\"tos_date\":\"2018-03-02T08:43:23+01:00\",\"active\":true,\"role\":\"user\",\"lang\":\"en_US\",\"created\":\"2018-03-02T05:10:46+01:00\",\"modified\":\"2018-03-02T05:11:47+01:00\",\"deleted\":null}}"
+						}
+					]
+				},
+				{
+					"name": "Index Users",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f6ccbfa9-2e12-4af2-8a3b-4315abbd2c62",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "d7fadce9-1278-4fca-9f54-c3e0e50c54b0",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/api/users",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						},
+						"description": "Returns all Users which is the requesting user allowed to see.\ne.g.: As Admin or Manager of a client, he can see all users of this client."
+					},
+					"response": []
+				},
+				{
+					"name": "[Public] Add user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "27b5a565-e1c5-497d-b1cf-6da20f7819cc",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "126cbae9-2e2e-40c9-ae0e-572166087331",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});",
+									"pm.test(\"user id has to be saved\", function () {",
+									"    jsonData = pm.response.json();",
+									"    pm.environment.set(\"created_user_id\", jsonData.data[0].id); ",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "{{jsontype}}"
+							},
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\":\"sdes@tests.freizeitplan.net\",\r\n  \"username\":\"sdfsa-testt\",\r\n  \"password\":\"Testa123\",\r\n  \"active\":1,\r\n  \"first_name\":\"testname\",\r\n  \"last_name\":\"testnachname\",\r\n  \"client_id\":1,\r\n  \"user_addresses\":{\r\n  \"street\":\"teststraße\",\r\n  \"zip_code\":\"12131\"\r\n  }\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/users",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						},
+						"description": "Register a new User.\nMake sure to send a client_id.\nIt's necesseray ATM. For later purposes it shouldn't be required, because we will add in future a public client module, where a user can book in all public clients."
+					},
+					"response": []
+				},
+				{
+					"name": "[Public] Register user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "27b5a565-e1c5-497d-b1cf-6da20f7819cc",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "126cbae9-2e2e-40c9-ae0e-572166087331",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});",
+									"pm.test(\"user id has to be saved\", function () {",
+									"    jsonData = pm.response.json();",
+									"    pm.environment.set(\"created_user_id\", jsonData.data[0].id); ",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "{{jsontype}}"
+							},
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\":\"support@ilockit.bike\",\r\n  \"username\":\"cha\",\r\n  \"first_name\":\"Christian\",\r\n  \"last_name\":\"Anuth\",\r\n  \"client_id\":11,\r\n  \"title\":\"mr.\",\r\n  \"active\":1,\r\n  \"role\":\"admin\",\r\n  \"lang\":\"de_DE\",\r\n  \"user_addresses\":{\r\n  \"street\":\"Teststraße\",\r\n  \"zip_code\":\"00000\"\r\n  }\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/users/userRegistration",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"userRegistration"
+							]
+						},
+						"description": "Register a new User.\nMake sure to send a client_id.\nIt's necesseray ATM. For later purposes it shouldn't be required, because we will add in future a public client module, where a user can book in all public clients."
+					},
+					"response": []
+				},
+				{
+					"name": "View user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "9ecadb74-6f75-42e6-8443-fe4bdbd95ea2",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "2b36c531-293a-468a-847e-929add6117cb",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/api/users/278a34ec-71fe-4ed0-928c-ac31f7112b9d",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"278a34ec-71fe-4ed0-928c-ac31f7112b9d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit User",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "9ecadb74-6f75-42e6-8443-fe4bdbd95ea2",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "9e34647b-52ee-4b9b-8378-5f5958f959d7",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "{{jsontype}}"
+							},
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"client_id\":1,\r\n  \"first_name\":\"Test_first_name_change\",\r\n  \"last_name\":\"change_last_name\",\r\n  \"user_addresses\":\r\n    {\r\n    \"id\":113,\r\n      \"street\":\"change_street_test\",\r\n    \"city\":\"Ratzeburg\"\r\n  }\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{URL}}/api/users/80bda5a4-8d0c-4a8f-a26b-5819e903c410",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"80bda5a4-8d0c-4a8f-a26b-5819e903c410"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "9ecadb74-6f75-42e6-8443-fe4bdbd95ea2",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a81d506-e28a-40c5-97d6-019bb8c345a5",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/api/users/{{created_user_id}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{created_user_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AvailabilityChecks",
+			"description": null,
+			"item": [
+				{
+					"name": "[Public] get available resources for Bikesharing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "55d3df4e-7173-41cc-ba5f-9c4f0c1b50a7",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"location_id\":10\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/resources/getAvailable",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"resources",
+								"getAvailable"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Availability for Resources of Location",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "55d3df4e-7173-41cc-ba5f-9c4f0c1b50a7",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"location_id\":10\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/resources/getAvailablesForLocation",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"resources",
+								"getAvailablesForLocation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Public] get availables for location",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "55d3df4e-7173-41cc-ba5f-9c4f0c1b50a7",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"location_id\":10\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/resources/getAvailablesForLocation",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"resources",
+								"getAvailablesForLocation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Public] get available contingents for Bikesharing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "62b9fc39-20f7-4d78-a00f-b0408d8f4ce4",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"contingent_id\":\"20\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/contingents/getAvailables",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"contingents",
+								"getAvailables"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Public] get available contingents for Appointments",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4ae67364-fb0c-4436-b00d-609caf192d34",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"contingent_id\":\"32\",\n  \"begin\":\"2018-06-01 00:00:00\",\n  \"end\":\"2018-06-30 00:00:00\",\n  \"client_id\":6\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/contingents/getAvailables",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"contingents",
+								"getAvailables"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Kontingent, Objekte,Ressourcen Modul",
+			"description": null,
+			"item": [
+				{
+					"name": "Appointments",
+					"description": null,
+					"item": [
+						{
+							"name": "Index appointments",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "ca7b8cb7-4836-4953-81b2-a79f59da75db",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "d2b1d333-3b28-4d07-9a4f-9c1ac0f99162",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URL}}/api/appointments/9",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"appointments",
+										"9"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "View appointment",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "ed13afc7-97be-4188-99a6-beb4831dcecd",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "11f34805-dac1-46a5-ae28-1c68918da766",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URL}}/api/appointments/1",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"appointments",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add appointment",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "382e2e6c-f928-44a3-9ee3-fc4cbb505c7d",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "c87cdc98-62d6-48e2-a4c4-abd06a0a673a",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "{{jsontype}}"
+									},
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"client_id\":\"3\",\r\n    \"name\":\"Test STadtführung Kolja(einzel)\",\r\n    \"description\": \"+- 1-2 Test Termin Kolja\",\r\n    \"contingent_id\":128,\r\n    \"begin\":\"2018-06-19 10:00:00\",\r\n    \"end\":\"2018-06-19 14:00:00\",\r\n    \"max_pers_count\":12,\r\n    \"current_available_pers_count\":12\r\n}"
+								},
+								"url": {
+									"raw": "{{URL}}/api/appointments",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"appointments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit appointment",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "e0ac8a24-be5a-47de-b580-18d03b8b1aa3",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "b7f2d1f5-f9b9-4d1d-be36-a5d5808c1079",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"status\":\"confirmed\"\n}"
+								},
+								"url": {
+									"raw": "{{URL}}/api/appointments/20",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"appointments",
+										"20"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete appointment",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "e0ac8a24-be5a-47de-b580-18d03b8b1aa3",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "5d175bf6-d544-405e-9e14-ecffdc5ef7e1",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URL}}/api/appointments/154",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"appointments",
+										"154"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Contingents",
+					"description": null,
+					"item": [
+						{
+							"name": "Index contingents",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "ca7b8cb7-4836-4953-81b2-a79f59da75db",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "d2b1d333-3b28-4d07-9a4f-9c1ac0f99162",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URL}}/api/contingents",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"contingents"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "View contingent",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "ed13afc7-97be-4188-99a6-beb4831dcecd",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "11f34805-dac1-46a5-ae28-1c68918da766",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URL}}/api/contingents/24",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"contingents",
+										"24"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add contingent",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "382e2e6c-f928-44a3-9ee3-fc4cbb505c7d",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "c87cdc98-62d6-48e2-a4c4-abd06a0a673a",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"type\": \"contingents\",\n        \"attributes\": {\n            \"name\": \"testcontingentjsonapi.org\",\n            \"description\": \"Testfälle for jsonapi.org\",\n            \"number_total\":5,\n            \"number_active\":5,\n            \"number_defect\":0\n            },\n        \"relationships\": {\n            \"calendar\": {\n                \"data\": {\n                    \"type\": \"calendars\",\n                    \"id\": \"1\"\n                }\n            }\n        }\n    }\n}\n"
+								},
+								"url": {
+									"raw": "{{URL}}/api/contingents",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"contingents"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit contingent",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "e0ac8a24-be5a-47de-b580-18d03b8b1aa3",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "b7f2d1f5-f9b9-4d1d-be36-a5d5808c1079",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"status\":\"confirmed\"\n}"
+								},
+								"url": {
+									"raw": "{{URL}}/api/contingents/20",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"contingents",
+										"20"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete contingent",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "e0ac8a24-be5a-47de-b580-18d03b8b1aa3",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "5d175bf6-d544-405e-9e14-ecffdc5ef7e1",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URL}}/api/contingents/154",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"contingents",
+										"154"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Resourcetypes",
+					"description": null,
+					"item": [
+						{
+							"name": "[Public] Index resourcetypes",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "6545d316-77bd-4e20-8272-a5dabbb1dd39",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "cb84997e-ef1a-41fc-948c-a5c572817cd5",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URL}}/api/resourcetypes",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"resourcetypes"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Resources",
+					"description": null,
+					"item": [
+						{
+							"name": "Index resource",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "7722e80d-ea06-4db1-9181-290871e34530",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "bbdd5ec4-ff2b-4013-b00e-494143142fe8",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URL}}/api/resources?limit=2",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"resources"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "View resource",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "8ddaafeb-738b-40cd-9ef2-9425f58c45a7",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "faae5ec1-b4f9-44b3-b390-be359f27eb96",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URL}}/api/resources/20",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"resources",
+										"20"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add resource",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "43b4953a-28ac-4340-bd35-f2b48d72091e",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "fb006746-ea2a-4e46-b15c-7b71b38d5502",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "{{jsontype}}"
+									},
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "\n{\n  \"contingent_id\":4,\n  \"longitude\":0,\n  \"latitude\":0,\n  \"created\":\"2018-01-25T01:10:58+00:00\",\n  \"modified\":\"2018-01-19T01:10:58+00:00\",\n  \"deleted\":null,\n  \"mac\":\"maccc\",\n  \"status\":\"inactive\",\n  \"secret\":\"helosdsaasdasddasdsaoo\",\n  \"battery_value\":null\n  \n}"
+								},
+								"url": {
+									"raw": "{{URL}}/api/resources",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"resources"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update resource",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "3e4d03b5-7ca3-45e6-8c56-12d549be6c67",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "bb9175db-be6d-4f9b-bacb-309483e4979e",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "{{jsontype}}"
+									},
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "\n{\n  \"contingent_id\":4,\n  \"longitude\":0,\n  \"latitude\":0,\n  \"created\":\"2018-01-25T01:10:58+00:00\",\n  \"modified\":\"2018-01-19T01:10:58+00:00\",\n  \"deleted\":null,\n  \"mac\":\"FF:B0:18:7D:8F:A7\",\n  \"status\":\"inactive\",\n  \"secret\":\"helosdsaasdasddasdsaoo\",\n  \"battery_value\":null\n  \n}"
+								},
+								"url": {
+									"raw": "{{URL}}/api/resources/20",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"resources",
+										"20"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete resource",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "d3be8eab-6c31-4ab5-8442-b4c09cf0ed9a",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "88048ed2-3749-4ec5-acaf-4447f274f755",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "{{jsontype}}"
+									},
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URL}}/api/resources/20",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"resources",
+										"20"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "Price Module",
+			"description": null,
+			"item": [
+				{
+					"name": "Prices",
+					"description": null,
+					"item": [
+						{
+							"name": "Index prices",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "7722e80d-ea06-4db1-9181-290871e34530",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "bbdd5ec4-ff2b-4013-b00e-494143142fe8",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URL}}/api/prices",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"prices"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "View price",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "8ddaafeb-738b-40cd-9ef2-9425f58c45a7",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "faae5ec1-b4f9-44b3-b390-be359f27eb96",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URL}}/api/prices/8",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"prices",
+										"8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add price",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "43b4953a-28ac-4340-bd35-f2b48d72091e",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "fb006746-ea2a-4e46-b15c-7b71b38d5502",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "{{jsontype}}"
+									},
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "\n{\n  \"pricetype_id\":5,\n  \"amount\":53412,\n  \"pricetariff_id\":28\n}"
+								},
+								"url": {
+									"raw": "{{URL}}/api/prices",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"prices"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update price",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "3e4d03b5-7ca3-45e6-8c56-12d549be6c67",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "bb9175db-be6d-4f9b-bacb-309483e4979e",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "{{jsontype}}"
+									},
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "\n{\n  \"amount_weekday_1\":500\n}"
+								},
+								"url": {
+									"raw": "{{URL}}/api/prices/103",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"prices",
+										"103"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete price",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "d3be8eab-6c31-4ab5-8442-b4c09cf0ed9a",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "88048ed2-3749-4ec5-acaf-4447f274f755",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "{{jsontype}}"
+									},
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URL}}/api/prices/5",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"prices",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getPrice",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"pricetariff_id\":2,\n  \"count_of_contingents\":3,\n  \"count_of_children\":2\n\n}"
+								},
+								"url": {
+									"raw": "{{URL}}/api/prices/getPrice",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"prices",
+										"getPrice"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Pricetariffs",
+					"description": null,
+					"item": [
+						{
+							"name": "Index pricetariffs",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "7722e80d-ea06-4db1-9181-290871e34530",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "bbdd5ec4-ff2b-4013-b00e-494143142fe8",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URL}}/api/pricetariffs/getPerContingent/74",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"pricetariffs",
+										"getPerContingent",
+										"74"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "View pricetariff",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "8ddaafeb-738b-40cd-9ef2-9425f58c45a7",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "faae5ec1-b4f9-44b3-b390-be359f27eb96",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URL}}/api/pricetariffs/9",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"pricetariffs",
+										"9"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add pricetariff",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "43b4953a-28ac-4340-bd35-f2b48d72091e",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "fb006746-ea2a-4e46-b15c-7b71b38d5502",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "{{jsontype}}"
+									},
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"contingent_id\":17,\n  \"client_id\":3,\n  \"name\": \"TestPricetariff Kolja\",\n  \"description\": \"Test zum Erstellen eines Preistarifs\",\n  \"begin\": \"2018-05-01 00:00:00\",\n  \"end\": \"2019-05-01 00:00:00\"\n  \"contingents\": [{\n  \"id\":17\n  }]\n}"
+								},
+								"url": {
+									"raw": "{{URL}}/api/pricetariffs",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"pricetariffs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update pricetariff",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "3e4d03b5-7ca3-45e6-8c56-12d549be6c67",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "bb9175db-be6d-4f9b-bacb-309483e4979e",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "{{jsontype}}"
+									},
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"contingent_id\":17,\n  \"client_id\":1,\n  \"name\": \"TestPricetariff Kolja\",\n  \"description\": \"Test zum Erstellen eines Preistarifs\",\n  \"begin\": \"2018-05-01 00:00:00\",\n  \"end\": \"2019-05-01 00:00:00\",\n  \"contingents\": [{\n  \"id\":17\n  }]\n}"
+								},
+								"url": {
+									"raw": "{{URL}}/api/pricetariffs/34",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"pricetariffs",
+										"34"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete pricetariff",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "d3be8eab-6c31-4ab5-8442-b4c09cf0ed9a",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "88048ed2-3749-4ec5-acaf-4447f274f755",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "{{jsontype}}"
+									},
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URL}}/api/pricetariffs/7",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"pricetariffs",
+										"7"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Pricetypes",
+					"description": null,
+					"item": [
+						{
+							"name": "Index pricetariffs Copy",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "7722e80d-ea06-4db1-9181-290871e34530",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "bbdd5ec4-ff2b-4013-b00e-494143142fe8",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URL}}/api/pricetypes",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"pricetypes"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "Order Module",
+			"description": null,
+			"item": [
+				{
+					"name": "Orders",
+					"description": null,
+					"item": [
+						{
+							"name": "Index orders",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "ca7b8cb7-4836-4953-81b2-a79f59da75db",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "1fb5e51a-bb4f-426e-aaf4-bb452f16458d",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URL}}/api/orders",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"orders"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Index orders Copy",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "ca7b8cb7-4836-4953-81b2-a79f59da75db",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "1fb5e51a-bb4f-426e-aaf4-bb452f16458d",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URL}}/api/orders?find=full",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "find",
+											"value": "full"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "View order",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "ed13afc7-97be-4188-99a6-beb4831dcecd",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "c8f6c690-61b3-4749-a4f5-ae8b28ca74ae",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URL}}/api/orders/335",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"orders",
+										"335"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add order",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "382e2e6c-f928-44a3-9ee3-fc4cbb505c7d",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "f13f0301-a451-48ac-9af4-e6cd862287d5",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "{{jsontype}}"
+									},
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user_id\": \"ec0ead6f-4f58-495f-a77a-b4a4b34f29d4\",\r\n    \"client_id\":\"3\",\r\n    \"description\": \"test Kolja\",\r\n    \"status\":\"requested\"\r\n}"
+								},
+								"url": {
+									"raw": "{{URL}}/api/orders",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"orders"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Execute order",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "382e2e6c-f928-44a3-9ee3-fc4cbb505c7d",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "f13f0301-a451-48ac-9af4-e6cd862287d5",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "{{jsontype}}"
+									},
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n}"
+								},
+								"url": {
+									"raw": "{{URL}}/api/orders/execute/335",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"orders",
+										"execute",
+										"335"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit order",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "e0ac8a24-be5a-47de-b580-18d03b8b1aa3",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "56fa3192-475e-45bb-bcf3-dfe2b377ae6f",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"status\":\"confirmed\"\n}"
+								},
+								"url": {
+									"raw": "{{URL}}/api/orders/130",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"orders",
+										"130"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete order",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "e0ac8a24-be5a-47de-b580-18d03b8b1aa3",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "d5e21122-a807-4b1f-bc21-72ceb74e37dd",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URL}}/api/orders/154",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"orders",
+										"154"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Reservations",
+					"description": null,
+					"item": [
+						{
+							"name": "Index reservations",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "ca7b8cb7-4836-4953-81b2-a79f59da75db",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "36ffdc27-a0f0-4f3e-bb4c-e1dc750164f0",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URL}}/api/reservations?limit=5",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"reservations"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "View reservation",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "6dcf33f3-ebc1-461b-a282-8028ceb56118",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "49bb815f-4605-4663-8806-db4fdbdd2c64",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n        \"description\": \"testttasdasdttt\"\n}"
+								},
+								"url": {
+									"raw": "{{URL}}/api/reservations/739",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"reservations",
+										"739"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add reservation",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "fd6db534-9081-4afa-af03-85cac7541980",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "2bc68cb0-c211-4f0c-a036-a5b0ab97539e",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "{{jsontype}}"
+									},
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"order_id\": \"335\",\r\n    \"description\": \"+- 1-2 tttttttttttttttttttttt\",\r\n    \"begin\": \"2018-06-15 08:00:00\",\r\n    \"end\": \"2018-06-15 12:00:00\",\r\n    \"user_id\": \"ec0ead6f-4f58-495f-a77a-b4a4b34f29d4\",\r\n    \"client_id\":6,\r\n    \"status\":\"requested\",\r\n    \"event_id\":254,\r\n    \"appointment_id\":9,\r\n  \"contingents\":[ \r\n        {\r\n            \"id\": \"32\",\r\n            \"_joinData\":{   \r\n              \"pricetariff_id\":3,\r\n              \"amount\": \"4\"\r\n            }\r\n        }\r\n    ]\r\n}\r\n"
+								},
+								"url": {
+									"raw": "{{URL}}/api/reservations",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"reservations"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit reservation",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "fd6db534-9081-4afa-af03-85cac7541980",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "ee9b3184-8fdb-49c1-8210-807801b763ab",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "{{jsontype}}"
+									},
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"description\":\"d\"\r\n  }\r\n"
+								},
+								"url": {
+									"raw": "{{URL}}/api/reservations/739",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"reservations",
+										"739"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete reservation",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "109419a7-2f0a-4052-a167-c2f82bcd47f2",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "ca784b45-c050-4f32-9d01-69fa7cf63569",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URL}}/api/reservations/5",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"reservations",
+										"5"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Checkins",
+					"description": null,
+					"item": [
+						{
+							"name": "Checkin // Add checkin",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "f3d05b7c-ada0-4501-af5d-01d1fe30b5c0",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "9eb03de7-e828-44de-be38-9d3433224e1c",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "{{jsontype}}"
+									},
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"checkin\":\"2018-05-15 10:00:00\",\r\n    \"resource_id\":49,\r\n    \"reservation_id\":626\r\n}"
+								},
+								"url": {
+									"raw": "{{URL}}/api/checkins",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"checkins"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Checkin // Edit checkin",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "f3d05b7c-ada0-4501-af5d-01d1fe30b5c0",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "9eb03de7-e828-44de-be38-9d3433224e1c",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "{{jsontype}}"
+									},
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"checkout\":\"2018-06-15 20:44:00\",\r\n    \"resource_id\":106,\r\n    \"reservation_id\":710,\r\n    \"lat\":51.328869884,\r\n    \"lng\":12.338358,\r\n    \"location_id\":10\r\n}"
+								},
+								"url": {
+									"raw": "{{URL}}/api/checkins/75",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"checkins",
+										"75"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "Calendars",
+			"description": null,
+			"item": [
+				{
+					"name": "Index calendars",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ca7b8cb7-4836-4953-81b2-a79f59da75db",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "d2b1d333-3b28-4d07-9a4f-9c1ac0f99162",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/api/calendars",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"calendars"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View calendar",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ed13afc7-97be-4188-99a6-beb4831dcecd",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "11f34805-dac1-46a5-ae28-1c68918da766",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/api/calendars/6",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"calendars",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add calendar",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "382e2e6c-f928-44a3-9ee3-fc4cbb505c7d",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "c87cdc98-62d6-48e2-a4c4-abd06a0a673a",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "{{jsontype}}"
+							},
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\":\"KoljaTest\",\r\n  \"description\":\"Tetst 17.05.2018\",\r\n  \"valid_from\":\"2018-05-01 00:00:00\",\r\n  \"contingents\":[ \r\n        {\r\n            \"id\": \"82\"\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/calendars",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"calendars"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit calendar",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "e0ac8a24-be5a-47de-b580-18d03b8b1aa3",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "b7f2d1f5-f9b9-4d1d-be36-a5d5808c1079",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"description\":\"test calendar description change\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/calendars/6",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"calendars",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete calendar",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "e0ac8a24-be5a-47de-b580-18d03b8b1aa3",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "5d175bf6-d544-405e-9e14-ecffdc5ef7e1",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/api/calendars/154",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"calendars",
+								"154"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Events",
+			"description": null,
+			"item": [
+				{
+					"name": "Index events",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ca7b8cb7-4836-4953-81b2-a79f59da75db",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "d2b1d333-3b28-4d07-9a4f-9c1ac0f99162",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/api/events",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View event",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ed13afc7-97be-4188-99a6-beb4831dcecd",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "11f34805-dac1-46a5-ae28-1c68918da766",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/api/events/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"events",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add event",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "382e2e6c-f928-44a3-9ee3-fc4cbb505c7d",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "c87cdc98-62d6-48e2-a4c4-abd06a0a673a",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "{{jsontype}}"
+							},
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\":\"KoljaTest\",\r\n  \"description\":\"Tetst 17.05.2018\",\r\n  \"valid_from\":\"2018-05-01 00:00:00\",\r\n  \"contingents\":[ \r\n        {\r\n            \"id\": \"82\"\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/events",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit event",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "e0ac8a24-be5a-47de-b580-18d03b8b1aa3",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "b7f2d1f5-f9b9-4d1d-be36-a5d5808c1079",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"description\":\"testevent description change\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/events/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"events",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete event",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "e0ac8a24-be5a-47de-b580-18d03b8b1aa3",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "5d175bf6-d544-405e-9e14-ecffdc5ef7e1",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/api/events/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"events",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Locations",
+			"description": null,
+			"item": [
+				{
+					"name": "Index locations",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "1e870dff-0076-4836-8fdf-4d5c65ed9417",
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.get(\"jwt_token\");"
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "3f4b03ca-d43c-466f-b218-8c02ad5ccb20",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "{{jsontype}}"
+							},
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/api/locations",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"locations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View location",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "1e870dff-0076-4836-8fdf-4d5c65ed9417",
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.get(\"jwt_token\");"
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "3f4b03ca-d43c-466f-b218-8c02ad5ccb20",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "{{jsontype}}"
+							},
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/api/locations/20",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"locations",
+								"20"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add location",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "382e2e6c-f928-44a3-9ee3-fc4cbb505c7d",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "c87cdc98-62d6-48e2-a4c4-abd06a0a673a",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "{{jsontype}}"
+							},
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": \"ec0ead6f-4f58-495f-a77a-b4a4b34f29d4\",\r\n    \"client_id\":\"1\",\r\n    \"description\": \"+- 1-2 Fahrräder\",\r\n    \"status\":\"requested\"\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/locations",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"locations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit location",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "e0ac8a24-be5a-47de-b580-18d03b8b1aa3",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "b7f2d1f5-f9b9-4d1d-be36-a5d5808c1079",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"status\":\"confirmed\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/locations/3",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"locations",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete location",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "e0ac8a24-be5a-47de-b580-18d03b8b1aa3",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "5d175bf6-d544-405e-9e14-ecffdc5ef7e1",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/api/locations/3",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"locations",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Clients",
+			"description": null,
+			"item": [
+				{
+					"name": "[Public] Index clients",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "1e870dff-0076-4836-8fdf-4d5c65ed9417",
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.get(\"jwt_token\");"
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "e4d4daf6-b339-43cc-a3cc-d25f857d132b",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "{{jsontype}}"
+							},
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/api/clients",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"clients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Public] View clients",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "81706fcf-fccf-46dd-9c46-d30f015a90f0",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "e4d4daf6-b339-43cc-a3cc-d25f857d132b",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/api/clients/6",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"clients",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add client",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "0cf69a47-5c67-4a47-91b3-d0c86a6092ed",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "7ef339c8-70e0-4e3d-a09c-d4420d87aced",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "{{jsontype}}"
+							},
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"organization\":\"TestOrga\",\n  \"description\":\"Testorga to Test automated Postman Tests\",\n  \"client_settings\":[{\n  \"logo\":\"test\",\n  \"product\":\"test\"\n  }]\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/clients",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"clients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit client",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "0cf69a47-5c67-4a47-91b3-d0c86a6092ed",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "7ef339c8-70e0-4e3d-a09c-d4420d87aced",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"// example using pm.response.to.be*",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "{{jsontype}}"
+							},
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"organization\":\"Demo Acountsssssssssss\",\r\n  \"client_settings\":[{\r\n    \"map_marker_logo\":\"tessdasdt\"\r\n    }]\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/clients/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"clients",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Clientlogos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ICS Module",
+			"description": null,
+			"item": [
+				{
+					"name": "Create ICS per contingent",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "{{jsontype}}"
+							},
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"client_id\": 5\n   \"contingent_id\": 5\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/ics/createICS",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"ics",
+								"createICS"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create ICS per order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "{{jsontype}}"
+							},
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"client_id\": 5\n   \"order_id\": 84\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/ics/createICS",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"ics",
+								"createICS"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create ICS per client",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "{{jsontype}}"
+							},
+							{
+								"key": "Accept",
+								"value": "{{jsontype}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"client_id\": 5\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/ics/createICS",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"ics",
+								"createICS"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Test Collection",
+			"description": null,
+			"item": [
+				{
+					"name": "UsersTests",
+					"description": null,
+					"item": [
+						{
+							"name": "[Public] GetToken demo_admin",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "aae52538-1789-49bb-8e82-e2ea5a8ff811",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "6e081ffe-cd7c-4893-b4f4-7761942fcb91",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});",
+											"jsonData = pm.response.json();",
+											"pm.environment.set(\"jwt_token\", jsonData.data.token);"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "{{jsontype}}"
+									},
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\":\"demo_admin\",\n  \"password\":\"Test123\"\n}"
+								},
+								"url": {
+									"raw": "{{URL}}/api/users/token",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"token"
+									]
+								},
+								"description": "Request the Bearer Authentication Token"
+							},
+							"response": [
+								{
+									"id": "3aba8dd5-31b7-4b15-9f89-77e18b8f4ab6",
+									"name": "GetToken ksc",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"username\":\"demo\",\n  \"password\":\"Test123\"\n}"
+										},
+										"url": {
+											"raw": "{{URL}}/api/users/token",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"token"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true",
+											"name": "Access-Control-Allow-Credentials",
+											"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "Accept, Authorization, Cache-Control, Content-Type, X-Requested-With, x-csrf-token, X-DEBUGKIT-ID",
+											"name": "Access-Control-Allow-Headers",
+											"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "GET, OPTIONS, PATCH, POST, PUT, DELETE",
+											"name": "Access-Control-Allow-Methods",
+											"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Access-Control-Max-Age",
+											"value": "3600",
+											"name": "Access-Control-Max-Age",
+											"description": "Indicates how long the results of a preflight request can be cached in seconds."
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=UTF-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 15 May 2018 18:05:48 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "Server",
+											"value": "nginx/1.14.0 (Ubuntu)",
+											"name": "Server",
+											"description": "A name for the server"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked",
+											"name": "Transfer-Encoding",
+											"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+										},
+										{
+											"key": "X-DEBUGKIT-ID",
+											"value": "*",
+											"name": "X-DEBUGKIT-ID",
+											"description": "Custom header"
+										}
+									],
+									"cookie": [],
+									"body": "{\"success\":true,\"data\":{\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ3ZjBlYnQ2Zi00ZjU4LTQ5NWYtYTc3YS1iNGE0YjI2aDEyZDQiLCJleHAiOjE1NDQ1NTE1NDh9.P13-o6UmyP_2ClKQXXaWuZzry7TIgXsjP32voXxpk2I\"},\"user\":{\"id\":\"wf0ebt6f-4f58-495f-a77a-b4a4b26h12d4\",\"created_by\":null,\"modified_by\":null,\"client_id\":1,\"username\":\"demo\",\"email\":\"test@tests.freizeitplan.net\",\"first_name\":\"Demo\",\"last_name\":\"User\",\"title\":null,\"api_token\":null,\"activation_date\":null,\"secret\":null,\"secret_verified\":null,\"tos_date\":\"2018-03-02T08:43:23+01:00\",\"active\":true,\"role\":\"user\",\"lang\":\"en_US\",\"created\":\"2018-03-02T05:10:46+01:00\",\"modified\":\"2018-03-02T05:11:47+01:00\",\"deleted\":null}}"
+								}
+							]
+						},
+						{
+							"name": "Index Users",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "f6ccbfa9-2e12-4af2-8a3b-4315abbd2c62",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "d7fadce9-1278-4fca-9f54-c3e0e50c54b0",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URL}}/api/users",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								},
+								"description": "Returns all Users which is the requesting user allowed to see.\ne.g.: As Admin or Manager of a client, he can see all users of this client."
+							},
+							"response": []
+						},
+						{
+							"name": "[Public] Register user",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "27b5a565-e1c5-497d-b1cf-6da20f7819cc",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "126cbae9-2e2e-40c9-ae0e-572166087331",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});",
+											"pm.test(\"user id has to be saved\", function () {",
+											"    jsonData = pm.response.json();",
+											"    pm.environment.set(\"created_user_id\", jsonData.data[0].id); ",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "{{jsontype}}"
+									},
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\":\"postman_test_{{$guid}}@tests.freizeitplan.net\",\r\n  \"username\":\"postman_test_{{$guid}}\",\r\n  \"password\":\"Test123\",\r\n  \"active\":1,\r\n  \"first_name\":\"testname\",\r\n  \"last_name\":\"testnachname\",\r\n  \"client_id\":1,\r\n  \"user_adresses\":[{\r\n  \"street\":\"teststraße\",\r\n  \"zip_code\":\"12131\"\r\n  }]\r\n}"
+								},
+								"url": {
+									"raw": "{{URL}}/api/users/userRegistration",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"userRegistration"
+									]
+								},
+								"description": "Register a new User.\nMake sure to send a client_id.\nIt's necesseray ATM. For later purposes it shouldn't be required, because we will add in future a public client module, where a user can book in all public clients."
+							},
+							"response": []
+						},
+						{
+							"name": "View user",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "9ecadb74-6f75-42e6-8443-fe4bdbd95ea2",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "2b36c531-293a-468a-847e-929add6117cb",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URL}}/api/users/{{created_user_id}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"{{created_user_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit User",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "9ecadb74-6f75-42e6-8443-fe4bdbd95ea2",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "9e34647b-52ee-4b9b-8378-5f5958f959d7",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "{{jsontype}}"
+									},
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"client_id\":1,\r\n  \"role\":\"admin\",\r\n          \"user_addresses\": [\r\n            {\r\n                \"id\": 1,\r\n                \"user_id\": \"ec0ead6f-4f58-495f-a77a-b4a4b34f29d4\",\r\n                \"zip_code\": \"06123108\",\r\n                \"city\": \"Halle\",\r\n                \"street\": \"August-Bebel-Str.\",\r\n                \"house_number\": 68,\r\n                \"phone_number\": null,\r\n                \"created\": null,\r\n                \"modified\": null,\r\n                \"deleted\": null\r\n            }\r\n        ],\r\n}"
+								},
+								"url": {
+									"raw": "{{URL}}/api/users/{{created_user_id}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"{{created_user_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete user",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "9ecadb74-6f75-42e6-8443-fe4bdbd95ea2",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "3a81d506-e28a-40c5-97d6-019bb8c345a5",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"// example using pm.response.to.be*",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{jsontype}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URL}}/api/users/{{created_user_id}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"{{created_user_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{jwt_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "2df0f24c-1aea-4099-a022-44451614e476",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "5781399b-180d-487c-b86e-894347b881dc",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
